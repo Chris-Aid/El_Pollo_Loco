@@ -10,9 +10,9 @@ class World {
         new Cloud()
     ];
     backgroundObjects = [
-        new BackgroundObject();
+        new BackgroundObject()
     ];
-    
+
     ctx;
 
     constructor(canvas) {
