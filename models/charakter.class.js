@@ -1,8 +1,8 @@
 class Character extends movableObject {
     
-    height = 270;
-    width = 120;
-    y = 155;
+    height = 290;
+    width = 130;
+    y = 135;
     x = 10;
     imagesWalking = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -12,7 +12,7 @@ class Character extends movableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-25.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png'
     ];
-    currentImage = 0;
+
 
     constructor() {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png');
@@ -27,6 +27,12 @@ class Character extends movableObject {
             this.loadImage(this.imagesWalking[i])
             this.currentImage++;
         }, 100);
+    }
+
+    moveRight() {
+        this.Character.onkeydown = function(){
+            this.x += 10;
+        };
     }
 
     jump() {
