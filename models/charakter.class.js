@@ -19,6 +19,7 @@ class Character extends movableObject {
         this.loadImages(this.imagesWalking)
 
         this.animate();
+
     }
 
     animate() {
@@ -30,9 +31,7 @@ class Character extends movableObject {
     }
 
     moveRight() {
-        this.Character.onkeydown = function(){
-            this.x += 10;
-        };
+this.x += 10;
     }
 
     jump() {

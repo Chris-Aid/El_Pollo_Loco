@@ -5,7 +5,7 @@ class Keyboard extends movableObject {
     Right = false;
     Up = false;
     Left() {
-        sd
+        if(event)
     }
 
     Right() {
