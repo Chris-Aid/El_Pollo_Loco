@@ -15,6 +15,7 @@ class Character extends movableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png'
     ];
     world;
+    running = new Audio('audi/running.mp3');
 
 
     constructor() {
@@ -28,16 +29,19 @@ class Character extends movableObject {
     animate() {
 
         setInterval(() => {
-            if (this.world.keyboard.Right) {
+            this.running.pause();
+            if (this.world.keyboard.Right && this.x < this.world.level.level_end_x) {
                 this.x += this.speed;
                 this.otherDirection = false;
+                this.running.play();
             }
 
-            if (this.world.keyboard.Left) {
+            if (this.world.keyboard.Left && this.x > 0) {
                 this.x -= this.speed;
                 this.otherDirection = true;
+                this.running.play();
             }
-            this.world.camera_x = -this.x;
+            this.world.camera_x = -this.x + 70;
         }, 1000 / 60);
 
         setInterval(() => {
@@ -46,7 +50,7 @@ class Character extends movableObject {
                 this.loadImage(this.imagesWalking[i])
                 this.currentImage++;
             }
-        }, 30);
+        }, 100);
     }
 
     moveRight() {
