@@ -1,9 +1,11 @@
 class Character extends movableObject {
-    
+
     height = 290;
     width = 130;
     y = 135;
     x = 10;
+    speed = 7;
+
     imagesWalking = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-22.png',
@@ -12,6 +14,7 @@ class Character extends movableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-25.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png'
     ];
+    world;
 
 
     constructor() {
@@ -23,15 +26,31 @@ class Character extends movableObject {
     }
 
     animate() {
+
         setInterval(() => {
-            let i = this.currentImage % this.imagesWalking.length;
-            this.loadImage(this.imagesWalking[i])
-            this.currentImage++;
-        }, 100);
+            if (this.world.keyboard.Right) {
+                this.x += this.speed;
+                this.otherDirection = false;
+            }
+
+            if (this.world.keyboard.Left) {
+                this.x -= this.speed;
+                this.otherDirection = true;
+            }
+            this.world.camera_x = -this.x;
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if (this.world.keyboard.Right || this.world.keyboard.Left) {
+                let i = this.currentImage % this.imagesWalking.length;
+                this.loadImage(this.imagesWalking[i])
+                this.currentImage++;
+            }
+        }, 30);
     }
 
     moveRight() {
-this.x += 10;
+
     }
 
     jump() {

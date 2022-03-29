@@ -1,19 +1,24 @@
 class Keyboard extends movableObject {
 
-
     Left = false;
     Right = false;
     Up = false;
+    Space = false;
+    
     Left() {
-        if(event)
+
     }
 
     Right() {
         sd
     }
-    space() {
+
+    Up() {
         sd
     }
 
+    Space() {
+        sd
+    }
 
 }
