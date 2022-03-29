@@ -20,7 +20,7 @@ class Character extends movableObject {
 
     constructor() {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png');
-        this.loadImages(this.imagesWalking)
+        // this.loadImages(this.imagesWalking)
 
         this.animate();
 
@@ -46,9 +46,7 @@ class Character extends movableObject {
 
         setInterval(() => {
             if (this.world.keyboard.Right || this.world.keyboard.Left) {
-                let i = this.currentImage % this.imagesWalking.length;
-                this.loadImage(this.imagesWalking[i])
-                this.currentImage++;
+                this.walkingAnimation();
             }
         }, 100);
     }

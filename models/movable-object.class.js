@@ -11,11 +11,18 @@ class movableObject {
     }
 
     loadImages(arr) {
+
         arr.forEach((path) => {
             let img = new Image();
             img.src = path;
             this.imageCache[path] = img;
         });
+    }
+
+    walkingAnimation() {
+        let i = this.currentImage % this.imagesWalking.length;
+        this.loadImage(this.imagesWalking[i])
+        this.currentImage++;
     }
 
     moveLeft() {
