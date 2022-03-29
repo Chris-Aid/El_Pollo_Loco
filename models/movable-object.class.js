@@ -25,10 +25,10 @@ class movableObject {
     }
 
     moveRight() {
-        console.log('moving right');
+
     }
 
     moveRight() {
-        console.log('moving right');
+
     }
 }
