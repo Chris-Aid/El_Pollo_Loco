@@ -8,6 +8,7 @@ class Coin extends movableObject {
         super().loadImage('img/8.Coin/Moneda1.png');
 
         this.x = Math.random() * 2400;
+    
     }
 
 }
