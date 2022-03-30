@@ -2,7 +2,7 @@ class Endboss extends movableObject {
     height = 280;
     width = 210;
     y = 160;
-    x = 200
+    x = 2200
 
     imagesWalking = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png',

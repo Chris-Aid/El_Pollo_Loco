@@ -10,7 +10,7 @@ class chicken extends movableObject {
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png'
     ];
 
-    
+
     constructor() {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png')
 
@@ -24,9 +24,7 @@ class chicken extends movableObject {
         this.moveLeft();
 
         setInterval(() => {
-            let i = this.currentImage % this.imagesWalking.length;
-            this.loadImage(this.imagesWalking[i])
-            this.currentImage++;
+            this.walkingAnimation();
         }, 100);
     }
 }
