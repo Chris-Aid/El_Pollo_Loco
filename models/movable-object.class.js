@@ -15,12 +15,12 @@ class movableObject {
             }  
         }, 1000 / 25);
 
-        // setInterval(() => { add jumping animation here
+        setInterval(() => { //add jumping animation here
 
-        //     if (this.world.keyboard.Up || this.world.keyboard.Space) {
-                
-        //     } 
-        // }, 100);
+            if (this.world.keyboard.Up || this.world.keyboard.Space) {
+                this.y -= 20;
+            } 
+        }, 1);
     }
 
     isAboveGround() {

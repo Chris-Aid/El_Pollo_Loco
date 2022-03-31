@@ -2,7 +2,7 @@ class Character extends movableObject {
 
     height = 290;
     width = 130;
-    y = 70;
+    y = 135;
     x = 10;
     speed = 7;
 
@@ -69,13 +69,7 @@ class Character extends movableObject {
                     this.playAnimation(this.imagesWalking);
                 }
         }, 100);
-
-        setInterval(() => {
-
-            if (this.world.keyboard.Left) {
-                this.playAnimation(this.imagesJumping);
-            } 
-        }, 100);
+        
     }
 
     moveRight() {
