@@ -1,7 +1,7 @@
 class World {
     character = new Character();
 
-   level = level1;
+    level = level1;
 
     canvas;
     ctx;
@@ -14,10 +14,23 @@ class World {
         this.keyboard = keyboard;
         this.setWorld();
         this.draw();
+        this.checkCollisions();
     }
 
     setWorld() {
         this.character.world = this;
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    console.log('is colliding with', enemy);
+                    pullEnergy
+                }
+            }
+            )
+        }, 200);
     }
 
     draw() {
@@ -47,15 +60,26 @@ class World {
 
     showObjectsInWorld(mo) {
         if (mo.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(mo.width, 0);
-            this.ctx.scale(-1, 1);
-            mo.x = mo.x * -1;
+            this.turnCharacter(mo);
         }
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+
+        mo.draw(this.ctx);
+        mo.drawRectangle(this.ctx);
+
         if (mo.otherDirection) {
-            mo.x = mo.x * -1;
-            this.ctx.restore();
+            this.turnCharacterAgain(mo);
         }
+    }
+
+    turnCharacter(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+    turnCharacterAgain(mo) {
+        mo.x = mo.x * -1;
+        this.ctx.restore();
     }
 }

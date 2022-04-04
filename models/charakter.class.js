@@ -28,6 +28,19 @@ class Character extends movableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-40.png',
     ];
 
+    restImages = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-2.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-3.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-4.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-5.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-6.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-7.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-8.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-9.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-10.png'
+    ]
+
     world;
     running = new Audio('audi/running.mp3');
 
@@ -36,6 +49,7 @@ class Character extends movableObject {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png');
         this.loadImages(this.imagesWalking);
         this.loadImages(this.imagesJumping);
+        this.loadImages(this.restImages);
 
         this.animate();
         this.applyGravity();
@@ -46,17 +60,22 @@ class Character extends movableObject {
 
         setInterval(() => {
             this.running.pause();
+
             if (this.world.keyboard.Right && this.x < this.world.level.level_end_x) {
-                this.x += this.speed;
-                this.otherDirection = false;
+                this.moveRight();
                 this.running.play();
             }
 
             if (this.world.keyboard.Left && this.x > 0) {
-                this.x -= this.speed;
+                this.moveLeft();
                 this.otherDirection = true;
                 this.running.play();
             }
+
+            if (this.world.keyboard.Up && !this.isAboveGround() || this.world.keyboard.Space && !this.isAboveGround()) {
+                this.jump();
+            }
+
             this.world.camera_x = -this.x + 70;
         }, 1000 / 60);
 
@@ -66,17 +85,15 @@ class Character extends movableObject {
                 this.playAnimation(this.imagesJumping);
             } else
                 if (this.world.keyboard.Right || this.world.keyboard.Left) {
-                    this.playAnimation(this.imagesWalking);
-                }
+                    this.playAnimation(this.imagesWalking); }
+                // else if 
+                //     (!this.isAboveGround() && !this.world.keyboard.Right && !this.world.keyboard.Left) {     function is supposed to load rest images while resting -- function isn't working
+                //         this.loadImages(this.restImages);
+                // }
         }, 100);
-        
-    }
-
-    moveRight() {
 
     }
 
-    jump() {
 
-    }
+
 }
