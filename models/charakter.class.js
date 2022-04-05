@@ -39,7 +39,23 @@ class Character extends movableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-8.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-9.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-10.png'
-    ]
+    ];
+
+    imagesHurt = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-43.png',
+    ];
+
+    imagesDead = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-51.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-52.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-53.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-54.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-55.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png',
+    ];
 
     world;
     running = new Audio('audi/running.mp3');
@@ -49,6 +65,8 @@ class Character extends movableObject {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png');
         this.loadImages(this.imagesWalking);
         this.loadImages(this.imagesJumping);
+        this.loadImages(this.imagesDead);
+        this.loadImages(this.imagesHurt);
         this.loadImages(this.restImages);
 
         this.animate();
@@ -80,20 +98,24 @@ class Character extends movableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-
-            if (this.isAboveGround()) {
+            if(this.isHurt()){
+                this.playAnimation(this.imagesHurt);
+            }
+            else if (this.isDead()) {
+                this.playAnimation(this.imagesDead);
+            }
+            else if (this.isAboveGround()) {
                 this.playAnimation(this.imagesJumping);
-            } else
-                if (this.world.keyboard.Right || this.world.keyboard.Left) {
-                    this.playAnimation(this.imagesWalking); }
-                // else if 
-                //     (!this.isAboveGround() && !this.world.keyboard.Right && !this.world.keyboard.Left) {     function is supposed to load rest images while resting -- function isn't working
-                //         this.loadImages(this.restImages);
-                // }
+
+            } else if (this.world.keyboard.Right || this.world.keyboard.Left) {
+                    this.playAnimation(this.imagesWalking);
+                }
+            else if 
+                (!this.isAboveGround() && !this.world.keyboard.Right && !this.world.keyboard.Left) {     
+                    this.playAnimation(this.restImages);
+            }
         }, 100);
 
     }
-
-
 
 }
