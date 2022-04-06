@@ -10,8 +10,8 @@ class CoinsBar extends DrawableObject {
     ];
 
     constructor() {
-        
-        super().loadImage('img/7.Marcadores/Barra/Marcador moneda/azul/100_.png');
+        let i = 5;
+        super().loadImage(this.imagesCoins[i]);
         this.loadImages(this.imagesCoins);
         this.x = 210;
         this.y = 10;

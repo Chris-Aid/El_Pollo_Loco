@@ -3,6 +3,7 @@ class World {
     statusbar = new StatusBar();
     coinsbar = new CoinsBar();
     bottlesbar = new BottlesBar();
+    throwableObjecs = [new ThrowableObject()];
 
     level = level1;
 
@@ -32,7 +33,14 @@ class World {
                     this.statusbar.setPercentage(this.character.energy);
                 }
             });
+
+            // this.level.coins.forEach((coin) => { ---------function is suppost to check if character collides with coins
+            //     if (this.character.isColliding(coin)) {
+            //         console.log('collected Coin', coin);
+            //     }
+            // });
         }, 200);
+
     }
 
     draw() {
@@ -45,6 +53,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.throwableObjecs);
 
         this.ctx.translate(-this.camera_x, 0); // moving backwards
         // -- Space for fixed objects --

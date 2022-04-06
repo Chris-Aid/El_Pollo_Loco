@@ -1,6 +1,6 @@
 class BottlesBar extends DrawableObject {
 
-    imagesBottles = [
+    imagesBottleBar = [
         'img/7.Marcadores/Barra/Marcador_botella/Azul/0_.png',
         'img/7.Marcadores/Barra/Marcador_botella/Azul/20_.png',
         'img/7.Marcadores/Barra/Marcador_botella/Azul/40_.png',
@@ -13,7 +13,7 @@ class BottlesBar extends DrawableObject {
     constructor() {
     
         super().loadImage('img/7.Marcadores/Barra/Marcador_botella/Azul/100_.png');
-        this.loadImages(this.imagesBottles);
+        this.loadImages(this.imagesBottleBar);
         this.x = 400;
         this.y = 10;
         this.height = 60;
