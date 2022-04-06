@@ -49,7 +49,7 @@ class movableObject extends DrawableObject {
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
-        this.loadImage(images[i])
+        this.loadImage(images[i]);
         this.currentImage++;
     }
 

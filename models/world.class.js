@@ -1,6 +1,8 @@
 class World {
     character = new Character();
     statusbar = new StatusBar();
+    coinsbar = new CoinsBar();
+    bottlesbar = new BottlesBar();
 
     level = level1;
 
@@ -48,6 +50,8 @@ class World {
         // -- Space for fixed objects --
 
         this.showObjectsInWorld(this.statusbar);
+        this.showObjectsInWorld(this.coinsbar);
+        this.showObjectsInWorld(this.bottlesbar);
 
         this.ctx.translate(this.camera_x, 0); // moving forwards
         this.ctx.translate(-this.camera_x, 0); // moving backwards
