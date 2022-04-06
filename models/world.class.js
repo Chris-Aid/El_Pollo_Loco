@@ -27,7 +27,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
-                    console.log(this.character.energy);
+                    this.statusbar.getIndexOfImages(this.character.energy);
                 }
             });
         }, 200);
@@ -36,15 +36,21 @@ class World {
     draw() {
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.translate(this.camera_x, 0);
+
+        this.ctx.translate(this.camera_x, 0); // moving forwards
         this.addObjectsToMap(this.level.backgroundObjects);
         this.showObjectsInWorld(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
+
+        this.ctx.translate(-this.camera_x, 0); // moving backwards
+        // -- Space for fixed objects --
+
         this.showObjectsInWorld(this.statusbar);
 
-        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.translate(this.camera_x, 0); // moving forwards
+        this.ctx.translate(-this.camera_x, 0); // moving backwards
 
         // draw wird immer wieder aufgerufen!
         let self = this;
