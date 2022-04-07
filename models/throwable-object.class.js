@@ -7,23 +7,22 @@ class ThrowableObject extends movableObject {
         'img/6.botella/Rotación/Mesa de trabajo 1 copia 6.png'
     ];
 
-    constructor() {
+    constructor(x, y) {
         super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png');
-        this.x = 100;
-        // this.y = 100;
+        this.x = x;
+        this.y = y;
         this.height = 90;
         this.width = 70;
-        this.loadImage
+
 
         this.throw();
     }
 
     throw() {
-        setInterval(() => {
-            this.acceleration = 10;
-            this.y = 100;
-            this.x += 20;
+            this.speedY = 30;
             this.applyGravity();
-        }, 50);
+            setInterval(() => {
+                this.x += 5;
+            }, 10);
     }
 }

@@ -3,7 +3,8 @@ class World {
     statusbar = new StatusBar();
     coinsbar = new CoinsBar();
     bottlesbar = new BottlesBar();
-    throwableObjecs = [new ThrowableObject()];
+    throwableObjecs = [];
+    keyboard = new Keyboard;
 
     level = level1;
 
@@ -18,21 +19,18 @@ class World {
         this.keyboard = keyboard;
         this.setWorld();
         this.draw();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
         this.character.world = this;
     }
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusbar.setPercentage(this.character.energy);
-                }
-            });
+
+            this.checkCollisions();
+            this.checkThrowObjecs();
 
             // this.level.coins.forEach((coin) => { ---------function is suppost to check if character collides with coins
             //     if (this.character.isColliding(coin)) {
@@ -40,7 +38,23 @@ class World {
             //     }
             // });
         }, 200);
+    }
 
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusbar.setPercentage(this.character.energy);
+            }
+        });
+    }
+
+    checkThrowObjecs() {
+        if(this.keyboard.D) {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
+            this.throwableObjecs.push(bottle);
+            // this.throwableObjecs[i].throw();
+        }
     }
 
     draw() {
