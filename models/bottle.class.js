@@ -1,14 +1,13 @@
-class Coin extends movableObject {
-    x = 260;
+class Bottle extends movableObject {
+    x = 160;
     y = 335;
-    height = 120;
-    width = 120;
+    height = 90;
+    width = 80;
 
     constructor(path) {
         super().loadImage(path);
 
         this.x = Math.random() * 2400;
-    
     }
 
 }

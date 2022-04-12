@@ -30,13 +30,11 @@ class World {
         setInterval(() => {
 
             this.checkCollisions();
+            this.checkCollisionsOfCoins();
+            this.checkCollisionsOfBottles();
             this.checkThrowObjecs();
 
-            this.level.coins.forEach((coin) => { //---------function is suppost to check if character collides with coins
-                if (this.character.isColliding(coin)) {
-                    console.log('collected Coin', coin);
-                }
-            });
+
         }, 200);
     }
 
@@ -49,10 +47,29 @@ class World {
         });
     }
 
+    checkCollisionsOfCoins() { // function checks collision with coins.
+        this.level.coins.forEach((coin) => {
+            if (this.character.isColliding(coin)) {
+                this.level.coins.splice(this.level.coins.indexOf(coin), 1);
+                this.coinsbar.coinCollected();
+            }
+        });
+    }
+
+    checkCollisionsOfBottles() {
+        this.level.bottles.forEach((bottle) => {
+            if (this.character.isColliding(bottle)) {
+                this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
+                this.bottlesbar.bottlesCollected();
+            }
+        });
+    }
+
     checkThrowObjecs() {
-        if(this.keyboard.D) {
+        if (this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
             this.throwableObjecs.push(bottle);
+            this.bottlesbar.bottleThrown();
         }
     }
 
@@ -66,6 +83,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjecs);
 
         this.ctx.translate(-this.camera_x, 0); // moving backwards

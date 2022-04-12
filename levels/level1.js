@@ -45,7 +45,15 @@ const level1 = new Level(
         new Coin('img/8.Coin/Moneda1.png'),
         new Coin('img/8.Coin/Moneda1.png'),
         new Coin('img/8.Coin/Moneda1.png'),
-        new Coin('img/8.Coin/Moneda1.png'),
         new Coin('img/8.Coin/Moneda1.png')
+    ],
+    [
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png')
     ]
 );
