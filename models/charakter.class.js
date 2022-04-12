@@ -39,6 +39,9 @@ class Character extends movableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-8.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-9.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-10.png',
+    ];
+
+    sleepImages = [
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-11.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-12.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-13.png',
@@ -49,7 +52,7 @@ class Character extends movableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-18.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-19.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-20.png',
-    ];
+    ]
 
     imagesHurt = [
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
@@ -69,6 +72,7 @@ class Character extends movableObject {
 
     world;
     running = new Audio('audi/running.mp3');
+    lastMove;
 
 
     constructor() {
@@ -122,16 +126,31 @@ class Character extends movableObject {
             }
 
         }, 100);
-        this.playSleepAnimation();
+
+        this.playRestAnimation();
+        // this.playSleepAnimation();
+
     }
 
-    playSleepAnimation() {
-
+    playRestAnimation() {
         setInterval(() => {
             if (!this.isAboveGround() && !this.world.keyboard.Right && !this.world.keyboard.Left) {
                 this.playAnimation(this.restImages);
             }
-        }, 1000);
-
+        }, 300);
+        // this.playSleepAnimation();
     }
+
+    // playSleepAnimation() {
+    //     let timeNow = new Date().getTime();
+    //     let timePassed = this.lastMove - timeNow;
+    //     console.log(timePassed);
+    //     if (timePassed > 10) {
+    //         setInterval(() => {
+    //             if (!this.isAboveGround() && !this.world.keyboard.Right && !this.world.keyboard.Left) {
+    //                 this.playAnimation(this.sleepImages);
+    //             }
+    //         }, 100);
+    //     }
+    // }
 }

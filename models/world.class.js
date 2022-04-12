@@ -8,7 +8,7 @@ class World {
 
     level = level1;
 
-    canvas;
+    // canvas;
     ctx;
     keyboard;
     camera_x;
@@ -32,11 +32,11 @@ class World {
             this.checkCollisions();
             this.checkThrowObjecs();
 
-            // this.level.coins.forEach((coin) => { ---------function is suppost to check if character collides with coins
-            //     if (this.character.isColliding(coin)) {
-            //         console.log('collected Coin', coin);
-            //     }
-            // });
+            this.level.coins.forEach((coin) => { //---------function is suppost to check if character collides with coins
+                if (this.character.isColliding(coin)) {
+                    console.log('collected Coin', coin);
+                }
+            });
         }, 200);
     }
 
@@ -53,7 +53,6 @@ class World {
         if(this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
             this.throwableObjecs.push(bottle);
-            // this.throwableObjecs[i].throw();
         }
     }
 

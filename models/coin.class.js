@@ -4,8 +4,8 @@ class Coin extends movableObject {
     height = 120;
     width = 120;
 
-    constructor() {
-        super().loadImage('img/8.Coin/Moneda1.png');
+    constructor(path) {
+        super().loadImage(path);
 
         this.x = Math.random() * 2400;
     
