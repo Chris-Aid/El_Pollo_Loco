@@ -66,7 +66,7 @@ class World {
     }
 
     checkThrowObjecs() {
-        if (this.keyboard.D) {
+        if (this.keyboard.D && this.bottlesbar.i > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
             this.throwableObjecs.push(bottle);
             this.bottlesbar.bottleThrown();
