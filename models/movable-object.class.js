@@ -69,4 +69,9 @@ class movableObject extends DrawableObject {
     jump() {
         this.speedY = 30;
     }
+
+    gotHitByBottle(x, y) {
+        console.log('getroffen', x , y);
+
+    }
 }

@@ -32,6 +32,7 @@ class World {
             this.checkCollisions();
             this.checkCollisionsOfCoins();
             this.checkCollisionsOfBottles();
+            this.checkIfBottleHitsEnemy();
             this.checkThrowObjecs();
 
 
@@ -62,6 +63,17 @@ class World {
                 this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
                 this.bottlesbar.bottlesCollected();
             }
+        });
+    }
+
+    checkIfBottleHitsEnemy() {
+        this.level.enemies.forEach((enemy) => {
+            this.throwableObjecs.forEach((object) => {
+                if (object.isColliding(enemy)) {
+                    console.log('got hit by bottle', enemy);
+                    enemy.gotHitByBottle(enemy.x, enemy.y);
+                }
+            });
         });
     }
 
