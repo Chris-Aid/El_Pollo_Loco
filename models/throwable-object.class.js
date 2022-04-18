@@ -7,19 +7,6 @@ class ThrowableObject extends movableObject {
         'img/6.botella/Rotación/Mesa de trabajo 1 copia 6.png'
     ];
 
-    imagesSauce = [
-        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 7.png',
-        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 8.png',
-        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 9.png',
-        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 10.png',
-        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 11.png',
-        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 12.png'
-    ];
-
-    
-
-
-
     constructor(x, y) {
         super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png');
         this.x = x;
@@ -33,10 +20,10 @@ class ThrowableObject extends movableObject {
     }
 
     throw() {
-            this.speedY = 30;
+            this.speedY = 20;
             this.applyGravity();
             setInterval(() => {
-                this.x += 5;
+                this.x += 7;
             }, 10);
     }
 

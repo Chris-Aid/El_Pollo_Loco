@@ -35,6 +35,9 @@ class World {
             this.checkIfBottleHitsEnemy();
             this.checkThrowObjecs();
 
+            // if(this.character.x > 1650) {
+            //     this.level.enemies.Endboss.animate();
+            // }
 
         }, 200);
     }
@@ -71,7 +74,13 @@ class World {
             this.throwableObjecs.forEach((object) => {
                 if (object.isColliding(enemy)) {
                     console.log('got hit by bottle', enemy);
-                    enemy.gotHitByBottle(enemy.x, enemy.y);
+                    enemy.energy -= 25;
+                    if (enemy.energy <= 0) {
+                        enemy.Dead();
+                    }
+                    if (enemy == Endboss) {
+                        enemy.imagesAfterHit();
+                    }
                 }
             });
         });

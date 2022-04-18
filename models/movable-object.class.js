@@ -1,5 +1,14 @@
 class movableObject extends DrawableObject {
 
+    imagesSauce = [
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 7.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 8.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 9.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 10.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 11.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 12.png'
+    ];
+
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -70,8 +79,4 @@ class movableObject extends DrawableObject {
         this.speedY = 30;
     }
 
-    gotHitByBottle(x, y) {
-        console.log('getroffen', x , y);
-
-    }
 }
