@@ -6,6 +6,9 @@ class World {
     throwableObjecs = [];
     keyboard = new Keyboard;
 
+    endboss = new Endboss();
+
+
     level = level1;
 
     // canvas;
@@ -24,6 +27,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+
     }
 
     run() {
@@ -35,10 +39,13 @@ class World {
             this.checkIfBottleHitsEnemy();
             this.checkThrowObjecs();
 
-            // if(this.character.x > 1650) {
-            //     this.level.enemies.Endboss.animate();
-            // }
+        }, 200);
 
+        let startEndbossAnimation = setInterval(() => {
+            if(this.character.x > 1650) {
+                this.endboss.animate();
+                clearInterval(startEndbossAnimation);
+            }
         }, 200);
     }
 
@@ -70,20 +77,19 @@ class World {
     }
 
     checkIfBottleHitsEnemy() {
-        this.level.enemies.forEach((enemy) => {
+
             this.throwableObjecs.forEach((object) => {
-                if (object.isColliding(enemy)) {
-                    console.log('got hit by bottle', enemy);
-                    enemy.energy -= 25;
-                    if (enemy.energy <= 0) {
-                        enemy.Dead();
+                if (object.isColliding(this.endboss)) {
+                    console.log('got hit by bottle', this.endboss);
+                    this.endboss.energy -= 25;
+                    if (this.endboss.energy <= 0) {
+                        this.endboss.Dead();
                     }
-                    if (enemy == Endboss) {
-                        enemy.imagesAfterHit();
+                    if (this.endboss instanceof Endboss) {
+                        this.endboss.imagesAfterHit();
                     }
                 }
             });
-        });
     }
 
     checkThrowObjecs() {
@@ -101,6 +107,7 @@ class World {
         this.ctx.translate(this.camera_x, 0); // moving forwards
         this.addObjectsToMap(this.level.backgroundObjects);
         this.showObjectsInWorld(this.character);
+        this.showObjectsInWorld(this.endboss);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
