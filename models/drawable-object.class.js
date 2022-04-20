@@ -26,7 +26,7 @@ class DrawableObject {
     }
 
     drawRectangle(ctx) {
-        if (this instanceof Character || this instanceof chicken) {
+        if (this instanceof Character || this instanceof chicken || this instanceof Endboss || this instanceof ThrowableObject) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';

@@ -6,7 +6,9 @@ class Endboss extends movableObject {
     energy = 100;
     walking = true;
 
-    // char = new Character();
+    bossAttacks = false;
+    dead = false;
+
 
     imagesWalking = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G1.png',
@@ -57,49 +59,50 @@ class Endboss extends movableObject {
         this.loadImages(this.imagesHit);
         this.loadImages(this.imagesDead);
         this.loadImages(this.imagesAttack);
+
         // this.endbossWalking();
     }
 
     imagesAfterHit() {
+        if (!this.dead) {
+            var timesRun = 0;
+            var interval = setInterval(() => {
 
-        var timesRun = 0;
-        var interval = setInterval(() => {
-            timesRun += 1;
-            if (timesRun === 6) {
-                clearInterval(interval);
-            } else {
-                this.playAnimation(this.imagesHit);
+                timesRun += 1;
+                if (timesRun === 6) {
+                    clearInterval(interval);
+                } else {
+                    this.playAnimation(this.imagesHit);
+                }
+            }, 300);
+        } else {
+            console.log('tot');
+        }
+    }
+
+    Dead() {
+        this.dead = true;
+
+        setInterval(() => {
+                this.x += 20;
+                this.y -= 20;
+                this.playAnimation(this.imagesDead);
+        }, 30);
+    }
+
+    animateAggression() {
+
+        setInterval(() => {
+            if (!this.dead) {
+                this.playAnimation(this.imagesAlerta);
             }
         }, 300);
     }
 
-    Dead() {
-        setInterval(() => {
-            this.playAnimation(this.imagesDead);
-        }, 100);
-    }
-
-
-    // animate() {
-    //     var timesRun = 0;
-    //     var animation = setInterval(() => {
-    //         timesRun += 1;
-    //         if (timesRun === 6) {
-    //             clearInterval(animation);
-    //             this.animateAttack();
-    //         } else {
-    //             this.playAnimation(this.imagesAlerta);
-    //         }
-    //     }, 300);
-    // }
-
-    animateAggression() {
-        setInterval(() => {
-            this.playAnimation(this.imagesAlerta);
-        }, 300);
-    }
-
     animateAttack() {
-        this.playAnimation(this.imagesAttack);
+        if (!this.dead && !this.bossAttacks) {
+            this.playAnimation(this.imagesAttack);
+            this.x -= 8;
+        }
     }
 }

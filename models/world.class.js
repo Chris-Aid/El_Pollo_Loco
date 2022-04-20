@@ -38,7 +38,7 @@ class World {
             this.checkIfBottleHitsEnemy();
             this.checkThrowObjecs();
 
-        }, 200);
+        }, 100);
 
         let endbossMeetsPepe = setInterval(() => {
             if (this.endboss.x - this.character.x <= 350) {
@@ -108,20 +108,12 @@ class World {
     }
 
     endbossAttacksPepe() {
-        let counter = 0;
-        let endbossAttacks = setInterval(() => {
-            counter+=1;
-            this.endboss.animateAttack();
-            if(this.endboss.x - this.character.x > 10) {
-                this.endboss.x -= 5;
-            }
-            if(counter > 1) {
-                clearInterval(endbossAttacks);
-                counter = 0;
-                this.endbossAttacksPepe();
+        this.endboss.bossAttacks = true;
+        setInterval(() => {
+            if (this.endboss.x - this.character.x > 10) {
+                this.endboss.animateAttack();
             }
         }, 100);
-       
     }
 
     draw() {
