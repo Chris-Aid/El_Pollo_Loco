@@ -40,17 +40,19 @@ class World {
 
         }, 200);
 
-        let enbossMeetsPepe = setInterval(() => {
-            this.endbossSeesPepe();
-            clearInterval(enbossMeetsPepe);
+        let endbossMeetsPepe = setInterval(() => {
+            if (this.endboss.x - this.character.x <= 350) {
+                this.endbossAttacksPepe();
+                clearInterval(endbossMeetsPepe);
+            }
         }, 50);
 
-        // let startEndbossAnimation = setInterval(() => {
-        //     if(this.character.x > 1650) {
-        //         this.endboss.animate();
-        //         clearInterval(startEndbossAnimation);
-        //     }
-        // }, 200);
+        let endbossRecognizePepe = setInterval(() => {
+            if (this.endboss.x - this.character.x <= 550) {
+                this.endboss.animateAggression();
+                clearInterval(endbossRecognizePepe);
+            }
+        }, 50);
     }
 
     checkCollisions() {
@@ -82,18 +84,19 @@ class World {
 
     checkIfBottleHitsEnemy() {
 
-            this.throwableObjecs.forEach((object) => {
-                if (object.isColliding(this.endboss)) {
-                    console.log('got hit by bottle', this.endboss);
-                    this.endboss.energy -= 25;
-                    if (this.endboss.energy <= 0) {
-                        this.endboss.Dead();
-                    }
-                    if (this.endboss instanceof Endboss) {
-                        this.endboss.imagesAfterHit();
-                    }
+        this.throwableObjecs.forEach((object) => {
+            if (object.isColliding(this.endboss)) {
+                console.log('got hit by bottle', this.endboss);
+                this.endboss.energy -= 25;
+                if (this.endboss.energy <= 0) {
+                    this.endboss.Dead();
                 }
-            });
+                if (this.endboss instanceof Endboss) {
+                    this.endbossAttacksPepe();
+                    this.endboss.imagesAfterHit();
+                }
+            }
+        });
     }
 
     checkThrowObjecs() {
@@ -103,13 +106,14 @@ class World {
             this.bottlesbar.bottleThrown();
         }
     }
-    
-    endbossSeesPepe() {
-        if(this.endboss.x - this.character.x <= 150) {
-            setInterval(() => {
+
+    endbossAttacksPepe() {
+        setInterval(() => {
+            this.endboss.animateAttack();
+            if(this.endboss.x - this.character.x > 10) {
                 this.endboss.x -= 5;
-            }, 100);
-        }
+            }
+        }, 100);
     }
 
     draw() {

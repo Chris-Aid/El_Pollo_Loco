@@ -24,7 +24,11 @@ class Endboss extends movableObject {
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G9.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G10.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G11.png',
-        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G12.png'
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G12.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G13.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G14.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G15.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G16.png'
     ];
 
     imagesHit = [
@@ -40,10 +44,6 @@ class Endboss extends movableObject {
     ];
 
     imagesAttack = [
-        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G13.png',
-        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G14.png',
-        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G15.png',
-        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G16.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G17.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G18.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G19.png',
@@ -52,39 +52,13 @@ class Endboss extends movableObject {
 
     constructor() {
         super().loadImage(this.imagesAlerta[0]);
+        this.loadImages(this.imagesWalking);
         this.loadImages(this.imagesAlerta);
+        this.loadImages(this.imagesHit);
+        this.loadImages(this.imagesDead);
+        this.loadImages(this.imagesAttack);
         // this.endbossWalking();
     }
-
-    // endbossWalking() {
-    //     if (this.walking) {
-    //         this.otherDirection = false;
-    //         let endbossWalkingForward = setInterval(() => {
-    //             if (this.x > 2200) {
-    //                 this.playAnimation(this.imagesWalking);
-    //                 this.x -= 11;
-    //             } else if (this.x <= 2200) {
-    //                 clearInterval(endbossWalkingForward);
-    //                 this.endbossWalkingBackwards();
-    //             }
-    //         }, 150);
-    //     }
-    // }
-
-    // endbossWalkingBackwards() {
-    //     if (this.walking) {
-    //         this.otherDirection = true;
-    //         let endbossWalkingBack = setInterval(() => {
-    //             if (this.x < 2700) {
-    //                 this.playAnimation(this.imagesWalking);
-    //                 this.x += 11;
-    //             } else if (this.x == 2700) {
-    //                 this.endbossWalking();
-    //                 clearInterval(endbossWalkingBack);
-    //             }
-    //         }, 150);
-    //     }
-    // }
 
     imagesAfterHit() {
 
@@ -105,24 +79,27 @@ class Endboss extends movableObject {
         }, 100);
     }
 
-    animate() {
-        this.walking = false;
-        let i = 0;
-        let animation = setInterval(() => {
-            if (i !== this.imagesAlerta.length) {
-                this.loadImage(this.imagesAlerta[i]);
-                i++;
-            }
-        }, 600);
-        clearInterval(animation);
 
-        this.animateAttack();
+    // animate() {
+    //     var timesRun = 0;
+    //     var animation = setInterval(() => {
+    //         timesRun += 1;
+    //         if (timesRun === 6) {
+    //             clearInterval(animation);
+    //             this.animateAttack();
+    //         } else {
+    //             this.playAnimation(this.imagesAlerta);
+    //         }
+    //     }, 300);
+    // }
+
+    animateAggression() {
+        setInterval(() => {
+            this.playAnimation(this.imagesAlerta);
+        }, 300);
     }
 
     animateAttack() {
-        setInterval(() => {
-            this.playAnimation(this.imagesAttack);
-        }, 200);
-
+        this.playAnimation(this.imagesAttack);
     }
 }
