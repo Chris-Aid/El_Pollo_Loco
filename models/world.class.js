@@ -27,7 +27,6 @@ class World {
 
     setWorld() {
         this.character.world = this;
-
     }
 
     run() {
@@ -41,12 +40,17 @@ class World {
 
         }, 200);
 
-        let startEndbossAnimation = setInterval(() => {
-            if(this.character.x > 1650) {
-                this.endboss.animate();
-                clearInterval(startEndbossAnimation);
-            }
-        }, 200);
+        let enbossMeetsPepe = setInterval(() => {
+            this.endbossSeesPepe();
+            clearInterval(enbossMeetsPepe);
+        }, 50);
+
+        // let startEndbossAnimation = setInterval(() => {
+        //     if(this.character.x > 1650) {
+        //         this.endboss.animate();
+        //         clearInterval(startEndbossAnimation);
+        //     }
+        // }, 200);
     }
 
     checkCollisions() {
@@ -97,6 +101,14 @@ class World {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
             this.throwableObjecs.push(bottle);
             this.bottlesbar.bottleThrown();
+        }
+    }
+    
+    endbossSeesPepe() {
+        if(this.endboss.x - this.character.x <= 150) {
+            setInterval(() => {
+                this.endboss.x -= 5;
+            }, 100);
         }
     }
 

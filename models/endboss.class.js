@@ -2,8 +2,11 @@ class Endboss extends movableObject {
     height = 280;
     width = 210;
     y = 160;
-    x = 2700;
+    x = 2200;
     energy = 100;
+    walking = true;
+
+    // char = new Character();
 
     imagesWalking = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G1.png',
@@ -36,11 +39,52 @@ class Endboss extends movableObject {
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G26.png'
     ];
 
+    imagesAttack = [
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G13.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G14.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G15.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G16.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G17.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G18.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G19.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G20.png',
+    ];
+
     constructor() {
         super().loadImage(this.imagesAlerta[0]);
         this.loadImages(this.imagesAlerta);
-        this.endbossWalking();
+        // this.endbossWalking();
     }
+
+    // endbossWalking() {
+    //     if (this.walking) {
+    //         this.otherDirection = false;
+    //         let endbossWalkingForward = setInterval(() => {
+    //             if (this.x > 2200) {
+    //                 this.playAnimation(this.imagesWalking);
+    //                 this.x -= 11;
+    //             } else if (this.x <= 2200) {
+    //                 clearInterval(endbossWalkingForward);
+    //                 this.endbossWalkingBackwards();
+    //             }
+    //         }, 150);
+    //     }
+    // }
+
+    // endbossWalkingBackwards() {
+    //     if (this.walking) {
+    //         this.otherDirection = true;
+    //         let endbossWalkingBack = setInterval(() => {
+    //             if (this.x < 2700) {
+    //                 this.playAnimation(this.imagesWalking);
+    //                 this.x += 11;
+    //             } else if (this.x == 2700) {
+    //                 this.endbossWalking();
+    //                 clearInterval(endbossWalkingBack);
+    //             }
+    //         }, 150);
+    //     }
+    // }
 
     imagesAfterHit() {
 
@@ -62,40 +106,23 @@ class Endboss extends movableObject {
     }
 
     animate() {
-
+        this.walking = false;
         let i = 0;
-        setInterval(() => {
+        let animation = setInterval(() => {
             if (i !== this.imagesAlerta.length) {
                 this.loadImage(this.imagesAlerta[i]);
                 i++;
             }
         }, 600);
+        clearInterval(animation);
 
+        this.animateAttack();
     }
 
-    endbossWalking() {
-        this.otherDirection = false;
-        let endbossWalkingForward = setInterval(() => {
-            if (this.x > 2200) {
-                this.playAnimation(this.imagesWalking);
-                this.x -= 11;
-            } else if(this.x <= 2200)  {
-                clearInterval(endbossWalkingForward);
-                this.endbossWalkingBackwards();
-            }
-        }, 150);
-    }
-
-    endbossWalkingBackwards() {
-        this.otherDirection = true;
+    animateAttack() {
         setInterval(() => {
-            if (this.x < 2700) {
-                this.playAnimation(this.imagesWalking);
-                this.x += 11;
-            } else if(this.x == 2700) {
-                this.endbossWalking();
-            }
-        }, 150);
+            this.playAnimation(this.imagesAttack);
+        }, 200);
 
     }
 }
