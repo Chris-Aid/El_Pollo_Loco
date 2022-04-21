@@ -44,9 +44,8 @@ class World {
         }, 100);
 
         // let endbossMeetsPepe = setInterval(() => {
-        //     if (this.endboss.x - this.character.x <= 350 && !this.endboss.bossGetsAttacked) {
+        //     if (this.endboss.x - this.character.x <= 350) {
         //         this.endbossAttacksPepe();
-        //         clearInterval(endbossMeetsPepe);
         //     }
         // }, 50);
 
