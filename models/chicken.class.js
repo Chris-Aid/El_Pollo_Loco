@@ -10,13 +10,14 @@ class chicken extends movableObject {
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png'
     ];
 
-    imagesDeasd = [
+    imagesDead = [
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png'
     ];
 
 
     constructor() {
-        super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png')
+        super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
+        this.loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png');
 
         this.x = 200 + Math.random() * 1200;
         this.speed = 0.4 + Math.random() * 0.25;
@@ -24,27 +25,20 @@ class chicken extends movableObject {
     }
 
     Dead() {
-        console.log('showImgae')
             this.loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png');
-
     }
-
-    // imagesAfterHit() {
-    //     if(this.hitByBottle) {
-    //         setInterval(()=> {
-    //             console.log('hallo');
-    //             this.playAnimation(this.imagesAfterHit);
-    //         }, 200);
-    //     }
-    // }
 
     animate() {
         setInterval(() => {
-            this.moveLeft();
+            if(this.energy > 0) {
+                this.moveLeft();
+            }
         }, 1000 / 60);
 
         setInterval(() => {
-            this.playAnimation(this.imagesWalking);
+            if(this.energy > 0) {
+                this.playAnimation(this.imagesWalking);
+            }
         }, 100);
     }
 

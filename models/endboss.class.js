@@ -6,7 +6,7 @@ class Endboss extends movableObject {
     energy = 100;
     walking = true;
 
-    bossAttacks = false;
+    bossGetsAttacked = false;
     dead = false;
 
 
@@ -84,9 +84,9 @@ class Endboss extends movableObject {
         this.dead = true;
 
         setInterval(() => {
-                this.x += 20;
-                this.y -= 20;
-                this.playAnimation(this.imagesDead);
+            this.x += 20;
+            this.y -= 20;
+            this.playAnimation(this.imagesDead);
         }, 30);
     }
 
@@ -99,10 +99,13 @@ class Endboss extends movableObject {
         }, 300);
     }
 
-    animateAttack() {
+    animateAttack(characterX) {
+
         if (!this.dead && !this.bossAttacks) {
             this.playAnimation(this.imagesAttack);
-            this.x -= 8;
+            if (this.x - characterX > 10) {
+                this.x -= 8;
+            }
         }
     }
 }

@@ -8,6 +8,9 @@ class World {
 
     endboss = new Endboss();
 
+    smashBottleSound = new Audio('https://freesound.org/data/previews/548/548230_12308033-lq.mp3');
+    chickenDies = new Audio('https://freesound.org/data/previews/342/342162_6099553-lq.mp3');
+
 
     level = level1;
 
@@ -40,12 +43,12 @@ class World {
 
         }, 100);
 
-        let endbossMeetsPepe = setInterval(() => {
-            if (this.endboss.x - this.character.x <= 350) {
-                this.endbossAttacksPepe();
-                clearInterval(endbossMeetsPepe);
-            }
-        }, 50);
+        // let endbossMeetsPepe = setInterval(() => {
+        //     if (this.endboss.x - this.character.x <= 350 && !this.endboss.bossGetsAttacked) {
+        //         this.endbossAttacksPepe();
+        //         clearInterval(endbossMeetsPepe);
+        //     }
+        // }, 50);
 
         let endbossRecognizePepe = setInterval(() => {
             if (this.endboss.x - this.character.x <= 550) {
@@ -58,8 +61,15 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusbar.setPercentage(this.character.energy);
+                if(this.character.isAboveGround()) {
+                    enemy.energy = 0;
+                    enemy.Dead();
+                    this.chickenDies.play();
+                } else if (enemy.energy > 0){
+                    this.character.hit();
+                    this.statusbar.setPercentage(this.character.energy);
+                }
+
             }
         });
     }
@@ -87,6 +97,7 @@ class World {
         this.throwableObjecs.forEach((object) => {
             if (object.isColliding(this.endboss)) {
                 console.log('got hit by bottle', this.endboss);
+                this.smashBottleSound.play();
                 this.endboss.energy -= 25;
                 if (this.endboss.energy <= 0) {
                     this.endboss.Dead();
@@ -108,12 +119,9 @@ class World {
     }
 
     endbossAttacksPepe() {
-        this.endboss.bossAttacks = true;
-        setInterval(() => {
-            if (this.endboss.x - this.character.x > 10) {
-                this.endboss.animateAttack();
-            }
-        }, 100);
+            setInterval(() => {
+                this.endboss.animateAttack(this.character.x);
+            }, 100);
     }
 
     draw() {
