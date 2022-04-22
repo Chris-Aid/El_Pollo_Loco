@@ -3,6 +3,7 @@ class chicken extends movableObject {
     width = 70;
     y = 345;
     energy = 25;
+    dead = false;
 
     imagesWalking = [
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png',
@@ -30,13 +31,13 @@ class chicken extends movableObject {
 
     animate() {
         setInterval(() => {
-            if(this.energy > 0) {
+            if(!this.dead) {
                 this.moveLeft();
             }
         }, 1000 / 60);
 
         setInterval(() => {
-            if(this.energy > 0) {
+            if(!this.dead) {
                 this.playAnimation(this.imagesWalking);
             }
         }, 100);

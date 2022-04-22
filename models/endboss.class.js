@@ -5,9 +5,14 @@ class Endboss extends movableObject {
     x = 2200;
     energy = 100;
     walking = true;
+    characterX;
 
+
+    bossAttacks = false;
     bossGetsAttacked = false;
     dead = false;
+
+    // imagesAfterHitInterval = setInterval(this.imagesAfterHit(), 100);
 
 
     imagesWalking = [
@@ -63,21 +68,17 @@ class Endboss extends movableObject {
         // this.endbossWalking();
     }
 
-    imagesAfterHit() {
-        if (!this.dead) {
-            var timesRun = 0;
-            var interval = setInterval(() => {
 
-                timesRun += 1;
-                if (timesRun === 6) {
-                    clearInterval(interval);
-                } else {
-                    this.playAnimation(this.imagesHit);
-                }
-            }, 300);
-        } else {
-            console.log('tot');
-        }
+    imagesAfterHit() {
+
+        let count=0;
+        var x=setInterval(() => {
+            this.playAnimation(this.imagesHit);
+          if(count > 5) { 
+              clearInterval(x); 
+            }
+          count++;
+        }, 200);
     }
 
     Dead() {
@@ -91,7 +92,6 @@ class Endboss extends movableObject {
     }
 
     animateAggression() {
-
         setInterval(() => {
             if (!this.dead) {
                 this.playAnimation(this.imagesAlerta);
@@ -99,13 +99,14 @@ class Endboss extends movableObject {
         }, 300);
     }
 
-    animateAttack(characterX) {
-
-        if (!this.dead && !this.bossAttacks) {
-            this.playAnimation(this.imagesAttack);
-            if (this.x - characterX > 10) {
-                this.x -= 8;
+    animateAttack() {
+        setInterval(() => {
+            if (!this.dead && this.bossAttacks) {
+                this.playAnimation(this.imagesAttack);
+                if (this.x - this.characterX > 10) {
+                    this.x -= 8;
+                }
             }
-        }
+        }, 100);
     }
 }

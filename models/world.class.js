@@ -3,21 +3,22 @@ class World {
     statusbar = new StatusBar();
     coinsbar = new CoinsBar();
     bottlesbar = new BottlesBar();
+    endboss = new Endboss();
     throwableObjecs = [];
     keyboard = new Keyboard;
-
-    endboss = new Endboss();
+    level = level1;
 
     smashBottleSound = new Audio('https://freesound.org/data/previews/548/548230_12308033-lq.mp3');
     chickenDies = new Audio('https://freesound.org/data/previews/342/342162_6099553-lq.mp3');
-
-
-    level = level1;
+    coinCollection = new Audio('https://freesound.org/data/previews/163/163452_2263027-lq.mp3');
+    bottleCollection = new Audio('https://freesound.org/data/previews/17/17945_30267-lq.mp3');
 
     // canvas;
     ctx;
     keyboard;
     camera_x;
+
+    // endbossAttacks = setInterval(this.endbossAttacksPepe(), 100);
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d'); // this.ctx = document.getElementById('canvas').getContext('2d);
@@ -30,6 +31,10 @@ class World {
 
     setWorld() {
         this.character.world = this;
+
+        setInterval(() => {
+            this.endboss.characterX = this.character.x;
+        }, 50);
     }
 
     run() {
@@ -41,13 +46,11 @@ class World {
             this.checkIfBottleHitsEnemy();
             this.checkThrowObjecs();
 
+            if(this.endboss.x - this.character.x <= 350) {
+                this.endboss.bossAttacks = true;
+            }
         }, 100);
 
-        // let endbossMeetsPepe = setInterval(() => {
-        //     if (this.endboss.x - this.character.x <= 350) {
-        //         this.endbossAttacksPepe();
-        //     }
-        // }, 50);
 
         let endbossRecognizePepe = setInterval(() => {
             if (this.endboss.x - this.character.x <= 550) {
@@ -60,15 +63,16 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if(this.character.isAboveGround()) {
-                    enemy.energy = 0;
-                    enemy.Dead();
-                    this.chickenDies.play();
-                } else if (enemy.energy > 0){
+                if (this.character.isAboveGround()) {
+                    if(!enemy.dead) {
+                        enemy.dead = true;
+                        enemy.Dead();
+                        this.chickenDies.play();
+                    }
+                } else if (!enemy.dead) {
                     this.character.hit();
                     this.statusbar.setPercentage(this.character.energy);
                 }
-
             }
         });
     }
@@ -78,6 +82,7 @@ class World {
             if (this.character.isColliding(coin)) {
                 this.level.coins.splice(this.level.coins.indexOf(coin), 1);
                 this.coinsbar.coinCollected();
+                this.coinCollection.play();
             }
         });
     }
@@ -87,6 +92,7 @@ class World {
             if (this.character.isColliding(bottle)) {
                 this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
                 this.bottlesbar.bottlesCollected();
+                this.bottleCollection.play();
             }
         });
     }
@@ -95,14 +101,13 @@ class World {
 
         this.throwableObjecs.forEach((object) => {
             if (object.isColliding(this.endboss)) {
-                console.log('got hit by bottle', this.endboss);
                 this.smashBottleSound.play();
                 this.endboss.energy -= 25;
+                this.endboss.animateAttack();
+                this.endboss.bossAttacks = true;
                 if (this.endboss.energy <= 0) {
                     this.endboss.Dead();
-                }
-                if (this.endboss instanceof Endboss) {
-                    this.endbossAttacksPepe();
+                } else {
                     this.endboss.imagesAfterHit();
                 }
             }
@@ -117,11 +122,18 @@ class World {
         }
     }
 
-    endbossAttacksPepe() {
-            setInterval(() => {
-                this.endboss.animateAttack(this.character.x);
-            }, 100);
-    }
+    // endbossAttacksPepe() {
+    //     setInterval(() => {
+    //         if (this.endboss.endbossStartsAttacking) {
+    //             this.endboss.animateAttack(this.character.x);
+    //         }
+    //     }, 100);
+    // }
+
+
+
+
+    //following functions are responsible for drawing the objects onto the canvas and display them in a poper way!
 
     draw() {
 
