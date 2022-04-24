@@ -4,21 +4,20 @@ class World {
     coinsbar = new CoinsBar();
     bottlesbar = new BottlesBar();
     endboss = new Endboss();
-    throwableObjecs = [];
+    // throwableObject = new ThrowableObject();
+    throwableObjects = [];
     keyboard = new Keyboard;
     level = level1;
 
     smashBottleSound = new Audio('https://freesound.org/data/previews/548/548230_12308033-lq.mp3');
     chickenDies = new Audio('https://freesound.org/data/previews/342/342162_6099553-lq.mp3');
     coinCollection = new Audio('https://freesound.org/data/previews/163/163452_2263027-lq.mp3');
-    bottleCollection = new Audio('https://freesound.org/data/previews/17/17945_30267-lq.mp3');
+    bottleCollection = new Audio('https://freesound.org/data/previews/195/195227_3628012-lq.mp3');
 
     // canvas;
     ctx;
     keyboard;
     camera_x;
-
-    // endbossAttacks = setInterval(this.endbossAttacksPepe(), 100);
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d'); // this.ctx = document.getElementById('canvas').getContext('2d);
@@ -40,7 +39,8 @@ class World {
     run() {
         setInterval(() => {
 
-            this.checkCollisions();
+            this.checkCollisionsWithEndboss();
+            this.checkCollisionsWithChicken();
             this.checkCollisionsOfCoins();
             this.checkCollisionsOfBottles();
             this.checkIfBottleHitsEnemy();
@@ -50,17 +50,16 @@ class World {
                 this.endboss.bossAttacks = true;
             }
         }, 100);
-
-
-        let endbossRecognizePepe = setInterval(() => {
-            if (this.endboss.x - this.character.x <= 550) {
-                this.endboss.animateAggression();
-                clearInterval(endbossRecognizePepe);
-            }
-        }, 50);
     }
 
-    checkCollisions() {
+    checkCollisionsWithEndboss() {
+        if(this.character.isColliding(this.endboss)) {
+            this.character.energy = 0;
+            console.log('tot');
+        }
+    }
+
+    checkCollisionsWithChicken() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
@@ -99,12 +98,14 @@ class World {
 
     checkIfBottleHitsEnemy() {
 
-        this.throwableObjecs.forEach((object) => {
+        this.throwableObjects.forEach((object) => {
             if (object.isColliding(this.endboss)) {
                 this.smashBottleSound.play();
                 this.endboss.energy -= 25;
-                this.endboss.animateAttack();
                 this.endboss.bossAttacks = true;
+                console.log(object.y)
+                this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
+
                 if (this.endboss.energy <= 0) {
                     this.endboss.Dead();
                 } else {
@@ -117,21 +118,10 @@ class World {
     checkThrowObjecs() {
         if (this.keyboard.D && this.bottlesbar.i > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection)
-            this.throwableObjecs.push(bottle);
+            this.throwableObjects.push(bottle);
             this.bottlesbar.bottleThrown();
         }
     }
-
-    // endbossAttacksPepe() {
-    //     setInterval(() => {
-    //         if (this.endboss.endbossStartsAttacking) {
-    //             this.endboss.animateAttack(this.character.x);
-    //         }
-    //     }, 100);
-    // }
-
-
-
 
     //following functions are responsible for drawing the objects onto the canvas and display them in a poper way!
 
@@ -147,7 +137,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
-        this.addObjectsToMap(this.throwableObjecs);
+        this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0); // moving backwards
         // -- Space for fixed objects --

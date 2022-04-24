@@ -4,16 +4,12 @@ class Endboss extends movableObject {
     y = 160;
     x = 2200;
     energy = 100;
-    walking = true;
-    characterX;
 
+    characterX;
 
     bossAttacks = false;
     bossGetsAttacked = false;
     dead = false;
-
-    // imagesAfterHitInterval = setInterval(this.imagesAfterHit(), 100);
-
 
     imagesWalking = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G1.png',
@@ -57,6 +53,9 @@ class Endboss extends movableObject {
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G20.png',
     ];
 
+    showAggression = setInterval(this.animateAttack(), 100);
+    startAttack = setInterval(this.animateAggression(), 100);
+
     constructor() {
         super().loadImage(this.imagesAlerta[0]);
         this.loadImages(this.imagesWalking);
@@ -64,9 +63,8 @@ class Endboss extends movableObject {
         this.loadImages(this.imagesHit);
         this.loadImages(this.imagesDead);
         this.loadImages(this.imagesAttack);
-
-        // this.endbossWalking();
     }
+
 
 
     imagesAfterHit() {
@@ -93,7 +91,7 @@ class Endboss extends movableObject {
 
     animateAggression() {
         setInterval(() => {
-            if (!this.dead) {
+            if (!this.dead && this.x - this.characterX <= 550 && !this.bossAttacks) {
                 this.playAnimation(this.imagesAlerta);
             }
         }, 300);
@@ -104,7 +102,7 @@ class Endboss extends movableObject {
             if (!this.dead && this.bossAttacks) {
                 this.playAnimation(this.imagesAttack);
                 if (this.x - this.characterX > 10) {
-                    this.x -= 8;
+                    this.x -= 20;
                 }
             }
         }, 100);

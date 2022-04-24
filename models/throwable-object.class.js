@@ -7,37 +7,77 @@ class ThrowableObject extends movableObject {
         'img/6.botella/Rotación/Mesa de trabajo 1 copia 6.png'
     ];
 
+    smashingBottle = [
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 7.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 8.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 9.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 10.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 11.png',
+        'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 12.png',
+    ];
+
+    bottleHit = false;
+
     constructor(x, y, otherDirectionOfCharacter) {
         super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png');
+        this.loadImages(this.smashingBottle);
         this.x = x;
         this.y = y;
         this.height = 90;
         this.width = 70;
-        this.otherDirection = otherDirectionOfCharacter;
-        if(this.otherDirection) {
-            this.x = x -100;
-        }
 
+        // throw bottles to left if character looks to other direction
+        this.otherDirection = otherDirectionOfCharacter;
+        if (this.otherDirection) {
+            this.x = x - 100;
+        }
 
         this.throw();
         this.throwAnimation();
     }
 
-    throw() {
-        this.speedY = 20;
-        this.applyGravity();
-        setInterval(() => {
-            if (this.otherDirection) {
-                this.x -= 7;
-            } else {
-                this.x += 7;
+
+    showSmashingBottleAnimation() {
+        this.bottleHit = true;
+        this.height = 120;
+        this.width = 100;
+        // this.speedY = 0;
+        let counter = 0;
+        let smashBottle = setInterval(() => {
+            counter++;
+            this.playAnimation(this.smashingBottle);
+            if(counter == 1) {
+                clearInterval(smashBottle);
             }
-        }, 10);
+        }, 50);
+    }
+
+    throw() {
+
+            this.applyGravity();
+            this.speedY = 15;
+            let throwBottle = setInterval(() => {
+                if (this.otherDirection) {
+                    this.x -= 8;
+                } else {
+                    this.x += 8;
+                }
+                if(this.y >= 350) {
+                    clearInterval(throwBottle);
+                }
+            }, 10);
+
     }
 
     throwAnimation() {
-        setInterval(() => {
-            this.playAnimation(this.imagesBottels);
-        }, 70);
+        if (!this.bottleHit) {
+            let rotation = setInterval(() => {
+                this.playAnimation(this.imagesBottels);
+                if(this.y >= 343) {
+                    clearInterval(rotation);
+                    this.showSmashingBottleAnimation();
+                }
+            }, 70);
+        }
     }
 }

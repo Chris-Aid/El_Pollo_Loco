@@ -27,6 +27,7 @@ class chicken extends movableObject {
 
     Dead() {
             this.loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png');
+            this.y = this.y + 10;
     }
 
     animate() {
