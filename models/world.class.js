@@ -43,17 +43,18 @@ class World {
             this.checkCollisionsWithChicken();
             this.checkCollisionsOfCoins();
             this.checkCollisionsOfBottles();
+            this.checkIfBottleHitsEndboss();
             this.checkIfBottleHitsEnemy();
             this.checkThrowObjecs();
 
-            if(this.endboss.x - this.character.x <= 350) {
+            if (this.endboss.x - this.character.x <= 350) {
                 this.endboss.bossAttacks = true;
             }
         }, 100);
     }
 
     checkCollisionsWithEndboss() {
-        if(this.character.isColliding(this.endboss)) {
+        if (this.character.isColliding(this.endboss)) {
             this.character.energy = 0;
             console.log('tot');
         }
@@ -63,7 +64,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
-                    if(!enemy.dead) {
+                    if (!enemy.dead) {
                         enemy.dead = true;
                         enemy.Dead();
                         this.chickenDies.play();
@@ -96,7 +97,7 @@ class World {
         });
     }
 
-    checkIfBottleHitsEnemy() {
+    checkIfBottleHitsEndboss() {
 
         this.throwableObjects.forEach((object) => {
             if (object.isColliding(this.endboss)) {
@@ -115,11 +116,32 @@ class World {
         });
     }
 
+    checkIfBottleHitsEnemy() {
+        this.throwableObjects.forEach((object) => {
+            this.level.enemies.forEach((enemy) => {
+                if (enemy.isColliding(object)) {
+                    if(!enemy.dead) {
+                        this.smashBottleSound.play();
+                        this.chickenDies.play();
+                        enemy.energy -= 25;
+                        enemy.dead = true;
+                        enemy.Dead();
+                    }
+                    // console.log(enemy);
+                    // this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
+                }
+            });
+        });
+    }
+
     checkThrowObjecs() {
         if (this.keyboard.D && this.bottlesbar.i > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection)
             this.throwableObjects.push(bottle);
             this.bottlesbar.bottleThrown();
+            setTimeout(() => {
+                this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1);
+            }, 1000);
         }
     }
 

@@ -64,6 +64,7 @@ class ThrowableObject extends movableObject {
                 }
                 if(this.y >= 350) {
                     clearInterval(throwBottle);
+                    this.y = this.y + 20;
                 }
             }, 10);
 
