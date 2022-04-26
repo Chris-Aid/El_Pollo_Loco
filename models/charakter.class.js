@@ -111,7 +111,7 @@ class Character extends movableObject {
         }, 100);
     }
 
-    // functin is responsible for moving character on canvas if certain keys are pressed
+    // function is responsible for moving character on canvas if certain keys are pressed
     moveCharacter() {
         this.running.pause();
 
@@ -130,7 +130,8 @@ class Character extends movableObject {
             this.jump();
         }
 
-        this.world.camera_x = -this.x + 70;
+        // responsible for moving camera with character to make Pepe the center of the game!
+        this.world.camera_x = -this.x + 100;
     }
 
     // this interval checks wether character is moving or standing still and also figures out when the last move happened + what time it is now!

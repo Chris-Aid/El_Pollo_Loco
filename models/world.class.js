@@ -50,11 +50,11 @@ class World {
             if (this.endboss.x - this.character.x <= 350) {
                 this.endboss.bossAttacks = true;
             }
-        }, 50);
+        }, 100);
 
         setInterval(() => {
             this.checkThrowObjecs();
-        }, 200);
+        }, 100);
     }
 
     checkCollisionsWithEndboss() {
@@ -108,7 +108,6 @@ class World {
                 this.smashBottleSound.play();
                 this.endboss.energy -= 25;
                 this.endboss.bossAttacks = true;
-                console.log(object.y)
                 this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
 
                 if (this.endboss.energy <= 0) {

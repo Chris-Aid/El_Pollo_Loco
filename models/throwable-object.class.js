@@ -46,7 +46,7 @@ class ThrowableObject extends movableObject {
         let smashBottle = setInterval(() => {
             counter++;
             this.playAnimation(this.smashingBottle);
-            if(counter == 1) {
+            if (counter == 1) {
                 clearInterval(smashBottle);
             }
         }, 50);
@@ -54,19 +54,19 @@ class ThrowableObject extends movableObject {
 
     throw() {
 
-            this.applyGravity();
-            this.speedY = 15;
-            let throwBottle = setInterval(() => {
-                if (this.otherDirection) {
-                    this.x -= 8;
-                } else {
-                    this.x += 8;
-                }
-                if(this.y >= 350) {
-                    clearInterval(throwBottle);
-                    this.y = this.y + 20;
-                }
-            }, 10);
+        this.applyGravity();
+        this.speedY = 20;
+        let throwBottle = setInterval(() => {
+            if (this.otherDirection) {
+                this.x -= 7;
+            } else {
+                this.x += 7;
+            }
+            if (this.y >= 350) {
+                clearInterval(throwBottle);
+                this.y = this.y + 20;
+            }
+        }, 10);
 
     }
 
@@ -74,7 +74,7 @@ class ThrowableObject extends movableObject {
         if (!this.bottleHit) {
             let rotation = setInterval(() => {
                 this.playAnimation(this.imagesBottels);
-                if(this.y >= 343) {
+                if (this.y >= 343) {
                     clearInterval(rotation);
                     this.showSmashingBottleAnimation();
                 }

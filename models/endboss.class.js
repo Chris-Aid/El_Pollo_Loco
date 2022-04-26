@@ -81,12 +81,11 @@ class Endboss extends movableObject {
 
     Dead() {
         this.dead = true;
-
         setInterval(() => {
             this.x += 20;
             this.y -= 20;
             this.playAnimation(this.imagesDead);
-        }, 30);
+        }, 40);
     }
 
     animateAggression() {
