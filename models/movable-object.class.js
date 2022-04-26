@@ -16,6 +16,9 @@ class movableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
 
+    // gameStarted;
+    // gameOver;
+    
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {

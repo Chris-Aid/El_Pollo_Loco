@@ -1,10 +1,13 @@
 class World {
+    startScreen = new startScreen();
+    endScreen = new endScreen();
     character = new Character();
     statusbar = new StatusBar();
     coinsbar = new CoinsBar();
     bottlesbar = new BottlesBar();
     endboss = new Endboss();
-    // throwableObject = new ThrowableObject();
+    drawableObject = new DrawableObject();
+    // moveableObjects = new movableObject();
     throwableObjects = [];
     keyboard = new Keyboard;
     level = level1;
@@ -19,6 +22,9 @@ class World {
     keyboard;
     camera_x;
 
+    gameStarted = true;
+    gameOver = false;
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d'); // this.ctx = document.getElementById('canvas').getContext('2d);
         this.canvas = canvas;
@@ -29,10 +35,16 @@ class World {
     }
 
     setWorld() {
+
         this.character.world = this;
 
         setInterval(() => {
             this.endboss.characterX = this.character.x;
+
+            this.character.gameStarted = this.gameStarted;
+            this.character.gameOver = this.gameOver;
+            this.level.enemies.forEach((enemy) => {enemy.gameStarted = this.gameStarted});
+            this.level.enemies.forEach((chicken) => {chicken.gameOver = this.gameOver});
         }, 50);
     }
 
@@ -60,7 +72,7 @@ class World {
     checkCollisionsWithEndboss() {
         if (this.character.isColliding(this.endboss)) {
             this.character.energy = 0;
-            console.log('tot');
+            this.gameOver = true;
         }
     }
 
@@ -74,8 +86,14 @@ class World {
                         this.chickenDies.play();
                     }
                 } else if (!enemy.dead) {
-                    this.character.hit();
-                    this.statusbar.setPercentage(this.character.energy);
+                    if (this.character.energy == 0) {
+                        this.gameOver = true;
+                    } else {
+                        this.character.hit();
+                        this.character.grunt.play();
+                        this.statusbar.setPercentage(this.character.energy);
+                    }
+
                 }
             }
         });
@@ -123,7 +141,7 @@ class World {
         this.throwableObjects.forEach((object) => {
             this.level.enemies.forEach((enemy) => {
                 if (enemy.isColliding(object)) {
-                    if(!enemy.dead) {
+                    if (!enemy.dead) {
                         this.smashBottleSound.play();
                         this.chickenDies.play();
                         enemy.energy -= 25;
@@ -156,6 +174,8 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0); // moving forwards
+
+
         this.addObjectsToMap(this.level.backgroundObjects);
         this.showObjectsInWorld(this.character);
         this.showObjectsInWorld(this.endboss);
@@ -174,6 +194,15 @@ class World {
 
         this.ctx.translate(this.camera_x, 0); // moving forwards
         this.ctx.translate(-this.camera_x, 0); // moving backwards
+
+        if (!this.gameStarted) {
+            this.showObjectsInWorld(this.startScreen);
+        }
+
+        if (this.gameOver) {
+            this.showObjectsInWorld(this.endScreen);
+        }
+
 
         // draw wird immer wieder aufgerufen!
         let self = this;

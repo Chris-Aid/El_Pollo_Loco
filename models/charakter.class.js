@@ -73,8 +73,11 @@ class Character extends movableObject {
 
     world;
     running = new Audio('audi/running.mp3');
+    grunt = new Audio('https://freesound.org/data/previews/420/420932_3890135-lq.mp3');
     timeNow;
     lastMove;
+    gameStarted;
+    gameOver;
 
     constructor() {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png');
@@ -91,24 +94,26 @@ class Character extends movableObject {
     }
 
     animateCharacterActions() {
+        if (this.gameStarted = true && !this.gameOver) {
+            // this interval animates running or jumping of character in 60fps!
+            setInterval(() => {
+                // console.log(this.gameStarted);
+                this.moveCharacter();
+            }, 1000 / 60);
 
-        // this interval animates running or jumping of character in 60fps!
-        setInterval(() => {
-            this.moveCharacter();
-        }, 1000 / 60);
 
+            setInterval(() => {
+                this.checkIfCharacterIsMoving;
+            }, 10);
 
-        setInterval(() => {
-            this.checkIfCharacterIsMoving;
-        }, 10);
+            setInterval(() => {
+                this.restingOrSleepingAnimation();
+            }, 600);
 
-        setInterval(() => {
-            this.restingOrSleepingAnimation();
-        }, 600);
-
-        setInterval(() => {
-            this.movingCharacterAnimations();
-        }, 100);
+            setInterval(() => {
+                this.movingCharacterAnimations();
+            }, 100);
+        }
     }
 
     // function is responsible for moving character on canvas if certain keys are pressed
