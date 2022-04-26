@@ -6,7 +6,6 @@ class Character extends movableObject {
     x = 10;
     speed = 7;
     characterIsMoving = false;
-    // lastMove;
 
     imagesWalking = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -74,7 +73,8 @@ class Character extends movableObject {
 
     world;
     running = new Audio('audi/running.mp3');
-
+    timeNow;
+    lastMove;
 
     constructor() {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png');
@@ -86,77 +86,85 @@ class Character extends movableObject {
         this.loadImages(this.sleepImages);
 
         // this.animateRunning();
-        this.animateMovingOrSleeping();
+        this.animateCharacterActions();
         this.applyGravity();
     }
 
-    // animateRunning() {
+    animateCharacterActions() {
 
-        
-
-    // }
-
-    animateMovingOrSleeping() {
-
+        // this interval animates running or jumping of character in 60fps!
         setInterval(() => {
-            this.running.pause();
-
-            if (this.world.keyboard.Right && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                let lastMove = new Date().getTime();
-                this.running.play();
-            }
-
-            if (this.world.keyboard.Left && this.x > 0) {
-                this.moveLeft();
-                // this.lastMove = new Date().getTime();
-                this.otherDirection = true;
-                this.running.play();
-            }
-
-            if (this.world.keyboard.Up && !this.isAboveGround() || this.world.keyboard.Space && !this.isAboveGround()) {
-                this.jump();
-                // this.lastMove = new Date().getTime();
-            }
-
-            this.world.camera_x = -this.x + 70;
+            this.moveCharacter();
         }, 1000 / 60);
 
-        setInterval(() => { // this funciton checks wether character is moving or standing still
 
-            if (!this.isAboveGround() && !this.world.keyboard.Right && !this.world.keyboard.Left) {
-                this.characterIsMoving = false;
-
-            } else if (this.isAboveGround() || this.world.keyboard.Right || this.world.keyboard.Left) {
-                this.characterIsMoving = true;
-            }
-
-            let time = new Date();
-            let timeInMs = time.getTime();
-            let timeInSec = timeInMs / 1000;
-            console.log(this.lastMove);
+        setInterval(() => {
+            this.checkIfCharacterIsMoving;
         }, 10);
 
         setInterval(() => {
-            if (!this.characterIsMoving) {
-                this.playAnimation(this.sleepImages);
-            }
-        }, 1000);
+            this.restingOrSleepingAnimation();
+        }, 600);
 
         setInterval(() => {
-            if (this.isHurt()) {
-                this.playAnimation(this.imagesHurt);
-            }
-            else if (this.isDead()) {
-                this.playAnimation(this.imagesDead);
-            }
-            else if (this.isAboveGround()) {
-                this.playAnimation(this.imagesJumping);
-
-            } else if (this.world.keyboard.Right || this.world.keyboard.Left) {
-                this.playAnimation(this.imagesWalking);
-            } 
+            this.movingCharacterAnimations();
         }, 100);
     }
-    
+
+    // functin is responsible for moving character on canvas if certain keys are pressed
+    moveCharacter() {
+        this.running.pause();
+
+        if (this.world.keyboard.Right && this.x < this.world.level.level_end_x) {
+            this.moveRight();
+            this.running.play();
+        }
+
+        if (this.world.keyboard.Left && this.x > 0) {
+            this.moveLeft();
+            this.otherDirection = true;
+            this.running.play();
+        }
+
+        if (this.world.keyboard.Up && !this.isAboveGround() || this.world.keyboard.Space && !this.isAboveGround()) {
+            this.jump();
+        }
+
+        this.world.camera_x = -this.x + 70;
+    }
+
+    // this interval checks wether character is moving or standing still and also figures out when the last move happened + what time it is now!
+    checkIfCharacterIsMoving() {
+        if (this.isAboveGround() || this.world.keyboard.Right || this.world.keyboard.Left) {
+            this.lastMove = new Date().getTime();
+        }
+
+        let time = new Date();
+        this.timeNow = time.getTime();
+    }
+
+    // funciton provides suitable images for every action of the character
+    movingCharacterAnimations() {
+        if (this.isHurt()) {
+            this.playAnimation(this.imagesHurt);
+        }
+        else if (this.isDead()) {
+            this.playAnimation(this.imagesDead);
+        }
+        else if (this.isAboveGround()) {
+            this.playAnimation(this.imagesJumping);
+
+        } else if (this.world.keyboard.Right || this.world.keyboard.Left) {
+            this.playAnimation(this.imagesWalking);
+        }
+    }
+
+    // if passed time is longer than 6 seconds, character sleeps. Otherwise character stands still!
+    restingOrSleepingAnimation() {
+        if (!this.characterIsMoving && this.timeNow - this.lastMove > 6000) {
+            this.playAnimation(this.sleepImages);
+        } else {
+            this.playAnimation(this.restImages);
+        }
+    }
 }
