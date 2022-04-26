@@ -5,6 +5,8 @@ class Character extends movableObject {
     y = 135;
     x = 10;
     speed = 7;
+    characterIsMoving = false;
+    // lastMove;
 
     imagesWalking = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -72,7 +74,6 @@ class Character extends movableObject {
 
     world;
     running = new Audio('audi/running.mp3');
-    lastMove;
 
 
     constructor() {
@@ -82,34 +83,65 @@ class Character extends movableObject {
         this.loadImages(this.imagesDead);
         this.loadImages(this.imagesHurt);
         this.loadImages(this.restImages);
+        this.loadImages(this.sleepImages);
 
-        this.animate();
+        // this.animateRunning();
+        this.animateMovingOrSleeping();
         this.applyGravity();
-
     }
 
-    animate() {
+    // animateRunning() {
+
+        
+
+    // }
+
+    animateMovingOrSleeping() {
 
         setInterval(() => {
             this.running.pause();
 
             if (this.world.keyboard.Right && this.x < this.world.level.level_end_x) {
                 this.moveRight();
+                let lastMove = new Date().getTime();
                 this.running.play();
             }
 
             if (this.world.keyboard.Left && this.x > 0) {
                 this.moveLeft();
+                // this.lastMove = new Date().getTime();
                 this.otherDirection = true;
                 this.running.play();
             }
 
             if (this.world.keyboard.Up && !this.isAboveGround() || this.world.keyboard.Space && !this.isAboveGround()) {
                 this.jump();
+                // this.lastMove = new Date().getTime();
             }
 
             this.world.camera_x = -this.x + 70;
         }, 1000 / 60);
+
+        setInterval(() => { // this funciton checks wether character is moving or standing still
+
+            if (!this.isAboveGround() && !this.world.keyboard.Right && !this.world.keyboard.Left) {
+                this.characterIsMoving = false;
+
+            } else if (this.isAboveGround() || this.world.keyboard.Right || this.world.keyboard.Left) {
+                this.characterIsMoving = true;
+            }
+
+            let time = new Date();
+            let timeInMs = time.getTime();
+            let timeInSec = timeInMs / 1000;
+            console.log(this.lastMove);
+        }, 10);
+
+        setInterval(() => {
+            if (!this.characterIsMoving) {
+                this.playAnimation(this.sleepImages);
+            }
+        }, 1000);
 
         setInterval(() => {
             if (this.isHurt()) {
@@ -123,34 +155,8 @@ class Character extends movableObject {
 
             } else if (this.world.keyboard.Right || this.world.keyboard.Left) {
                 this.playAnimation(this.imagesWalking);
-            }
-
+            } 
         }, 100);
-
-        this.playRestAnimation();
-        // this.playSleepAnimation();
-
     }
-
-    playRestAnimation() {
-        setInterval(() => {
-            if (!this.isAboveGround() && !this.world.keyboard.Right && !this.world.keyboard.Left) {
-                this.playAnimation(this.restImages);
-            }
-        }, 300);
-        // this.playSleepAnimation();
-    }
-
-    // playSleepAnimation() {
-    //     let timeNow = new Date().getTime();
-    //     let timePassed = this.lastMove - timeNow;
-    //     console.log(timePassed);
-    //     if (timePassed > 10) {
-    //         setInterval(() => {
-    //             if (!this.isAboveGround() && !this.world.keyboard.Right && !this.world.keyboard.Left) {
-    //                 this.playAnimation(this.sleepImages);
-    //             }
-    //         }, 100);
-    //     }
-    // }
+    
 }

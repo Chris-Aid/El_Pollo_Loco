@@ -50,7 +50,7 @@ class World {
             if (this.endboss.x - this.character.x <= 350) {
                 this.endboss.bossAttacks = true;
             }
-        }, 100);
+        }, 50);
     }
 
     checkCollisionsWithEndboss() {
