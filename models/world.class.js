@@ -45,12 +45,16 @@ class World {
             this.checkCollisionsOfBottles();
             this.checkIfBottleHitsEndboss();
             this.checkIfBottleHitsEnemy();
-            this.checkThrowObjecs();
+
 
             if (this.endboss.x - this.character.x <= 350) {
                 this.endboss.bossAttacks = true;
             }
         }, 50);
+
+        setInterval(() => {
+            this.checkThrowObjecs();
+        }, 200);
     }
 
     checkCollisionsWithEndboss() {
@@ -134,12 +138,13 @@ class World {
         });
     }
 
+    // function creates new throwable Object every time D is pressed.
     checkThrowObjecs() {
         if (this.keyboard.D && this.bottlesbar.i > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection)
             this.throwableObjects.push(bottle);
             this.bottlesbar.bottleThrown();
-            setTimeout(() => {
+            setTimeout(() => { // objects get deleted after 1 sec!
                 this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1);
             }, 1000);
         }
