@@ -1,7 +1,7 @@
 class chicken extends movableObject {
     height = 70;
     width = 70;
-    y = 345;
+    y = 550;
     energy = 25;
     dead = false;
     gameStarted;
@@ -40,7 +40,6 @@ class chicken extends movableObject {
                 setInterval(() => {
                     if (!this.dead) {
                         this.moveLeft();
-                        console.log(this.gameOver);
                     }
                 }, 1000 / 60);
 
@@ -49,6 +48,8 @@ class chicken extends movableObject {
                         this.playAnimation(this.imagesWalking);
                     }
                 }, 100);
+            } else {
+                console.log('kaputt')
             }
         }, 500);
     }

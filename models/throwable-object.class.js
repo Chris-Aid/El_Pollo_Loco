@@ -17,6 +17,7 @@ class ThrowableObject extends movableObject {
     ];
 
     bottleHit = false;
+    allreadyhits = false;
 
     constructor(x, y, otherDirectionOfCharacter) {
         super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png');

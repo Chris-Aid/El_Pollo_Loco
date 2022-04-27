@@ -43,8 +43,8 @@ class World {
 
             this.character.gameStarted = this.gameStarted;
             this.character.gameOver = this.gameOver;
-            this.level.enemies.forEach((enemy) => {enemy.gameStarted = this.gameStarted});
-            this.level.enemies.forEach((chicken) => {chicken.gameOver = this.gameOver});
+            this.level.enemies.forEach((enemy) => { enemy.gameStarted = this.gameStarted });
+            this.level.enemies.forEach((chicken) => { chicken.gameOver = this.gameOver });
         }, 50);
     }
 
@@ -52,7 +52,6 @@ class World {
         setInterval(() => {
 
             this.checkCollisionsWithEndboss();
-            this.checkCollisionsWithChicken();
             this.checkCollisionsOfCoins();
             this.checkCollisionsOfBottles();
             this.checkIfBottleHitsEndboss();
@@ -62,10 +61,11 @@ class World {
             if (this.endboss.x - this.character.x <= 350) {
                 this.endboss.bossAttacks = true;
             }
-        }, 100);
+        }, 10);
 
         setInterval(() => {
             this.checkThrowObjecs();
+            this.checkCollisionsWithChicken();
         }, 100);
     }
 
@@ -123,16 +123,21 @@ class World {
 
         this.throwableObjects.forEach((object) => {
             if (object.isColliding(this.endboss)) {
-                this.smashBottleSound.play();
-                this.endboss.energy -= 25;
-                this.endboss.bossAttacks = true;
-                this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
-
-                if (this.endboss.energy <= 0) {
-                    this.endboss.Dead();
-                } else {
-                    this.endboss.imagesAfterHit();
+                if (!object.allreadyhits) {
+                    object.allreadyhits = true;
+                    this.smashBottleSound.play();
+                    this.endboss.energy -= 25;
+                    console.log(this.endboss.energy)
+                    this.endboss.bossAttacks = true;
+                    this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
+                    
+                    if (this.endboss.energy <= 0) {
+                        this.endboss.Dead();
+                    } else {
+                        this.endboss.imagesAfterHit();
+                    }
                 }
+
             }
         });
     }
