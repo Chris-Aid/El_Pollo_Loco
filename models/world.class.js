@@ -7,7 +7,6 @@ class World {
     bottlesbar = new BottlesBar();
     endboss = new Endboss();
     drawableObject = new DrawableObject();
-    // moveableObjects = new movableObject();
     throwableObjects = [];
     keyboard = new Keyboard;
     level = level1;
@@ -186,6 +185,7 @@ class World {
         this.showObjectsInWorld(this.endboss);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.smallEnemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);

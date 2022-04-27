@@ -94,26 +94,24 @@ class Character extends movableObject {
     }
 
     animateCharacterActions() {
-        if (this.gameStarted = true && !this.gameOver) {
-            // this interval animates running or jumping of character in 60fps!
-            setInterval(() => {
-                // console.log(this.gameStarted);
-                this.moveCharacter();
-            }, 1000 / 60);
+        // this interval animates running or jumping of character in 60fps!
+        setInterval(() => {
+            // console.log(this.gameStarted);
+            this.moveCharacter();
+        }, 1000 / 60);
 
 
-            setInterval(() => {
-                this.checkIfCharacterIsMoving;
-            }, 10);
+        setInterval(() => {
+            this.checkIfCharacterIsMoving;
+        }, 10);
 
-            setInterval(() => {
-                this.restingOrSleepingAnimation();
-            }, 600);
+        setInterval(() => {
+            this.restingOrSleepingAnimation();
+        }, 600);
 
-            setInterval(() => {
-                this.movingCharacterAnimations();
-            }, 100);
-        }
+        setInterval(() => {
+            this.movingCharacterAnimations();
+        }, 100);
     }
 
     // function is responsible for moving character on canvas if certain keys are pressed
@@ -155,7 +153,7 @@ class Character extends movableObject {
             this.playAnimation(this.imagesHurt);
         }
         else if (this.isDead()) {
-            this.playAnimation(this.imagesDead);
+            this.loadImage(this.imagesDead[5]);
         }
         else if (this.isAboveGround()) {
             this.playAnimation(this.imagesJumping);
