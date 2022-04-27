@@ -19,8 +19,7 @@ class chicken extends movableObject {
 
 
     constructor(x) {
-        super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
-        this.loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png');
+        super().loadImage(this.imagesWalking[0]);
         this.x = x;
         this.x = 200 + Math.random() * 4000;
         this.speed = 0.4 + Math.random() * 0.25;
@@ -29,17 +28,18 @@ class chicken extends movableObject {
 
     Dead() {
         if (this.dead) {
-            this.loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png');
+            this.loadImage(this.imagesDead[0]);
             this.y = this.y + 10;
         }
     }
 
     animate() {
         setTimeout(() => {
-            if (this.gameStarted) {
+            // if (this.gameStarted && !this.gameOver) {
                 setInterval(() => {
                     if (!this.dead) {
                         this.moveLeft();
+                        // console.log(this.gameOver)
                     }
                 }, 1000 / 60);
 
@@ -48,9 +48,9 @@ class chicken extends movableObject {
                         this.playAnimation(this.imagesWalking);
                     }
                 }, 100);
-            } else {
-                console.log('kaputt')
-            }
+            // } else {
+            //     this.loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
+            // }
         }, 500);
     }
 }
