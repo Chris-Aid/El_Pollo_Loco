@@ -1,7 +1,7 @@
 class chicken extends movableObject {
-    height = 70;
-    width = 70;
-    y = 550;
+    height = 90;
+    width = 90;
+    y = 530;
     energy = 25;
     dead = false;
     gameStarted;
@@ -18,11 +18,11 @@ class chicken extends movableObject {
     ];
 
 
-    constructor() {
+    constructor(x) {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
         this.loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png');
-
-        this.x = 200 + Math.random() * 2000;
+        this.x = x;
+        this.x = 200 + Math.random() * 4000;
         this.speed = 0.4 + Math.random() * 0.25;
         this.animate();
     }

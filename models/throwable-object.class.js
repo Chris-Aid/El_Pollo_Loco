@@ -59,11 +59,11 @@ class ThrowableObject extends movableObject {
         this.speedY = 20;
         let throwBottle = setInterval(() => {
             if (this.otherDirection) {
-                this.x -= 7;
+                this.x -= 10;
             } else {
-                this.x += 7;
+                this.x += 10;
             }
-            if (this.y >= 350) {
+            if (this.y >= 555) {
                 clearInterval(throwBottle);
                 this.y = this.y + 20;
             }
@@ -75,7 +75,7 @@ class ThrowableObject extends movableObject {
         if (!this.bottleHit) {
             let rotation = setInterval(() => {
                 this.playAnimation(this.imagesBottels);
-                if (this.y >= 343) {
+                if (this.y >= 548) {
                     clearInterval(rotation);
                     this.showSmashingBottleAnimation();
                 }

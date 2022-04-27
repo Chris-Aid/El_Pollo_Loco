@@ -1,8 +1,8 @@
 class Endboss extends movableObject {
-    height = 280;
-    width = 210;
-    y = 160;
-    x = 2200;
+    height = 330;
+    width = 260;
+    y = 315;
+    x = 4000;
     energy = 100;
 
     characterX;
@@ -69,13 +69,13 @@ class Endboss extends movableObject {
 
     imagesAfterHit() {
 
-        let count=0;
-        var x=setInterval(() => {
+        let count = 0;
+        var x = setInterval(() => {
             this.playAnimation(this.imagesHit);
-          if(count > 5) { 
-              clearInterval(x); 
+            if (count > 5) {
+                clearInterval(x);
             }
-          count++;
+            count++;
         }, 200);
     }
 

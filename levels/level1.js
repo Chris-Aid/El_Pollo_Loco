@@ -1,12 +1,12 @@
 const level1 = new Level(
 
     [
-        new chicken(),
-        new chicken(),
-        new chicken(),
-        new chicken(),
-        new chicken(),
-        new chicken()
+        new chicken(200),
+        new chicken(200 * 2),
+        new chicken(200 * 3),
+        new chicken(200 * 6),
+        new chicken(200 * 7),
+        new chicken(200 * 11),
 
     ],
     [
@@ -14,8 +14,11 @@ const level1 = new Level(
     ],
     [
         new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 0),
-        new Cloud('img/5.Fondo/Capas/4.nubes/2.png', 719),
-        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 719 * 2),
+        new Cloud('img/5.Fondo/Capas/4.nubes/2.png', 1280),
+        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 2),
+        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 3),
+        new Cloud('img/5.Fondo/Capas/4.nubes/2.png', 1280 * 4),
+        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 5)
     ],
     [
 

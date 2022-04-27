@@ -15,9 +15,6 @@ class movableObject extends DrawableObject {
     acceleration = 3;
     energy = 100;
     lastHit = 0;
-
-    // gameStarted;
-    // gameOver;
     
     applyGravity() {
         setInterval(() => {
@@ -57,9 +54,9 @@ class movableObject extends DrawableObject {
 
     isAboveGround() {
         if(this instanceof ThrowableObject) { 
-            return this.y < 345; // Throwable objects shouldt fall until they reach the ground!
+            return this.y < 550; // Throwable objects shouldt fall until they reach the ground!
         } else {
-            return this.y < 135;
+            return this.y < 310;
         }
     }
 
