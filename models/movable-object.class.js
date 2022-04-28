@@ -15,7 +15,7 @@ class movableObject extends DrawableObject {
     acceleration = 3;
     energy = 100;
     lastHit = 0;
-    
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -53,13 +53,15 @@ class movableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if(this instanceof ThrowableObject) { 
+        if (this instanceof ThrowableObject) {
             return this.y < 550; // Throwable objects shouldt fall until they reach the ground!
+        } else if (this instanceof smallChicken) {
+            return this.y < 540;
         } else {
             return this.y < 310;
         }
     }
-
+    
     playAnimation(images) {
         let i = this.currentImage % images.length;
         this.loadImage(images[i]);

@@ -88,7 +88,7 @@ class Character extends movableObject {
         this.loadImages(this.restImages);
         this.loadImages(this.sleepImages);
 
-        // this.animateRunning();
+
         this.animateCharacterActions();
         this.applyGravity();
     }
@@ -96,7 +96,6 @@ class Character extends movableObject {
     animateCharacterActions() {
         // this interval animates running or jumping of character in 60fps!
         setInterval(() => {
-            // console.log(this.gameStarted);
             this.moveCharacter();
         }, 1000 / 60);
 

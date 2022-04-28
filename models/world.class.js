@@ -55,6 +55,7 @@ class World {
             this.checkCollisionsOfBottles();
             this.checkIfBottleHitsEndboss();
             this.checkIfBottleHitsEnemy();
+            this.checkIfBottleHitsSmallChicken();
 
 
             if (this.endboss.x - this.character.x <= 350) {
@@ -65,6 +66,7 @@ class World {
         setInterval(() => {
             this.checkThrowObjecs();
             this.checkCollisionsWithChicken();
+            this.checkCollisionsWithSmallChicken();
         }, 100);
     }
 
@@ -79,6 +81,29 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
+                    if (!enemy.dead) {
+                        enemy.dead = true;
+                        enemy.Dead();
+                        this.chickenDies.play();
+                    }
+                } else if (!enemy.dead) {
+                    if (this.character.energy == 0) {
+                        this.gameOver = true;
+                    } else {
+                        this.character.hit();
+                        this.character.grunt.play();
+                        this.statusbar.setPercentage(this.character.energy);
+                    }
+
+                }
+            }
+        });
+    }
+
+    checkCollisionsWithSmallChicken() {
+        this.level.smallEnemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                if (this.character.isAboveGround() && !enemy.isAboveGround()) {
                     if (!enemy.dead) {
                         enemy.dead = true;
                         enemy.Dead();
@@ -152,8 +177,22 @@ class World {
                         enemy.dead = true;
                         enemy.Dead();
                     }
-                    // console.log(enemy);
-                    // this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
+                }
+            });
+        });
+    }
+
+    checkIfBottleHitsSmallChicken() {
+        this.throwableObjects.forEach((object) => {
+            this.level.smallEnemies.forEach((enemy) => {
+                if (enemy.isColliding(object)) {
+                    if (!enemy.dead) {
+                        this.smashBottleSound.play();
+                        this.chickenDies.play();
+                        enemy.energy -= 25;
+                        enemy.dead = true;
+                        enemy.Dead();
+                    }
                 }
             });
         });
