@@ -21,7 +21,7 @@ class World {
     keyboard;
     camera_x;
 
-    gameStarted = true;
+    gameStarted = false;
     gameOver = false;
 
     constructor(canvas, keyboard) {
@@ -49,18 +49,14 @@ class World {
 
     run() {
         setInterval(() => {
-
             this.checkCollisionsWithEndboss();
             this.checkCollisionsOfCoins();
             this.checkCollisionsOfBottles();
             this.checkIfBottleHitsEndboss();
             this.checkIfBottleHitsEnemy();
             this.checkIfBottleHitsSmallChicken();
-
-
-            if (this.endboss.x - this.character.x <= 350) {
-                this.endboss.bossAttacks = true;
-            }
+            this.checkIfCharakterIsToCloseToEndoss();
+            this.checkIfGameIsStarted();
         }, 10);
 
         setInterval(() => {
@@ -68,6 +64,19 @@ class World {
             this.checkCollisionsWithChicken();
             this.checkCollisionsWithSmallChicken();
         }, 100);
+    }
+
+    checkIfGameIsStarted() {
+        window.addEventListener('keydown', (event) => {
+            this.gameStarted = true;
+            document.getElementById('pressAnyKey').style = "display: none";
+        });
+    }
+
+    checkIfCharakterIsToCloseToEndoss() {
+        if (this.endboss.x - this.character.x <= 350) {
+            this.endboss.bossAttacks = true;
+        }
     }
 
     checkCollisionsWithEndboss() {
@@ -154,7 +163,7 @@ class World {
                     console.log(this.endboss.energy)
                     this.endboss.bossAttacks = true;
                     this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
-                    
+
                     if (this.endboss.energy <= 0) {
                         this.endboss.Dead();
                     } else {

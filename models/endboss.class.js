@@ -2,8 +2,9 @@ class Endboss extends movableObject {
     height = 330;
     width = 260;
     y = 315;
-    x = 4000;
+    x = 6000;
     energy = 100;
+    acceleration = 5;
 
     characterX;
 
@@ -63,6 +64,8 @@ class Endboss extends movableObject {
         this.loadImages(this.imagesHit);
         this.loadImages(this.imagesDead);
         this.loadImages(this.imagesAttack);
+
+        // this.applyGravity();
     }
 
 
@@ -81,10 +84,11 @@ class Endboss extends movableObject {
 
     Dead() {
         this.dead = true;
+
         setInterval(() => {
-            this.x += 20;
-            this.y -= 20;
             this.playAnimation(this.imagesDead);
+            this.x += 40;
+            this.y -= 15;
         }, 40);
     }
 

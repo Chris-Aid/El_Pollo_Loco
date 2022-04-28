@@ -1,10 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
+    font-family: 'Fredoka One', cursive;
 }
 
 canvas {
     background-color: black;
+}
+
+.gameInforamtion {
+    position: absolute;
+    top: 64px;
+    width: 1280px;
+    height: 100px;
 }
