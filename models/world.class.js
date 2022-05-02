@@ -127,7 +127,7 @@ class World {
     checkCollisionsWithSmallChicken() {
         this.level.smallEnemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.isAboveGround() && !enemy.isAboveGround()) {
+                if (this.character.isAboveGround() -30 && !enemy.isAboveGround() || this.character.y + this.character.height - 30 < enemy.y) {
                     if (!enemy.dead) {
                         this.chickenCounter++;
                         enemy.dead = true;

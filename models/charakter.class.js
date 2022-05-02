@@ -164,6 +164,7 @@ class Character extends movableObject {
 
     // if passed time is longer than 6 seconds, character sleeps. Otherwise character stands still!
     restingOrSleepingAnimation() {
+        console.log(this.timeNow)
         if (!this.characterIsMoving && this.timeNow - this.lastMove > 6000) {
             this.playAnimation(this.sleepImages);
         } else {

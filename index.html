@@ -35,25 +35,25 @@
 
 <body onload="init()">
     <h1>EL POLLO LOCO</h1>
+    <div class="pressAnyKey" id="pressAnyKey">
+        <h2>press any key to start the game</h2>
+    </div>
     <div class="content">
-        <canvas id="canvas" height="720px" width="1280px"></canvas>
-        <div class="pressAnyKey" id="pressAnyKey">
-            <h2>press any key to start the game</h2>
-        </div>
+        <canvas id="canvas" class="canvas" height="720px" width="1280px"></canvas>
         <div class="gameInforamtion">
             <div class="howToPlay">
                 <h3>RUN</h3>
-                <img style="height: 60px;" class="key-images" src="img/10.Key_Images/arrow-keys.png" alt="arrow-keys">
+                <img class="arrow-keys" src="img/10.Key_Images/arrow-keys.png" alt="arrow-keys">
             </div>
 
             <div class="howToPlay">
                 <h3>THROW A BOTTLE</h3>
-                <img style="height: 45px;" class="key-images" src="img/10.Key_Images/d-key.png" alt="d-key">
+                <img class="key-images" src="img/10.Key_Images/d-key.png" alt="d-key">
             </div>
 
             <div class="howToPlay">
                 <h3>JUMP</h3>
-                <img style="height: 45px;" class="key-images" src="img/10.Key_Images/space-key.png" alt="space-keys">
+                <img class="key-images" src="img/10.Key_Images/space-key.png" alt="space-keys">
             </div>
             <div class="score">
                 <div class="counter" id="chickenCounter"></div>

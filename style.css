@@ -9,12 +9,14 @@ body {
     background-color: rgb(206, 206, 206);
 }
 
-p{
+p {
     margin: 0;
 }
 
-canvas {
+.canvas {
     background-color: black;
+    height: 720px;
+    width: 1280px;
 }
 
 .content {
@@ -22,7 +24,7 @@ canvas {
 }
 
 .pressAnyKey {
-    position: absolute;
+    margin: 0;
     top: 32px;
     left: 410px;
     color: white;
@@ -55,8 +57,65 @@ canvas {
     gap: 12px;
 }
 
+.key-images {
+    height: 45px;
+}
+
+.arrow-keys {
+    height: 65px;
+}
+
 .counter {
     display: flex;
     justify-content: space-between;
     width: 250px;
+}
+
+@media only screen and (max-height: 390px) {
+    .content {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pressAnyKey {
+        margin: 0;
+        top: 12px;
+        left: 220px;
+        font-size: 10pt;
+    }
+
+    .canvas {
+        width: 80%;
+        height: auto;
+    }
+
+    .gameInforamtion {
+        width: 100%;
+        gap: 42px;
+    }
+
+    h1 {
+        font-size: 1.3em;
+    }
+
+    h2 {
+        margin: 0;
+        margin-bottom: 12px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    .key-images {
+        height: 32px;
+    }
+
+    .arrow-keys {
+        height: 45px;
+    }
 }
