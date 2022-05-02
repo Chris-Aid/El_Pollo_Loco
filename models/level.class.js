@@ -18,11 +18,3 @@ class Level {
         this.bottles = bottles;
     }
 }
-
-// coins =         new Coin('img/8.Coin/Moneda1.png'),
-//                 new Coin('img/8.Coin/Moneda1.png'),
-//                 new Coin('img/8.Coin/Moneda1.png')
-
-// this.coins =    new Coin('img/8.Coin/Moneda1.png'),
-//                 new Coin('img/8.Coin/Moneda1.png'),
-//                 new Coin('img/8.Coin/Moneda1.png')

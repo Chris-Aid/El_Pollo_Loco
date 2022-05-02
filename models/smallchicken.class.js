@@ -5,6 +5,7 @@ class smallChicken extends movableObject {
     y = 540;
     energy = 25;
     dead = false;
+    alreadyHit = false;
     gameStarted;
     gameOver;
 
@@ -18,11 +19,9 @@ class smallChicken extends movableObject {
         'img/3.Secuencias_Enemy_básico/Versión_pollito/4.Muerte.png'
     ];
 
-
     constructor(x) {
         super().loadImage(this.imagesWalking[0]);
         this.x = x + Math.random() * 10000;
-
 
         this.animate();
         this.applyGravity();
@@ -44,7 +43,7 @@ class smallChicken extends movableObject {
 
             setInterval(() => {
                 if (!this.dead && this.gameStarted && !this.gameOver) {
-                this.playAnimation(this.imagesWalking);
+                    this.playAnimation(this.imagesWalking);
                 }
             }, 100);
 
@@ -63,7 +62,6 @@ class smallChicken extends movableObject {
                     }
                 }
             }, 1000 / 60);
-
         }, 500);
     }
 }

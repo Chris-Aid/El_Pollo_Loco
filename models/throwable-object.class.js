@@ -42,7 +42,6 @@ class ThrowableObject extends movableObject {
         this.bottleHit = true;
         this.height = 120;
         this.width = 100;
-        // this.speedY = 0;
         let counter = 0;
         let smashBottle = setInterval(() => {
             counter++;

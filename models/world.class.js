@@ -74,7 +74,7 @@ class World {
     }
 
     updateCounter() {
-        if(this.gameStarted) {
+        if (this.gameStarted) {
             document.getElementById('chickenCounter').innerHTML = `<p>CHICKEN KILLED</p> <p><b>${this.chickenCounter}</b></p>`;
             document.getElementById('bottleCounter').innerHTML = `<p>BOTTLES</p> <p><b>${this.bottleCounter}</b></p>`;
         }
@@ -113,12 +113,12 @@ class World {
                 } else if (!enemy.dead) {
                     if (this.character.energy == 0) {
                         this.gameOver = true;
-                    } else {
+                    } else if(!enemy.alreadyHit) {
+                        enemy.alreadyHit = true;
                         this.character.hit();
                         this.character.grunt.play();
                         this.statusbar.setPercentage(this.character.energy);
                     }
-
                 }
             }
         });
@@ -137,12 +137,12 @@ class World {
                 } else if (!enemy.dead) {
                     if (this.character.energy == 0) {
                         this.gameOver = true;
-                    } else {
+                    } else if(!enemy.alreadyHit){
+                        enemy.alreadyHit = true;
                         this.character.hit();
                         this.character.grunt.play();
                         this.statusbar.setPercentage(this.character.energy);
                     }
-
                 }
             }
         });
@@ -170,7 +170,6 @@ class World {
     }
 
     checkIfBottleHitsEndboss() {
-
         this.throwableObjects.forEach((object) => {
             if (object.isColliding(this.endboss)) {
                 if (!object.allreadyhits) {
@@ -187,7 +186,6 @@ class World {
                         this.endboss.imagesAfterHit();
                     }
                 }
-
             }
         });
     }

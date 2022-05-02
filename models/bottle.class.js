@@ -9,5 +9,4 @@ class Bottle extends movableObject {
 
         this.x = Math.random() * 4400;
     }
-
 }

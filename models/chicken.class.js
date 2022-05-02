@@ -4,6 +4,7 @@ class chicken extends movableObject {
     y = 530;
     energy = 25;
     dead = false;
+    alreadyHit = false;
     gameStarted;
     gameOver;
 
@@ -45,7 +46,6 @@ class chicken extends movableObject {
                     this.playAnimation(this.imagesWalking);
                 }
             }, 100);
-
         }, 500);
     }
 }

@@ -20,18 +20,29 @@ class BottlesBar extends DrawableObject {
     }
 
     bottlesCollected() {
-        if (this.i < 5) {
-            this.i++;
-            this.loadImage(this.imagesBottleBar[this.i]);
-        }
+        this.i++;
+        this.showBottlesBar();
     }
 
     bottleThrown() {
-        if (this.i > 0) {
-            this.i--;
-            this.loadImage(this.imagesBottleBar[this.i]);
-        }
+        this.i--
+        this.showBottlesBar();
     }
 
+    showBottlesBar() {
+        if (this.i < 2) {
+            this.loadImage(this.imagesBottleBar[0]);
+        } else if (this.i <= 4) {
+            this.loadImage(this.imagesBottleBar[1]);
+        } else if (this.i <= 6) {
+            this.loadImage(this.imagesBottleBar[2]);
+        } else if (this.i <= 8) {
+            this.loadImage(this.imagesBottleBar[3]);
+        } else if (this.i <= 10) {
+            this.loadImage(this.imagesBottleBar[4]);
+        } else if (this.i <= 12) {
+            this.loadImage(this.imagesBottleBar[5]);
+        }
+    }
 }
 
