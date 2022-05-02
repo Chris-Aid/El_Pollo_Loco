@@ -117,18 +117,18 @@ class Character extends movableObject {
     moveCharacter() {
         this.running.pause();
 
-        if (this.world.keyboard.Right && this.x < this.world.level.level_end_x) {
+        if (this.world.keyboard.Right && this.x < this.world.level.level_end_x && this.gameStarted && !this.gameOver) {
             this.moveRight();
             this.running.play();
         }
 
-        if (this.world.keyboard.Left && this.x > 0) {
+        if (this.world.keyboard.Left && this.x > 0 && this.gameStarted && !this.gameOver) {
             this.moveLeft();
             this.otherDirection = true;
             this.running.play();
         }
 
-        if (this.world.keyboard.Up && !this.isAboveGround() || this.world.keyboard.Space && !this.isAboveGround()) {
+        if (this.world.keyboard.Up && !this.isAboveGround() || this.world.keyboard.Space && !this.isAboveGround() && this.gameStarted && !this.gameOver) {
             this.jump();
         }
 

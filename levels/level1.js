@@ -7,6 +7,15 @@ const level1 = new Level(
         new chicken(200 * 3),
         new chicken(200 * 4),
         new chicken(200 * 5),
+        new chicken(200 * 6),
+        new chicken(200 * 7),
+        new chicken(200 * 8),
+        new chicken(200 * 9),
+        new chicken(200 * 10),
+        new chicken(200 * 11),
+        new chicken(200 * 12),
+        new chicken(200 * 13),
+        new chicken(200 * 14),
 
     ],
     [
@@ -16,6 +25,14 @@ const level1 = new Level(
         new smallChicken(200 * 3),
         new smallChicken(200 * 4),
         new smallChicken(200 * 5),
+        new smallChicken(200 * 6),
+        new smallChicken(200 * 7),
+        new smallChicken(200 * 8),
+        new smallChicken(200 * 9),
+        new smallChicken(200 * 10),
+        new smallChicken(200 * 11),
+        new smallChicken(200 * 12),
+        new smallChicken(200 * 13)
     ],
     [
         new Endboss(),

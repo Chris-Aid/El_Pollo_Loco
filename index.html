@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png" sizes="64x64">
+    <link rel="icon" type="image/png" href="img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png"
+        sizes="64x64">
     <link rel="stylesheet" href="style.css">
     <script src="models/drawable-object.class.js"></script>
     <script src="models/startScreen.class.js"></script>
@@ -30,11 +32,39 @@
 
     <title>EL POLLO LOCO</title>
 </head>
+
 <body onload="init()">
     <h1>EL POLLO LOCO</h1>
-    <canvas id="canvas" height="720px" width="1280px"></canvas>
-    <div class="gameInforamtion">
-        <div id="pressAnyKey"><h2>press any key to start the game</h2></div>
+    <div class="content">
+        <canvas id="canvas" height="720px" width="1280px"></canvas>
+        <div class="pressAnyKey" id="pressAnyKey">
+            <h2>press any key to start the game</h2>
+        </div>
+        <div class="gameInforamtion">
+            <div class="howToPlay">
+                <h3>RUN</h3>
+                <img style="height: 60px;" class="key-images" src="img/10.Key_Images/arrow-keys.png" alt="arrow-keys">
+            </div>
+
+            <div class="howToPlay">
+                <h3>THROW A BOTTLE</h3>
+                <img style="height: 45px;" class="key-images" src="img/10.Key_Images/d-key.png" alt="d-key">
+            </div>
+
+            <div class="howToPlay">
+                <h3>JUMP</h3>
+                <img style="height: 45px;" class="key-images" src="img/10.Key_Images/space-key.png" alt="space-keys">
+            </div>
+            <div class="score">
+                <div class="counter" id="chickenCounter"></div>
+                <div class="counter" id="bottleCounter"></div>
+            </div>
+            
+            
+
+        </div>
     </div>
+
 </body>
+
 </html>

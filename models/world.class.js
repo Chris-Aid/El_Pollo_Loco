@@ -11,6 +11,9 @@ class World {
     keyboard = new Keyboard;
     level = level1;
 
+    chickenCounter = 0;
+    bottleCounter = 0;
+
     smashBottleSound = new Audio('https://freesound.org/data/previews/548/548230_12308033-lq.mp3');
     chickenDies = new Audio('https://freesound.org/data/previews/342/342162_6099553-lq.mp3');
     coinCollection = new Audio('https://freesound.org/data/previews/163/163452_2263027-lq.mp3');
@@ -42,8 +45,10 @@ class World {
 
             this.character.gameStarted = this.gameStarted;
             this.character.gameOver = this.gameOver;
-            this.level.enemies.forEach((enemy) => { enemy.gameStarted = this.gameStarted });
+            this.level.enemies.forEach((chicken) => { chicken.gameStarted = this.gameStarted });
             this.level.enemies.forEach((chicken) => { chicken.gameOver = this.gameOver });
+            this.level.smallEnemies.forEach((smallchicken) => { smallchicken.gameStarted = this.gameStarted });
+            this.level.smallEnemies.forEach((smallchicken) => { smallchicken.gameOver = this.gameOver });
         }, 50);
     }
 
@@ -57,13 +62,22 @@ class World {
             this.checkIfBottleHitsSmallChicken();
             this.checkIfCharakterIsToCloseToEndoss();
             this.checkIfGameIsStarted();
+
         }, 10);
 
         setInterval(() => {
             this.checkThrowObjecs();
             this.checkCollisionsWithChicken();
             this.checkCollisionsWithSmallChicken();
+            this.updateCounter();
         }, 100);
+    }
+
+    updateCounter() {
+        if(this.gameStarted) {
+            document.getElementById('chickenCounter').innerHTML = `<p>CHICKEN KILLED</p> <p><b>${this.chickenCounter}</b></p>`;
+            document.getElementById('bottleCounter').innerHTML = `<p>BOTTLES</p> <p><b>${this.bottleCounter}</b></p>`;
+        }
     }
 
     checkIfGameIsStarted() {
@@ -92,6 +106,7 @@ class World {
                 if (this.character.isAboveGround()) {
                     if (!enemy.dead) {
                         enemy.dead = true;
+                        this.chickenCounter++;
                         enemy.Dead();
                         this.chickenDies.play();
                     }
@@ -114,6 +129,7 @@ class World {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround() && !enemy.isAboveGround()) {
                     if (!enemy.dead) {
+                        this.chickenCounter++;
                         enemy.dead = true;
                         enemy.Dead();
                         this.chickenDies.play();
@@ -145,6 +161,7 @@ class World {
     checkCollisionsOfBottles() {
         this.level.bottles.forEach((bottle) => {
             if (this.character.isColliding(bottle)) {
+                this.bottleCounter++;
                 this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
                 this.bottlesbar.bottlesCollected();
                 this.bottleCollection.play();
@@ -179,11 +196,13 @@ class World {
         this.throwableObjects.forEach((object) => {
             this.level.enemies.forEach((enemy) => {
                 if (enemy.isColliding(object)) {
-                    if (!enemy.dead) {
+                    if (!enemy.dead && !object.allreadyhits) {
+                        object.allreadyhits = true;
                         this.smashBottleSound.play();
                         this.chickenDies.play();
                         enemy.energy -= 25;
                         enemy.dead = true;
+                        this.chickenCounter++;
                         enemy.Dead();
                     }
                 }
@@ -195,11 +214,13 @@ class World {
         this.throwableObjects.forEach((object) => {
             this.level.smallEnemies.forEach((enemy) => {
                 if (enemy.isColliding(object)) {
-                    if (!enemy.dead) {
+                    if (!enemy.dead && !object.allreadyhits) {
+                        object.allreadyhits = true;
                         this.smashBottleSound.play();
                         this.chickenDies.play();
                         enemy.energy -= 25;
                         enemy.dead = true;
+                        this.chickenCounter++;
                         enemy.Dead();
                     }
                 }
@@ -209,10 +230,11 @@ class World {
 
     // function creates new throwable Object every time D is pressed.
     checkThrowObjecs() {
-        if (this.keyboard.D && this.bottlesbar.i > 0) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection)
+        if (this.keyboard.D && this.bottleCounter > 0) {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
             this.throwableObjects.push(bottle);
             this.bottlesbar.bottleThrown();
+            this.bottleCounter--;
             setTimeout(() => { // objects get deleted after 1 sec!
                 this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1);
             }, 1000);

@@ -11,7 +11,6 @@ class BottlesBar extends DrawableObject {
     i = 0;
 
     constructor() {
-    
         super().loadImage('img/7.Marcadores/Barra/Marcador_botella/Azul/0_.png');
         this.loadImages(this.imagesBottleBar);
         this.x = 400;

@@ -5,6 +5,8 @@ class smallChicken extends movableObject {
     y = 540;
     energy = 25;
     dead = false;
+    gameStarted;
+    gameOver;
 
     imagesWalking = [
         'img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png',
@@ -19,7 +21,7 @@ class smallChicken extends movableObject {
 
     constructor(x) {
         super().loadImage(this.imagesWalking[0]);
-        this.x = x + Math.random() * 7000;
+        this.x = x + Math.random() * 10000;
 
 
         this.animate();
@@ -35,25 +37,25 @@ class smallChicken extends movableObject {
     animate() {
         setTimeout(() => {
             setInterval(() => {
-                if (!this.dead) {
+                if (!this.dead && this.gameStarted && !this.gameOver) {
                     this.moveLeft();
                 }
             }, 1000 / 60);
 
             setInterval(() => {
-                if (!this.dead) {
+                if (!this.dead && this.gameStarted && !this.gameOver) {
                 this.playAnimation(this.imagesWalking);
                 }
             }, 100);
 
             setInterval(() => {
-                if (!this.dead) {
+                if (!this.dead && this.gameStarted && !this.gameOver) {
                     this.jump();
                 }
             }, 1000 + Math.random() * 3000);
 
             setInterval(() => {
-                if (!this.dead) {
+                if (!this.dead && this.gameStarted && !this.gameOver) {
                     if (this.isAboveGround()) {
                         this.speed = 7.5
                     } else {

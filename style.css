@@ -6,15 +6,57 @@ body {
     align-items: center;
     margin: 0;
     font-family: 'Fredoka One', cursive;
+    background-color: rgb(206, 206, 206);
+}
+
+p{
+    margin: 0;
 }
 
 canvas {
     background-color: black;
 }
 
-.gameInforamtion {
+.content {
+    position: relative;
+}
+
+.pressAnyKey {
     position: absolute;
-    top: 64px;
+    top: 32px;
+    left: 410px;
+    color: white;
+    font-size: 16pt;
+}
+
+.gameInforamtion {
+    display: flex;
+    justify-content: center;
     width: 1280px;
     height: 100px;
+    gap: 64px;
+}
+
+.howToPlay {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    gap: 12px;
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    font-size: 20px;
+    color: white;
+    gap: 12px;
+}
+
+.counter {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
 }
