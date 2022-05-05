@@ -24,7 +24,7 @@ class World {
     keyboard;
     camera_x;
 
-    gameStarted = false;
+    gameStarted = true;
     gameOver = false;
 
     constructor(canvas, keyboard) {
@@ -85,6 +85,40 @@ class World {
             this.gameStarted = true;
             document.getElementById('pressAnyKey').style = "display: none";
         });
+
+        document.getElementById('move-left').ontouchstart = function (e) {
+            // e.preventDefault();
+            this.gameStarted = true;
+        }
+        document.getElementById('move-left').ontouchend = function (e) {
+            // e.preventDefault();
+            this.gameStarted = true;
+        }
+        document.getElementById('move-right').ontouchstart = function (e) {
+            // e.preventDefault();
+            this.gameStarted = true;
+        }
+        document.getElementById('move-right').ontouchend = function (e) {
+            // e.preventDefault();
+            this.gameStarted = true;
+        }
+        document.getElementById('throw').ontouchstart = function (e) {
+            // e.preventDefault();
+            this.gameStarted = true;
+        }
+        document.getElementById('throw').ontouchend = function (e) {
+            // e.preventDefault();
+            this.gameStarted = true;
+        }
+        document.getElementById('jump').ontouchstart = function (e) {
+            // e.preventDefault();
+            this.gameStarted = true;
+        }
+        document.getElementById('jump').ontouchend = function (e) {
+            // e.preventDefault();
+            this.gameStarted = true;
+        }
+
     }
 
     checkIfCharakterIsToCloseToEndoss() {
@@ -113,7 +147,7 @@ class World {
                 } else if (!enemy.dead) {
                     if (this.character.energy == 0) {
                         this.gameOver = true;
-                    } else if(!enemy.alreadyHit) {
+                    } else if (!enemy.alreadyHit) {
                         enemy.alreadyHit = true;
                         this.character.hit();
                         this.character.grunt.play();
@@ -127,7 +161,7 @@ class World {
     checkCollisionsWithSmallChicken() {
         this.level.smallEnemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.isAboveGround() -30 && !enemy.isAboveGround() || this.character.y + this.character.height - 30 < enemy.y) {
+                if (this.character.isAboveGround() && !enemy.isAboveGround() || this.character.y + this.character.height - 30 < enemy.y) {
                     if (!enemy.dead) {
                         this.chickenCounter++;
                         enemy.dead = true;
@@ -137,7 +171,7 @@ class World {
                 } else if (!enemy.dead) {
                     if (this.character.energy == 0) {
                         this.gameOver = true;
-                    } else if(!enemy.alreadyHit){
+                    } else if (!enemy.alreadyHit) {
                         enemy.alreadyHit = true;
                         this.character.hit();
                         this.character.grunt.play();
