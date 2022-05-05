@@ -85,40 +85,6 @@ class World {
             this.gameStarted = true;
             document.getElementById('pressAnyKey').style = "display: none";
         });
-
-        document.getElementById('move-left').ontouchstart = function (e) {
-            // e.preventDefault();
-            this.gameStarted = true;
-        }
-        document.getElementById('move-left').ontouchend = function (e) {
-            // e.preventDefault();
-            this.gameStarted = true;
-        }
-        document.getElementById('move-right').ontouchstart = function (e) {
-            // e.preventDefault();
-            this.gameStarted = true;
-        }
-        document.getElementById('move-right').ontouchend = function (e) {
-            // e.preventDefault();
-            this.gameStarted = true;
-        }
-        document.getElementById('throw').ontouchstart = function (e) {
-            // e.preventDefault();
-            this.gameStarted = true;
-        }
-        document.getElementById('throw').ontouchend = function (e) {
-            // e.preventDefault();
-            this.gameStarted = true;
-        }
-        document.getElementById('jump').ontouchstart = function (e) {
-            // e.preventDefault();
-            this.gameStarted = true;
-        }
-        document.getElementById('jump').ontouchend = function (e) {
-            // e.preventDefault();
-            this.gameStarted = true;
-        }
-
     }
 
     checkIfCharakterIsToCloseToEndoss() {
@@ -169,7 +135,7 @@ class World {
                         this.chickenDies.play();
                     }
                 } else if (!enemy.dead) {
-                    if (this.character.energy == 0) {
+                    if (this.character.isDead()) {
                         this.gameOver = true;
                     } else if (!enemy.alreadyHit) {
                         enemy.alreadyHit = true;

@@ -97,12 +97,11 @@ class Character extends movableObject {
         // this interval animates running or jumping of character in 60fps!
         setInterval(() => {
             this.moveCharacter();
-            this.checkIfButtonsArePressedONTouchscreen();
         }, 1000 / 60);
 
 
         setInterval(() => {
-            this.checkIfCharacterIsMoving;
+            this.checkIfCharacterIsMoving();
         }, 10);
 
         setInterval(() => {
@@ -115,47 +114,11 @@ class Character extends movableObject {
 
     }
 
-    checkIfButtonsArePressedONTouchscreen() {
-
-        document.getElementById('move-left').ontouchstart = function (e) {
-            this.world.keyboard.LEFT = true;
-            e.preventDefault();
-        }
-        document.getElementById('move-left').ontouchend = function (e) {
-            this.world.keyboard.LEFT = false;
-            e.preventDefault();
-        }
-        document.getElementById('move-right').ontouchstart = function (e) {
-            this.world.keyboard.RIGHT = true;
-            e.preventDefault();
-        }
-        document.getElementById('move-right').ontouchend = function (e) {
-            this.world.keyboard.RIGHT = false;
-            e.preventDefault();
-        }
-        document.getElementById('throw').ontouchstart = function (e) {
-            this.world.keyboard.D = true;
-            e.preventDefault();
-        }
-        document.getElementById('throw').ontouchend = function (e) {
-            this.world.keyboard.D = false;
-            e.preventDefault();
-        }
-        document.getElementById('jump').ontouchstart = function (e) {
-            this.world.keyboard.SPACE = true;
-            e.preventDefault();
-        }
-        document.getElementById('jump').ontouchend = function (e) {
-            this.world.keyboard.SPACE = false;
-            e.preventDefault();
-        }
-    }
-
     // function is responsible for moving character on canvas if certain keys are pressed
     moveCharacter() {
         this.running.pause();
 
-        if (this.world.keyboard.Right || document.getElementById('move-right').clicked) {
+        if (this.world.keyboard.Right && this.x < 6000 && this.gameStarted && !this.gameOver) {
             this.moveRight();
             this.running.play();
         }
@@ -166,7 +129,7 @@ class Character extends movableObject {
             this.running.play();
         }
 
-        if (this.world.keyboard.Up && !this.isAboveGround() || this.world.keyboard.Space && !this.isAboveGround() && this.gameStarted && !this.gameOver) {
+        if (this.world.keyboard.Up && !this.isAboveGround() && !this.gameOver || this.world.keyboard.Space && !this.isAboveGround() && this.gameStarted && !this.gameOver) {
             this.jump();
         }
 
