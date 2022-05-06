@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 body {
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    position: relative;
     margin: 0;
     font-family: 'Fredoka One', cursive;
     background-color: rgb(236, 235, 235);
-    margin-top: 16px;
 }
 
 h1 {
+    margin-top: 12px;
     margin-bottom: 0;
 }
 
@@ -18,14 +19,35 @@ p {
     margin: 0;
 }
 
-.canvas {
+#container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 75vw;
+    /* height: 100vh; */
+}
+
+#container canvas, #overlay {
+    position: absolute;
+}
+
+canvas {
     background-color: black;
     height: 720px;
     width: 1280px;
 }
 
 .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
+    gap: 12px;
+}
+
+.start-btn {
+    display: none;
 }
 
 .pressAnyKey {
@@ -45,6 +67,8 @@ p {
     justify-content: center;
     width: 1280px;
     gap: 64px;
+    position: absolute;
+    bottom: 50px;
 }
 
 .howToPlay {
@@ -80,9 +104,19 @@ p {
 }
 
 @media only screen and (max-width: 1280px) and (max-height: 1200px) {
+    #container {
+        width: 100vw;
+    }
 
     .content {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pressAnyKey {
+        display: none;
     }
 
     h2 {
@@ -90,8 +124,14 @@ p {
     }
 
     .canvas {
-        width: 100%;
+        width: 100vw;
         height: auto;
+    }
+
+    .start-btn {
+        display: flex;
+        position: relative;
+        top: 10px;
     }
 
     .gameInforamtion {
@@ -100,10 +140,13 @@ p {
 
     .button-container {
         display: flex;
-        width: 100%;
-        justify-content: space space-evenly;
-        padding: 10px;
+        position: absolute;
         justify-content: space-between;
+        align-items: center;
+        top: 215px;
+        width: 100vw;
+        padding-left: 25px;
+        padding-right: 25px;
     }
 
     .buttonsForTouchscreen {
@@ -114,11 +157,13 @@ p {
 
     .leftAndRightArrows {
         display: flex;
-        gap: 13px;
+        gap: 12px;
     }
 
-    .jump-btn {
-        margin-bottom: -8px;
+    .jumpAndThrow-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
     }
 
     .arrow-for-touchscreens {
@@ -131,11 +176,11 @@ p {
 @media only screen and (max-height: 700px) and (min-width: 600px) {
     .content {
         position: relative;
-        width: 100%;
+
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+
     }
 
     .pressAnyKey {
@@ -157,9 +202,8 @@ p {
 
     .button-container {
         display: flex;
-        width: 97%;
         justify-content: space-between;
-        margin-top: -100px;
+        width: 100vw;
     }
 
     h1 {

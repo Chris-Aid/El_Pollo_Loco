@@ -83,3 +83,13 @@ function mobileDevice() {
         keyboard.Space = false;
     });
 }
+
+function startGameOnMobileDevice() {
+    document.getElementById('showButtons').style = "display: flex";
+    document.getElementById('startButton').style = "display: none";
+    document.getElementById('subject').style = "display: none";
+    if(window.innerHeight < window.innerWidth){
+        document.getElementById('canvas').style = "height: 100vh";
+    }
+    world.gameStarted = true;
+}

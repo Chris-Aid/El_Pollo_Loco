@@ -24,7 +24,7 @@ class World {
     keyboard;
     camera_x;
 
-    gameStarted = true;
+    gameStarted = false;
     gameOver = false;
 
     constructor(canvas, keyboard) {
