@@ -34,7 +34,6 @@ class movableObject extends DrawableObject {
 
     hit() {
         this.energy -= 10;
-        console.log(this.energy);
         if (this.energy < 0) {
             this.energy = 0;
         } else {

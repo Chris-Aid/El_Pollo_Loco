@@ -85,13 +85,20 @@ const level1 = new Level(
 
     ],
     [
-        new Coin('img/8.Coin/Moneda1.png'),
-        new Coin('img/8.Coin/Moneda1.png'),
-        new Coin('img/8.Coin/Moneda1.png'),
-        new Coin('img/8.Coin/Moneda1.png'),
-        new Coin('img/8.Coin/Moneda1.png'),
-        new Coin('img/8.Coin/Moneda1.png'),
-        new Coin('img/8.Coin/Moneda1.png')
+        new Coin('img/8.Coin/Moneda1.png', 540),
+        new Coin('img/8.Coin/Moneda1.png', 300),
+        new Coin('img/8.Coin/Moneda1.png', 400),
+        new Coin('img/8.Coin/Moneda1.png', 350),
+        new Coin('img/8.Coin/Moneda1.png', 540),
+        new Coin('img/8.Coin/Moneda1.png', 350),
+        new Coin('img/8.Coin/Moneda1.png', 540),
+        new Coin('img/8.Coin/Moneda1.png', 540),
+        new Coin('img/8.Coin/Moneda1.png', 300),
+        new Coin('img/8.Coin/Moneda1.png', 400),
+        new Coin('img/8.Coin/Moneda1.png', 350),
+        new Coin('img/8.Coin/Moneda1.png', 540),
+        new Coin('img/8.Coin/Moneda1.png', 200),
+        new Coin('img/8.Coin/Moneda1.png', 540)
     ],
     [
         new Bottle('img/6.botella/2.Botella_enterrada1.png'),

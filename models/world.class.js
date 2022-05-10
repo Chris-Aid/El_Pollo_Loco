@@ -228,7 +228,7 @@ class World {
 
     // function creates new throwable Object every time D is pressed.
     checkThrowObjecs() {
-        if (this.keyboard.D && this.bottleCounter > 0) {
+        if (this.keyboard.D && this.bottleCounter > 0 && !this.gameOver && this.gameStarted) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
             this.throwableObjects.push(bottle);
             this.bottlesbar.bottleThrown();
@@ -275,7 +275,6 @@ class World {
         if (this.gameOver) {
             this.showObjectsInWorld(this.endScreen);
         }
-
 
         // draw wird immer wieder aufgerufen!
         let self = this;

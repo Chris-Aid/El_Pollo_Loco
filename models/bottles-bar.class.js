@@ -29,6 +29,7 @@ class BottlesBar extends DrawableObject {
         this.showBottlesBar();
     }
 
+    // displays the proper image for the bottles bar depending on how many bottles are collected
     showBottlesBar() {
         if (this.i < 2) {
             this.loadImage(this.imagesBottleBar[0]);

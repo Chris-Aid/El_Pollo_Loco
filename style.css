@@ -33,7 +33,6 @@ p {
     justify-content: center;
     position: relative;
     width: 75vw;
-    /* height: 100vh; */
 }
 
 #container canvas, #overlay {
@@ -42,8 +41,8 @@ p {
 
 canvas {
     background-color: black;
-    height: 720px;
-    width: 1280px;
+    /* max-height: 75vh;
+    width: auto; */
 }
 
 .content {
@@ -77,7 +76,7 @@ canvas {
     width: 1280px;
     gap: 64px;
     position: absolute;
-    bottom: 50px;
+    bottom: 35px;
 }
 
 .howToPlay {
@@ -112,7 +111,7 @@ canvas {
     width: 250px;
 }
 
-@media only screen and (max-width: 1280px) and (max-height: 1200px) {
+@media only screen and (max-width: 1280px) and (max-height: 1390px) {
 
     #turnYourDevice {
         display: flex;
@@ -165,7 +164,6 @@ canvas {
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 100vh;
     }
 
     .leftAndRightArrows {
@@ -201,11 +199,9 @@ canvas {
 
     .content {
         position: relative;
-
         display: flex;
         flex-direction: column;
         align-items: center;
-
     }
 
     .pressAnyKey {
@@ -250,4 +246,38 @@ canvas {
     .arrow-keys {
         height: 45px;
     }
+
 }
+
+  /* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1390px) and (max-height: 800px) and (orientation: landscape) {
+  
+    #turnYourDevice {
+        display: none;
+    }
+
+    .start-btn {
+        display: flex;
+        position: relative;
+        top: 40px;
+    }
+
+    .buttonsForTouchscreen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .gameInforamtion {
+        display: none;
+    }
+
+    .pressAnyKey {
+        display: none;
+    }
+  }
+  

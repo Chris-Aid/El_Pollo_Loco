@@ -86,6 +86,7 @@ function mobileDevice() {
 
 function startGameOnMobileDevice() {
     document.getElementById('startButton').style = "display: none";
+    document.getElementById('button-container').style = "height: 100vh";
     document.getElementById('subject').style = "display: none";
     if(window.innerHeight < window.innerWidth){
         document.getElementById('canvas').setAttribute("style", "height:100vh;width:100vw;");

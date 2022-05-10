@@ -33,6 +33,7 @@ class chicken extends movableObject {
         }
     }
 
+    // this function gets started by constructor and runs if certain requirements are met
     animate() {
         setTimeout(() => {
             setInterval(() => {

@@ -45,7 +45,7 @@
 
         <div id="container">
             <canvas id="canvas" class="canvas" height="720px" width="1280px"></canvas>
-            <div class="buttonsForTouchscreen">
+            <div id="button-container" class="buttonsForTouchscreen">
                 <div id="showButtons" style="display: none;" class="button-container dont-show">
                     <div class="jumpAndThrow-btn">
                         <img id="jump" class="arrow-for-touchscreens jump-btn" src="img/10.Key_Images/jump.png"
@@ -63,27 +63,29 @@
             </div>
             <button id="startButton" onclick="startGameOnMobileDevice()" type="button" class="btn btn-success start-btn">START!</button>
         </div>
-    </div>
-    <div class="gameInforamtion">
-        <div class="howToPlay">
-            <h3>RUN</h3>
-            <img class="arrow-keys" src="img/10.Key_Images/arrow-keys.png" alt="arrow-keys">
-        </div>
-
-        <div class="howToPlay">
-            <h3>THROW A BOTTLE</h3>
-            <img class="key-images" src="img/10.Key_Images/d-key.png" alt="d-key">
-        </div>
-
-        <div class="howToPlay">
-            <h3>JUMP</h3>
-            <img class="key-images" src="img/10.Key_Images/space-key.png" alt="space-keys">
+        <div class="gameInforamtion">
+            <div class="howToPlay">
+                <h3>RUN</h3>
+                <img class="arrow-keys" src="img/10.Key_Images/arrow-keys.png" alt="arrow-keys">
+            </div>
+    
+            <div class="howToPlay">
+                <h3>THROW A BOTTLE</h3>
+                <img class="key-images" src="img/10.Key_Images/d-key.png" alt="d-key">
+            </div>
+    
+            <div class="howToPlay">
+                <h3>JUMP</h3>
+                <img class="key-images" src="img/10.Key_Images/space-key.png" alt="space-keys">
+            </div>
         </div>
         <div class="score">
             <div class="counter" id="chickenCounter"></div>
             <div class="counter" id="bottleCounter"></div>
         </div>
     </div>
+
+
 </body>
 
 </html>
