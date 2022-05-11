@@ -8,7 +8,7 @@ class CoinsBar extends DrawableObject {
         'img/7.Marcadores/Barra/Marcador moneda/azul/80_.png',
         'img/7.Marcadores/Barra/Marcador moneda/azul/100_.png',
     ];
-    
+
     i = 0;
 
     constructor() {
@@ -19,15 +19,27 @@ class CoinsBar extends DrawableObject {
         this.y = 10;
         this.height = 60;
         this.width = 170;
-
     }
 
     coinCollected() {
-        if (this.i < 5) {
-            this.i++;
-            this.loadImage(this.imagesCoins[this.i]);
-        }
+        this.i++;
+        this.showCoinsbar();
     }
 
+    showCoinsbar() {
+        if (this.i < 3) {
+            this.loadImage(this.imagesCoins[0]);
+        } else if (this.i <= 6) {
+            this.loadImage(this.imagesCoins[1]);
+        } else if (this.i <= 8) {
+            this.loadImage(this.imagesCoins[2]);
+        } else if (this.i <= 10) {
+            this.loadImage(this.imagesCoins[3]);
+        } else if (this.i <= 12) {
+            this.loadImage(this.imagesCoins[4]);
+        } else if (this.i <= 14) {
+            this.loadImage(this.imagesCoins[5]);
+        }
+    }
 }
 

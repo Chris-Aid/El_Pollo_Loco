@@ -12,6 +12,7 @@ class World {
     level = level1;
 
     chickenCounter = 0;
+    coinCounter = 0;
     bottleCounter = 0;
 
     smashBottleSound = new Audio('https://freesound.org/data/previews/548/548230_12308033-lq.mp3');
@@ -75,6 +76,7 @@ class World {
     updateCounter() {
         if (this.gameStarted) {
             document.getElementById('chickenCounter').innerHTML = `<p>CHICKEN KILLED</p> <p><b>${this.chickenCounter}</b></p>`;
+            document.getElementById('coinCounter').innerHTML = `<p>COINS COLLECTED</p> <p><b>${this.coinCounter}</b></p>`;
             document.getElementById('bottleCounter').innerHTML = `<p>BOTTLES</p> <p><b>${this.bottleCounter}</b></p>`;
         }
     }
@@ -152,6 +154,7 @@ class World {
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
                 this.level.coins.splice(this.level.coins.indexOf(coin), 1);
+                this.coinCounter++;
                 this.coinsbar.coinCollected();
                 this.coinCollection.play();
             }
