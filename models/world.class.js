@@ -42,7 +42,6 @@ class World {
 
         setInterval(() => {
             this.endboss.characterX = this.character.x;
-
             this.character.gameStarted = this.gameStarted;
             this.character.gameOver = this.gameOver;
             this.level.enemies.forEach((chicken) => { chicken.gameStarted = this.gameStarted });
@@ -127,7 +126,7 @@ class World {
     checkCollisionsWithSmallChicken() {
         this.level.smallEnemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.isAboveGround() && !enemy.isAboveGround() || this.character.y + this.character.height - 30 < enemy.y) {
+                if (this.character.isAboveGround() && !enemy.isAboveGround()) {
                     if (!enemy.dead) {
                         this.chickenCounter++;
                         enemy.dead = true;
@@ -139,6 +138,7 @@ class World {
                         this.gameOver = true;
                     } else if (!enemy.alreadyHit) {
                         enemy.alreadyHit = true;
+                        this.character.lastAction = new Date().getTime(); // 
                         this.character.hit();
                         this.character.grunt.play();
                         this.statusbar.setPercentage(this.character.energy);

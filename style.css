@@ -35,14 +35,8 @@ p {
     width: 75vw;
 }
 
-#container canvas, #overlay {
-    position: absolute;
-}
-
 canvas {
     background-color: black;
-    /* max-height: 75vh;
-    width: auto; */
 }
 
 .content {
@@ -73,10 +67,9 @@ canvas {
 .gameInforamtion {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 1280px;
     gap: 64px;
-    position: absolute;
-    bottom: 35px;
 }
 
 .howToPlay {
@@ -141,6 +134,7 @@ canvas {
     }
 
     .canvas {
+        position: absolute;
         width: 100vw;
         height: auto;
     }
@@ -249,13 +243,13 @@ canvas {
 
 }
 
-  /* 
+/* 
   ##Device = Tablets, Ipads (landscape)
   ##Screen = B/w 768px to 1024px
 */
 
-@media (min-width: 768px) and (max-width: 1390px) and (max-height: 800px) and (orientation: landscape) {
-  
+@media (min-width: 768px) and (max-width: 1390px) and (max-height: 1024px) and (orientation: landscape) {
+
     #turnYourDevice {
         display: none;
     }
@@ -271,7 +265,7 @@ canvas {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .gameInforamtion {
         display: none;
     }
@@ -279,5 +273,8 @@ canvas {
     .pressAnyKey {
         display: none;
     }
-  }
-  
+
+    .canvas {
+       position: absolute;
+    }
+}

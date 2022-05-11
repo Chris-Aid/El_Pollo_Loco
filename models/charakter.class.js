@@ -75,7 +75,7 @@ class Character extends movableObject {
     running = new Audio('audi/running.mp3');
     grunt = new Audio('https://freesound.org/data/previews/420/420932_3890135-lq.mp3');
     timeNow;
-    lastMove;
+    lastAction;
     gameStarted;
     gameOver;
 
@@ -140,7 +140,7 @@ class Character extends movableObject {
     // this interval checks wether character is moving or standing still and also figures out when the last move happened + what time it is now!
     checkIfCharacterIsMoving() {
         if (this.isAboveGround() || this.world.keyboard.Right || this.world.keyboard.Left) {
-            this.lastMove = new Date().getTime();
+            this.lastAction = new Date().getTime();
         }
 
         this.timeNow = new Date().getTime();
@@ -164,7 +164,7 @@ class Character extends movableObject {
 
     // if passed time is longer than 6 seconds, character sleeps. Otherwise character stands still!
     restingOrSleepingAnimation() {
-        if (!this.characterIsMoving && this.timeNow - this.lastMove > 6000) {
+        if (!this.characterIsMoving && this.timeNow - this.lastAction > 6000) {
             this.playAnimation(this.sleepImages);
         } else {
             this.playAnimation(this.restImages);

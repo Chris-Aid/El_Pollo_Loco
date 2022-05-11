@@ -23,8 +23,11 @@ window.addEventListener('keydown', (event) => {
     if (event.keyCode == 32) {
         keyboard.Space = true;
     }
-    if (event.keyCode == 68 || document.getElementById('throw').clicked == true) {
+    if (event.keyCode == 68) {
         keyboard.D = true;
+    }
+    if (event.keyCode == 70) {
+        document.getElementById('canvas').requestFullscreen();
     }
 });
 
@@ -36,7 +39,6 @@ window.addEventListener('keyup', (event) => {
         keyboard.Up = false;
     }
     if (event.keyCode == 39) {
-        console.log('true')
         keyboard.Right = false;
     }
     if (event.keyCode == 32) {
