@@ -106,7 +106,7 @@ class Character extends movableObject {
 
         setInterval(() => {
             this.restingOrSleepingAnimation();
-        }, 600);
+        }, 300);
 
         setInterval(() => {
             this.movingCharacterAnimations();
@@ -118,7 +118,7 @@ class Character extends movableObject {
     moveCharacter() {
         this.running.pause();
 
-        if (this.world.keyboard.Right && this.x < 6000 && this.gameStarted && !this.gameOver) {
+        if (this.world.keyboard.Right && this.x < 12000 && this.gameStarted && !this.gameOver) {
             this.moveRight();
             this.running.play();
         }
@@ -142,7 +142,6 @@ class Character extends movableObject {
         if (this.isAboveGround() || this.world.keyboard.Right || this.world.keyboard.Left) {
             this.lastAction = new Date().getTime();
         }
-
         this.timeNow = new Date().getTime();
     }
 

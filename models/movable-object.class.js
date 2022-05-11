@@ -38,10 +38,17 @@ class movableObject extends DrawableObject {
 
     // if character is colliding with an enemy this function returns true / proves overlaps of all image corners of the objects
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height;
+        if (this instanceof Character) {
+            return this.x + this.width > mo.x &&
+                this.y + this.height > mo.y &&
+                this.x < mo.x &&
+                this.y + 100 < mo.y + mo.height;
+        } else {
+            return this.x + this.width > mo.x &&
+                this.y + this.height > mo.y &&
+                this.x < mo.x &&
+                this.y < mo.y + mo.height;
+        }
     }
 
     // reduces characters energy after every hit and saves time of last hit
@@ -64,8 +71,8 @@ class movableObject extends DrawableObject {
     isDead() {
         return this.energy == 0;
     }
-    
-    
+
+
     playAnimation(images) {
         let i = this.currentImage % images.length;
         this.loadImage(images[i]);

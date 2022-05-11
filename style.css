@@ -7,7 +7,7 @@ body {
     position: relative;
     margin: 0;
     font-family: 'Fredoka One', cursive;
-    background-color: rgb(236, 235, 235);
+    background-image: url('img/10.Key_Images/background.jpg');
 }
 
 h1 {
@@ -16,7 +16,7 @@ h1 {
 }
 
 h2 {
-    margin-top: 12px;
+    margin: 0;
 }
 
 p {
