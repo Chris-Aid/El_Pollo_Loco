@@ -9,8 +9,6 @@ class StatusBar extends DrawableObject {
         'img/7.Marcadores/Barra/Marcador vida/azul/100_.png'
     ];
 
-    percentage = 100;
-
     constructor() {
         super();
         this.loadImages(this.imagesHealth);
@@ -18,28 +16,30 @@ class StatusBar extends DrawableObject {
         this.y = 10;
         this.height = 60;
         this.width = 170; 
-        this.setPercentage(101);
+        this.setPercentage(100);
     }
 
+    // percentage gets reduced every time an enemie hits character
     setPercentage(percentage) {
             this.percentage = percentage;
             let path = this.imagesHealth[this.getIndexOfImages(percentage)];
             this.img = this.imageCache[path];
     }
 
+    //returns position of image based on health of character
     getIndexOfImages(percentage) {
         if (percentage == 100) {
-            return 6;
-        } else if (percentage > 80) {
             return 5;
-        } else if (percentage > 60) {
+        } else if (percentage > 80) {
             return 4;
-        } else if (percentage > 40) {
+        } else if (percentage > 60) {
             return 3;
-        } else if (percentage > 20) {
+        } else if (percentage > 40) {
             return 2;
-        } else if (percentage > 0) {
+        } else if (percentage > 20) {
             return 1;
+        } else if (percentage > 0) {
+            return 0;
         } else {
             return 0;
         }

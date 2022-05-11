@@ -34,10 +34,10 @@ class ThrowableObject extends movableObject {
         }
 
         this.throw();
-        this.throwAnimation();
+        this.rotationAnimation();
     }
 
-
+    // plays the smash images once after bottle hits ground
     showSmashingBottleAnimation() {
         this.bottleHit = true;
         this.height = 120;
@@ -52,8 +52,8 @@ class ThrowableObject extends movableObject {
         }, 50);
     }
 
+    // function creates the throwcurve
     throw() {
-
         this.applyGravity();
         this.speedY = 20;
         let throwBottle = setInterval(() => {
@@ -67,10 +67,10 @@ class ThrowableObject extends movableObject {
                 this.y = this.y + 20;
             }
         }, 10);
-
     }
 
-    throwAnimation() {
+    // function creates the rotation animation after throw
+    rotationAnimation() {
         if (!this.bottleHit) {
             let rotation = setInterval(() => {
                 this.playAnimation(this.imagesBottels);

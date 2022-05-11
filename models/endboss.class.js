@@ -54,8 +54,8 @@ class Endboss extends movableObject {
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G20.png',
     ];
 
-    showAggression = setInterval(this.animateAttack(), 100);
-    startAttack = setInterval(this.animateAggression(), 100);
+    // showAggression = setInterval(this.animateAttack(), 100);
+    // startAttack = setInterval(this.animateAggression(), 100);
 
     constructor() {
         super().loadImage(this.imagesAlerta[0]);
@@ -64,17 +64,18 @@ class Endboss extends movableObject {
         this.loadImages(this.imagesHit);
         this.loadImages(this.imagesDead);
         this.loadImages(this.imagesAttack);
+
+        this.animateAggression();
+        this.animateAttack();
     }
 
-
-
+    // plays images of injured endboss and stops after counter reaches the number 5 (5 = number of last image)
     imagesAfterHit() {
-
         let count = 0;
-        var x = setInterval(() => {
+        var imagesOfHitEndboss = setInterval(() => {
             this.playAnimation(this.imagesHit);
             if (count > 5) {
-                clearInterval(x);
+                clearInterval(imagesOfHitEndboss);
             }
             count++;
         }, 200);
@@ -82,7 +83,6 @@ class Endboss extends movableObject {
 
     Dead() {
         this.dead = true;
-
         setInterval(() => {
             this.playAnimation(this.imagesDead);
             this.x += 40;
@@ -90,6 +90,7 @@ class Endboss extends movableObject {
         }, 40);
     }
 
+    // if character comes close to endboss fucntion plays agression images
     animateAggression() {
         setInterval(() => {
             if (!this.dead && this.x - this.characterX <= 550 && !this.bossAttacks) {
@@ -98,6 +99,7 @@ class Endboss extends movableObject {
         }, 300);
     }
 
+    // if character comes to close or throws a bottle, enboss attacks
     animateAttack() {
         setInterval(() => {
             if (!this.dead && this.bossAttacks) {

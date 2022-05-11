@@ -16,6 +16,7 @@ class movableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
 
+    // function starts automatically after an object is above ground or character jumps
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -23,32 +24,6 @@ class movableObject extends DrawableObject {
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 25);
-    }
-
-    isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height;
-    }
-
-    hit() {
-        this.energy -= 10;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
-        }
-    }
-
-    isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; // difference in ms
-        timepassed = timepassed / 1000; //difference in s
-        return timepassed < 1;
-    }
-
-    isDead() {
-        return this.energy == 0;
     }
 
     isAboveGround() {
@@ -60,6 +35,36 @@ class movableObject extends DrawableObject {
             return this.y < 310;
         }
     }
+
+    // if character is colliding with an enemy this function returns true / proves overlaps of all image corners of the objects
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height;
+    }
+
+    // reduces characters energy after every hit and saves time of last hit
+    hit() {
+        this.energy -= 10;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    // returns true as long as one second has not passed after last hit
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit; // difference in ms
+        timepassed = timepassed / 1000; //difference in s
+        return timepassed < 1;
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+    
     
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -79,5 +84,4 @@ class movableObject extends DrawableObject {
     jump() {
         this.speedY = 30;
     }
-
 }

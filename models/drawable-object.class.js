@@ -24,15 +24,13 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    drawRectangle(ctx) {
-        if (this instanceof Character || this instanceof chicken || this instanceof Endboss || this instanceof ThrowableObject) {
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
-
+    // drawRectangle(ctx) {
+    //     if (this instanceof Character || this instanceof chicken || this instanceof Endboss || this instanceof ThrowableObject) {
+    //         ctx.beginPath();
+    //         ctx.lineWidth = '3';
+    //         ctx.strokeStyle = 'blue';
+    //         ctx.rect(this.x, this.y, this.width, this.height);
+    //         ctx.stroke();
+    //     }
+    // }
 }

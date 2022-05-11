@@ -283,6 +283,7 @@ class World {
         });
     }
 
+    // renders through all objects and applies showObjectsInWorldFunction for each
     addObjectsToMap(object) {
         object.forEach(o => {
             this.showObjectsInWorld(o);
@@ -294,6 +295,7 @@ class World {
             this.turnCharacter(mo);
         }
 
+        //draw function is within drawable Objects class and draws all the objects
         mo.draw(this.ctx);
         // mo.drawRectangle(this.ctx);
 
@@ -302,6 +304,7 @@ class World {
         }
     }
 
+    // function is responsible for turning the character
     turnCharacter(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
