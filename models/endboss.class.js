@@ -5,11 +5,7 @@ class Endboss extends Bosses {
     x ;
     energy = 100;
     acceleration = 5;
-
     characterX;
-
-
-
 
     // showAggression = setInterval(this.animateAttack(), 100);
     // startAttack = setInterval(this.animateAggression(), 100);

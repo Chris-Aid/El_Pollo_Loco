@@ -5,8 +5,6 @@ class World {
     statusbar = new StatusBar();
     coinsbar = new CoinsBar();
     bottlesbar = new BottlesBar();
-    // endboss = new Endboss();
-    // secondendboss = new this.secondendboss();
     drawableObject = new DrawableObject();
     throwableObjects = [];
     keyboard = new Keyboard;
@@ -43,7 +41,7 @@ class World {
         this.character.world = this;
 
         setInterval(() => {
-            this.level.endboss.characterX = this.character.x;
+            this.level.endboss.forEach((boss) => { boss.characterX = this.character.x });
             this.character.gameStarted = this.gameStarted;
             this.character.gameOver = this.gameOver;
             this.level.enemies.forEach((chicken) => { chicken.gameStarted = this.gameStarted });
@@ -91,15 +89,11 @@ class World {
     }
 
     checkIfCharakterIsToCloseToEndoss() {
-        this.level.endboss.forEach((enboss) => {
-            if (enboss.x - this.character.x <= 350) {
-                enboss.bossAttacks = true;
+        this.level.endboss.forEach((endboss) => {
+            if (endboss.x - this.character.x <= 350) {
+                endboss.bossAttacks = true;
             }
         });
-
-        // if (this.level.endboss.x - this.character.x <= 350) {
-        //     this.level.endboss.bossAttacks = true;
-        // }
     }
 
     checkCollisionsWithEndboss() {
@@ -109,12 +103,6 @@ class World {
                 this.gameOver = true;
             }
         });
-
-
-        // if (this.character.isColliding(this.endboss)) {
-        //     this.character.energy = 0;
-        //     this.gameOver = true;
-        // }
     }
 
     checkCollisionsWithChicken() {
@@ -198,42 +186,23 @@ class World {
         });
     }
 
-    // checkIfBottleHitsEndboss() {
-    //     this.throwableObjects.forEach((object) => {
-    //         if (object.isColliding(this.endboss)) {
-    //             if (!object.allreadyhits) {
-    //                 object.allreadyhits = true;
-    //                 this.smashBottleSound.play();
-    //                 this.endboss.energy -= 25;
-    //                 console.log(this.endboss.energy)
-    //                 this.endboss.bossAttacks = true;
-    //                 this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
-
-    //                 if (this.endboss.energy <= 0) {
-    //                     this.endboss.Dead();
-    //                 } else {
-    //                     this.endboss.imagesAfterHit();
-    //                 }
-    //             }
-    //         }
-    //     });
-    // }
-
     checkIfBottleHitsEndboss() {
         this.throwableObjects.forEach((object) => {
             this.level.endboss.forEach((endboss) => {
-                if (!object.allreadyhits) {
-                    object.allreadyhits = true;
-                    this.smashBottleSound.play();
-                    endboss.energy -= 25;
-                    console.log(endboss.energy)
-                    endboss.bossAttacks = true;
-                    this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
+                if (object.isColliding(endboss)) {
+                    if (!object.allreadyhits) {
+                        object.allreadyhits = true;
+                        this.smashBottleSound.play();
+                        endboss.energy -= 25;
+                        console.log(endboss.energy)
+                        endboss.bossAttacks = true;
+                        this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
 
-                    if (endboss.energy <= 0) {
-                        endboss.Dead();
-                    } else {
-                        endboss.imagesAfterHit();
+                        if (endboss.energy <= 0) {
+                            endboss.Dead();
+                        } else {
+                            endboss.imagesAfterHit();
+                        }
                     }
                 }
             });
@@ -241,11 +210,11 @@ class World {
     }
 
     checkIfBottleHitsEnemy() {
-        this.throwableObjects.forEach((object) => {
+        this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
-                if (enemy.isColliding(object)) {
-                    if (!enemy.dead && !object.allreadyhits) {
-                        object.allreadyhits = true;
+                if (enemy.isColliding(bottle)) {
+                    if (!enemy.dead && !bottle.allreadyhits) {
+                        bottle.allreadyhits = true;
                         this.smashBottleSound.play();
                         this.chickenDies.play();
                         enemy.energy -= 25;
@@ -300,7 +269,6 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.showObjectsInWorld(this.character);
-        // this.showObjectsInWorld(this.endboss);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
