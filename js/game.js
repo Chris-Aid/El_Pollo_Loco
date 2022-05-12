@@ -61,7 +61,6 @@ function mobileDevice() {
     });
     document.getElementById('move-right').addEventListener('touchstart', (e) => {
         e.preventDefault();
-        console.log('true')
         keyboard.Right = true;
     });
     document.getElementById('move-right').addEventListener('touchend', (e) => {

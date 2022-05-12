@@ -6,6 +6,7 @@ class World {
     coinsbar = new CoinsBar();
     bottlesbar = new BottlesBar();
     endboss = new Endboss();
+    // secondendboss = new this.secondendboss();
     drawableObject = new DrawableObject();
     throwableObjects = [];
     keyboard = new Keyboard;
@@ -56,6 +57,7 @@ class World {
         setInterval(() => {
             this.checkCollisionsWithEndboss();
             this.checkCollisionsOfCoins();
+            this.checkCollisionsOfHearts();
             this.checkCollisionsOfBottles();
             this.checkIfBottleHitsEndboss();
             this.checkIfBottleHitsEnemy();
@@ -161,6 +163,16 @@ class World {
         });
     }
 
+    checkCollisionsOfHearts() { // function checks collision with hearts.
+        this.level.hearts.forEach((heart) => {
+            if (this.character.isColliding(heart)) {
+                this.level.hearts.splice(this.level.hearts.indexOf(heart), 1);
+                this.character.energy += 10;
+                this.statusbar.setPercentage(this.character.energy);
+            }
+        });
+    }
+
     checkCollisionsOfBottles() {
         this.level.bottles.forEach((bottle) => {
             if (this.character.isColliding(bottle)) {
@@ -259,6 +271,7 @@ class World {
         this.addObjectsToMap(this.level.smallEnemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.hearts);
         this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0); // moving backwards

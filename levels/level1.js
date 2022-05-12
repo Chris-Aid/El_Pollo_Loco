@@ -43,7 +43,14 @@ const level1 = new Level(
         new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 2),
         new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 3),
         new Cloud('img/5.Fondo/Capas/4.nubes/2.png', 1280 * 4),
-        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 5)
+        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 5),
+        new Cloud('img/5.Fondo/Capas/4.nubes/2.png', 1280 * 6),
+        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 7),
+        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 8),
+        new Cloud('img/5.Fondo/Capas/4.nubes/2.png', 1280 * 9),
+        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 10),
+        new Cloud('img/5.Fondo/Capas/4.nubes/2.png', 1280 * 11),
+        new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 1280 * 12),
     ],
     [
 
@@ -82,6 +89,33 @@ const level1 = new Level(
         new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 1279 * 5),
         new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 1279 * 5),
 
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 1279 * 6, this.height = 720),
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 1279 * 6),
+        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 1279 * 6),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 1279 * 6),
+
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 1279 * 7, this.height = 720),
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 1279 * 7),
+        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 1279 * 7),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 1279 * 7),
+
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 1279 * 8, this.height = 720),
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 1279 * 8),
+        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 1279 * 8),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 1279 * 8),
+
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 1279 * 9, this.height = 720),
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 1279 * 9),
+        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 1279 * 9),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 1279 * 9),
+
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 1279 * 10, this.height = 720),
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 1279 * 10),
+        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 1279 * 10),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 1279 * 10),
+
+
+
 
     ],
     [
@@ -116,6 +150,36 @@ const level1 = new Level(
         new Bottle('img/6.botella/2.Botella_enterrada1.png'),
         new Bottle('img/6.botella/2.Botella_enterrada1.png'),
         new Bottle('img/6.botella/2.Botella_enterrada2.png'),
-        new Bottle('img/6.botella/2.Botella_enterrada1.png')
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+    ],
+    [
+        new Heart('img/7.Marcadores/Icono/Vidas.png', 1200),
+        new Heart('img/7.Marcadores/Icono/Vidas.png', 4000),
+        new Heart('img/7.Marcadores/Icono/Vidas.png', 6000),
+        new Heart('img/7.Marcadores/Icono/Vidas.png', 9000),
+        new Heart('img/7.Marcadores/Icono/Vidas.png', 11000),
     ]
+
 );

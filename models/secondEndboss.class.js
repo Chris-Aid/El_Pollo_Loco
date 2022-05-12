@@ -1,8 +1,8 @@
 class Endboss extends Bosses {
-    height = 330;
-    width = 260;
-    y = 315;
-    x = 2000;
+    height = 390;
+    width = 300;
+    y = 255;
+    x = 4000;
     energy = 100;
     acceleration = 5;
 
@@ -11,11 +11,6 @@ class Endboss extends Bosses {
     bossAttacks = false;
     bossGetsAttacked = false;
     dead = false;
-
-
-
-    // showAggression = setInterval(this.animateAttack(), 100);
-    // startAttack = setInterval(this.animateAggression(), 100);
 
     constructor() {
         super().loadImage(this.imagesAlerta[0]);
@@ -28,6 +23,4 @@ class Endboss extends Bosses {
         this.animateAggression();
         this.animateAttack();
     }
-
-  
 }
