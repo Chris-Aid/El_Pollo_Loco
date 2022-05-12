@@ -35,7 +35,8 @@ const level1 = new Level(
         new smallChicken(200 * 13)
     ],
     [
-        new Endboss(),
+        new Endboss(2000, 315, 330, 260),
+        new Endboss(3000, 235, 410, 310),
     ],
     [
         new Cloud('img/5.Fondo/Capas/4.nubes/1.png', 0),

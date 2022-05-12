@@ -5,7 +5,7 @@ class World {
     statusbar = new StatusBar();
     coinsbar = new CoinsBar();
     bottlesbar = new BottlesBar();
-    endboss = new Endboss();
+    // endboss = new Endboss();
     // secondendboss = new this.secondendboss();
     drawableObject = new DrawableObject();
     throwableObjects = [];
@@ -43,7 +43,7 @@ class World {
         this.character.world = this;
 
         setInterval(() => {
-            this.endboss.characterX = this.character.x;
+            this.level.endboss.characterX = this.character.x;
             this.character.gameStarted = this.gameStarted;
             this.character.gameOver = this.gameOver;
             this.level.enemies.forEach((chicken) => { chicken.gameStarted = this.gameStarted });
@@ -91,16 +91,30 @@ class World {
     }
 
     checkIfCharakterIsToCloseToEndoss() {
-        if (this.endboss.x - this.character.x <= 350) {
-            this.endboss.bossAttacks = true;
-        }
+        this.level.endboss.forEach((enboss) => {
+            if (enboss.x - this.character.x <= 350) {
+                enboss.bossAttacks = true;
+            }
+        });
+
+        // if (this.level.endboss.x - this.character.x <= 350) {
+        //     this.level.endboss.bossAttacks = true;
+        // }
     }
 
     checkCollisionsWithEndboss() {
-        if (this.character.isColliding(this.endboss)) {
-            this.character.energy = 0;
-            this.gameOver = true;
-        }
+        this.level.endboss.forEach((endboss) => {
+            if (this.character.isColliding(endboss)) {
+                this.character.energy = 0;
+                this.gameOver = true;
+            }
+        });
+
+
+        // if (this.character.isColliding(this.endboss)) {
+        //     this.character.energy = 0;
+        //     this.gameOver = true;
+        // }
     }
 
     checkCollisionsWithChicken() {
@@ -184,24 +198,45 @@ class World {
         });
     }
 
+    // checkIfBottleHitsEndboss() {
+    //     this.throwableObjects.forEach((object) => {
+    //         if (object.isColliding(this.endboss)) {
+    //             if (!object.allreadyhits) {
+    //                 object.allreadyhits = true;
+    //                 this.smashBottleSound.play();
+    //                 this.endboss.energy -= 25;
+    //                 console.log(this.endboss.energy)
+    //                 this.endboss.bossAttacks = true;
+    //                 this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
+
+    //                 if (this.endboss.energy <= 0) {
+    //                     this.endboss.Dead();
+    //                 } else {
+    //                     this.endboss.imagesAfterHit();
+    //                 }
+    //             }
+    //         }
+    //     });
+    // }
+
     checkIfBottleHitsEndboss() {
         this.throwableObjects.forEach((object) => {
-            if (object.isColliding(this.endboss)) {
+            this.level.endboss.forEach((endboss) => {
                 if (!object.allreadyhits) {
                     object.allreadyhits = true;
                     this.smashBottleSound.play();
-                    this.endboss.energy -= 25;
-                    console.log(this.endboss.energy)
-                    this.endboss.bossAttacks = true;
+                    endboss.energy -= 25;
+                    console.log(endboss.energy)
+                    endboss.bossAttacks = true;
                     this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
 
-                    if (this.endboss.energy <= 0) {
-                        this.endboss.Dead();
+                    if (endboss.energy <= 0) {
+                        endboss.Dead();
                     } else {
-                        this.endboss.imagesAfterHit();
+                        endboss.imagesAfterHit();
                     }
                 }
-            }
+            });
         });
     }
 
@@ -265,7 +300,8 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.showObjectsInWorld(this.character);
-        this.showObjectsInWorld(this.endboss);
+        // this.showObjectsInWorld(this.endboss);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.smallEnemies);

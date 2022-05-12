@@ -41,6 +41,12 @@ class Bosses extends movableObject {
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G19.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/2.Ataque/G20.png',
     ];
+
+
+    bossAttacks = false;
+    bossGetsAttacked = false;
+    dead = false;
+
     // plays images of injured endboss and stops after counter reaches the number 5 (5 = number of last image)
     imagesAfterHit() {
         let count = 0;
