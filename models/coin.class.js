@@ -4,9 +4,10 @@ class Coin extends movableObject {
     height = 120;
     width = 120;
 
-    constructor(path, y) {
+    constructor(path, y, x) {
         super().loadImage(path);
-        this.x = Math.random() * 7400;
+        // this.x = Math.random() * 7400;
+        this.x = x;
         this.y = y;
         this.animate();
     }

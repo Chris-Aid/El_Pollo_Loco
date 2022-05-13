@@ -18,6 +18,8 @@ class World {
     chickenDies = new Audio('https://freesound.org/data/previews/342/342162_6099553-lq.mp3');
     coinCollection = new Audio('https://freesound.org/data/previews/163/163452_2263027-lq.mp3');
     bottleCollection = new Audio('https://freesound.org/data/previews/195/195227_3628012-lq.mp3');
+    backgroundMusic = new Audio('https://freesound.org/data/previews/489/489035_4977896-lq.mp3');
+    endbossSound = new Audio('https://freesound.org/data/previews/316/316920_4921277-lq.mp3');
 
     // canvas;
     ctx;
@@ -84,6 +86,7 @@ class World {
     checkIfGameIsStarted() {
         window.addEventListener('keydown', (event) => {
             this.gameStarted = true;
+            this.backgroundMusic.play();
             document.getElementById('pressAnyKey').style = "display: none";
         });
     }
@@ -118,6 +121,7 @@ class World {
                 } else if (!enemy.dead) {
                     if (this.character.energy == 0) {
                         this.gameOver = true;
+                        this.backgroundMusic.pause();
                     } else if (!enemy.alreadyHit) {
                         enemy.alreadyHit = true;
                         this.character.hit();
@@ -194,7 +198,7 @@ class World {
                         object.allreadyhits = true;
                         this.smashBottleSound.play();
                         endboss.energy -= 25;
-                        console.log(endboss.energy)
+                        this.endbossSound.play();
                         endboss.bossAttacks = true;
                         this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
 
