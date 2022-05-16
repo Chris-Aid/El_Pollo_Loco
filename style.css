@@ -10,6 +10,13 @@ body {
     background-image: url('img/10.Key_Images/background.jpg');
 }
 
+.overlays {
+    width: 1280px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
 h1 {
     margin-top: 12px;
     margin-bottom: 0;
@@ -85,7 +92,7 @@ canvas {
     position: absolute;
     right: 32px;
     top: 32px;
-    font-size: 14px;
+    font-size: 18px;
     color: white;
     gap: 8px;
 }
@@ -101,7 +108,7 @@ canvas {
 .counter {
     display: flex;
     justify-content: space-between;
-    width: 200px;
+    width: 240px;
 }
 
 @media only screen and (max-width: 1280px) and (max-height: 1390px) {
@@ -137,6 +144,14 @@ canvas {
         position: absolute;
         width: 100vw;
         height: auto;
+    }
+
+    .overlays {
+        width: 100vw;
+    }
+
+    .score {
+        font-size: 14px;
     }
 
     .gameInforamtion {
@@ -210,6 +225,10 @@ canvas {
         height: auto;
     }
 
+    /* .overlays {
+        width: 65%;
+    } */
+
     .gameInforamtion {
         width: 100%;
         gap: 42px;
@@ -276,5 +295,9 @@ canvas {
 
     .canvas {
        position: absolute;
+    }
+
+    .score {
+        font-size: 18px;
     }
 }

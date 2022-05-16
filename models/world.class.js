@@ -355,7 +355,7 @@ class World {
     }
 
     resetGame() {
-        this.gameOver = true;
+        // this.gameOver = true;
         this.backgroundMusic.pause();
         this.gameWin.play();
         this.level.enemies.forEach((enemy) => {
