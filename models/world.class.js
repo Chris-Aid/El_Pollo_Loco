@@ -42,6 +42,7 @@ class World {
 
         this.character.world = this;
 
+        // gives some variables from world to other classes.
         setInterval(() => {
             this.level.endboss.forEach((boss) => { boss.characterX = this.character.x });
             this.character.gameStarted = this.gameStarted;
@@ -85,12 +86,15 @@ class World {
 
     checkIfGameIsStarted() {
         window.addEventListener('keydown', (event) => {
-            this.gameStarted = true;
-            this.backgroundMusic.play();
-            document.getElementById('pressAnyKey').style = "display: none";
+            if(!this.gameOver) {
+                this.gameStarted = true;
+                this.backgroundMusic.play();
+                document.getElementById('pressAnyKey').style = "display: none";
+            }
         });
     }
-
+    
+    // if character comes to close to Endboss, images of Aggression are played
     checkIfCharakterIsToCloseToEndoss() {
         this.level.endboss.forEach((endboss) => {
             if (endboss.x - this.character.x <= 350) {
@@ -99,6 +103,7 @@ class World {
         });
     }
 
+    //character dies instantly if endboss hits him
     checkCollisionsWithEndboss() {
         this.level.endboss.forEach((endboss) => {
             if (this.character.isColliding(endboss)) {
@@ -113,20 +118,14 @@ class World {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
                     if (!enemy.dead) {
-                        enemy.dead = true;
-                        this.chickenCounter++;
-                        enemy.Dead();
-                        this.chickenDies.play();
+                        this.characterKillsChicken(enemy);
                     }
                 } else if (!enemy.dead) {
                     if (this.character.energy == 0) {
                         this.gameOver = true;
                         this.backgroundMusic.pause();
                     } else if (!enemy.alreadyHit) {
-                        enemy.alreadyHit = true;
-                        this.character.hit();
-                        this.character.grunt.play();
-                        this.statusbar.setPercentage(this.character.energy);
+                        this.chickenHitsCharacter(enemy);
                     }
                 }
             }
@@ -138,24 +137,32 @@ class World {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround() && !enemy.isAboveGround()) {
                     if (!enemy.dead) {
-                        this.chickenCounter++;
-                        enemy.dead = true;
-                        enemy.Dead();
-                        this.chickenDies.play();
+                        this.characterKillsChicken(enemy);
                     }
                 } else if (!enemy.dead) {
                     if (this.character.isDead()) {
                         this.gameOver = true;
                     } else if (!enemy.alreadyHit) {
-                        enemy.alreadyHit = true;
-                        this.character.lastAction = new Date().getTime(); // 
-                        this.character.hit();
-                        this.character.grunt.play();
-                        this.statusbar.setPercentage(this.character.energy);
+                        this.chickenHitsCharacter(enemy);
                     }
                 }
             }
         });
+    }
+
+    characterKillsChicken(enemy) {
+        this.chickenCounter++;
+        enemy.dead = true;
+        enemy.Dead();
+        this.chickenDies.play();
+    }
+
+    chickenHitsCharacter(enemy) {
+        enemy.alreadyHit = true;
+        this.character.lastAction = new Date().getTime();
+        this.character.hit();
+        this.character.grunt.play();
+        this.statusbar.setPercentage(this.character.energy);
     }
 
     checkCollisionsOfCoins() { // function checks collision with coins.
@@ -348,6 +355,7 @@ class World {
     }
 
     resetGame() {
+        this.gameOver = true;
         this.backgroundMusic.pause();
         this.gameWin.play();
         this.level.enemies.forEach((enemy) => {
