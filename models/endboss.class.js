@@ -10,7 +10,7 @@ class Endboss extends Bosses {
     // showAggression = setInterval(this.animateAttack(), 100);
     // startAttack = setInterval(this.animateAggression(), 100);
 
-    constructor(x, y, height, width) {
+    constructor(x, y, height, width, boss) {
         super().loadImage(this.imagesAlerta[0]);
         this.loadImages(this.imagesWalking);
         this.loadImages(this.imagesAlerta);
@@ -25,6 +25,7 @@ class Endboss extends Bosses {
         this.y = y;
         this.height = height;
         this.width = width;
+        this.boss = boss;
     }
 
   

@@ -20,8 +20,8 @@ class World {
     bottleCollection = new Audio('https://freesound.org/data/previews/195/195227_3628012-lq.mp3');
     backgroundMusic = new Audio('https://freesound.org/data/previews/489/489035_4977896-lq.mp3');
     endbossSound = new Audio('https://freesound.org/data/previews/316/316920_4921277-lq.mp3');
+    gameWin = new Audio('https://cdn.freesound.org/previews/572/572624_10182789-lq.mp3');
 
-    // canvas;
     ctx;
     keyboard;
     camera_x;
@@ -197,13 +197,19 @@ class World {
                     if (!object.allreadyhits) {
                         object.allreadyhits = true;
                         this.smashBottleSound.play();
-                        endboss.energy -= 25;
                         this.endbossSound.play();
                         endboss.bossAttacks = true;
+                        if (endboss.boss == 'firstBoss') {
+                            endboss.energy -= 25;
+                        } else {
+                            endboss.energy -= 10;
+                        }
                         this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
-
-                        if (endboss.energy <= 0) {
+                        if (endboss.energy <= 0 && endboss.boss == 'firstBoss') {
                             endboss.Dead();
+                        } else if (endboss.energy <= 0 && endboss.boss == 'secondBoss') {
+                            endboss.Dead();
+                            this.resetGame();
                         } else {
                             endboss.imagesAfterHit();
                         }
@@ -339,5 +345,21 @@ class World {
     turnCharacterAgain(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
+    }
+
+    resetGame() {
+        this.backgroundMusic.pause();
+        this.gameWin.play();
+        this.level.enemies.forEach((enemy) => {
+            enemy.dead = true;
+            enemy.Dead();
+        });
+        this.level.smallEnemies.forEach((smallenemy) => {
+            smallenemy.dead = true;
+            smallenemy.Dead();
+        });
+        setTimeout(() => {
+            location.reload(true);
+        }, 6000);
     }
 }

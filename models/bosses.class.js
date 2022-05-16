@@ -82,8 +82,10 @@ class Bosses extends movableObject {
         setInterval(() => {
             if (!this.dead && this.bossAttacks) {
                 this.playAnimation(this.imagesAttack);
-                if (this.x - this.characterX > 10) {
+                if (this.x - this.characterX > 10 && this.boss == 'firstBoss') {
                     this.x -= 20;
+                } else if (this.x - this.characterX > 10 && this.boss == 'secondBoss') {
+                    this.x -= 30;
                 }
             }
         }, 100);
