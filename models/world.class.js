@@ -86,7 +86,7 @@ class World {
 
     checkIfGameIsStarted() {
         window.addEventListener('keydown', (event) => {
-            if(!this.gameOver) {
+            if(!this.level.endboss[1].dead) {
                 this.gameStarted = true;
                 this.backgroundMusic.play();
                 document.getElementById('pressAnyKey').style = "display: none";
@@ -117,7 +117,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
-                    if (!enemy.dead) {
+                    if (!enemy.dead && !enemy.alreadyHit) {
                         this.characterKillsChicken(enemy);
                     }
                 } else if (!enemy.dead) {
@@ -135,8 +135,8 @@ class World {
     checkCollisionsWithSmallChicken() {
         this.level.smallEnemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.isAboveGround() && !enemy.isAboveGround()) {
-                    if (!enemy.dead) {
+                if (this.character.isAboveGround() && !enemy.isAboveGround() || this.character.chickenSmashes(enemy)) {
+                    if (!enemy.dead && !enemy.alreadyHit) {
                         this.characterKillsChicken(enemy);
                     }
                 } else if (!enemy.dead) {
@@ -163,6 +163,9 @@ class World {
         this.character.hit();
         this.character.grunt.play();
         this.statusbar.setPercentage(this.character.energy);
+        setTimeout(() => { // after 0,8 seconds, an enemy can hit the character again
+            enemy.alreadyHit = false;
+        }, 800);
     }
 
     checkCollisionsOfCoins() { // function checks collision with coins.
@@ -178,7 +181,7 @@ class World {
 
     checkCollisionsOfHearts() { // function checks collision with hearts.
         this.level.hearts.forEach((heart) => {
-            if (this.character.isColliding(heart)) {
+            if (this.character.isColliding(heart) && this.character.energy < 100) {
                 this.level.hearts.splice(this.level.hearts.indexOf(heart), 1);
                 this.character.energy += 10;
                 this.statusbar.setPercentage(this.character.energy);
@@ -355,7 +358,7 @@ class World {
     }
 
     resetGame() {
-        // this.gameOver = true;
+        this.displayScore();
         this.backgroundMusic.pause();
         this.gameWin.play();
         this.level.enemies.forEach((enemy) => {
@@ -368,6 +371,14 @@ class World {
         });
         setTimeout(() => {
             location.reload(true);
-        }, 6000);
+        }, 8000);
+    }
+
+    displayScore() {
+        document.getElementById('score').classList.add('scoreAfterWin');
+        document.getElementById('score-overlay').classList.add('displayScoreAfterWin');
+        document.getElementById('chickenCounter').classList.add('counterAfterWin');
+        document.getElementById('coinCounter').classList.add('counterAfterWin');
+        document.getElementById('bottleCounter').style = 'display: none';
     }
 }

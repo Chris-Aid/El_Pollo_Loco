@@ -51,6 +51,10 @@ class movableObject extends DrawableObject {
         }
     }
 
+    chickenSmashes(chicken) {
+       return (this.y + this.height - 10) - (chicken.y + 20) < 20;
+    }
+
     // reduces characters energy after every hit and saves time of last hit
     hit() {
         this.energy -= 10;

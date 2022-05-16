@@ -10,7 +10,35 @@ body {
     background-image: url('img/10.Key_Images/background.jpg');
 }
 
-.overlays {
+.displayScoreAfterWin {
+    transition: all 2s ease-in-out !important;
+    position: relative;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.scoreAfterWin {
+    transition: all 1s ease-in-out !important;
+    animation: blinker 1s linear infinite;
+    position:  relative !important;
+    font-size: 32px !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0.6;
+        color: rgb(58, 58, 58);
+      }    
+}
+
+.counterAfterWin {
+    width: 370px !important;
+}
+
+.score-overlay {
+    transition: all 2s ease-in-out !important;
     width: 1280px;
     position: absolute;
     top: 0;
@@ -35,6 +63,7 @@ p {
 }
 
 #container {
+    /* transition: all 2s ease-in-out; */
     position: relative;
     display: flex;
     justify-content: center;
@@ -146,7 +175,7 @@ canvas {
         height: auto;
     }
 
-    .overlays {
+    .score-overlay{
         width: 100vw;
     }
 
