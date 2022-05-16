@@ -20,7 +20,7 @@ body {
 
 .scoreAfterWin {
     transition: all 1s ease-in-out !important;
-    animation: blinker 1s linear infinite;
+    animation: blinker 1.5s linear infinite;
     position:  relative !important;
     font-size: 32px !important;
     color: rgb(255, 255, 255) !important;
@@ -29,7 +29,6 @@ body {
 @keyframes blinker {
     50% {
         opacity: 0.6;
-        color: rgb(58, 58, 58);
       }    
 }
 

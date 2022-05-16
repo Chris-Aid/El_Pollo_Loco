@@ -380,5 +380,6 @@ class World {
         document.getElementById('chickenCounter').classList.add('counterAfterWin');
         document.getElementById('coinCounter').classList.add('counterAfterWin');
         document.getElementById('bottleCounter').style = 'display: none';
+        document.getElementById('congrats').style = 'display: flex';
     }
 }

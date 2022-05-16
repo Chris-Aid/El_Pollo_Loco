@@ -57,7 +57,7 @@ class movableObject extends DrawableObject {
 
     // reduces characters energy after every hit and saves time of last hit
     hit() {
-        this.energy -= 10;
+        this.energy -= 20;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
