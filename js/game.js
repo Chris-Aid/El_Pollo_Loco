@@ -16,12 +16,18 @@ window.addEventListener('keydown', (event) => {
     }
     if (event.keyCode == 38) {
         keyboard.Up = true;
+        event.preventDefault();
+    }
+    if (event.keyCode == 40) {
+        // avoid scrolling on pressing down arrow
+        event.preventDefault();
     }
     if (event.keyCode == 39) {
         keyboard.Right = true;
     }
     if (event.keyCode == 32) {
         keyboard.Space = true;
+        event.preventDefault();
     }
     if (event.keyCode == 68) {
         keyboard.D = true;

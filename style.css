@@ -37,11 +37,13 @@ body {
 }
 
 .score-overlay {
-    transition: all 2s ease-in-out !important;
+    /* transition: all 2s ease-in-out !important; */
     width: 1280px;
     position: absolute;
     top: 0;
     bottom: 0;
+    display: flex;
+    justify-content: center;
 }
 
 h1 {
@@ -62,7 +64,6 @@ p {
 }
 
 #container {
-    /* transition: all 2s ease-in-out; */
     position: relative;
     display: flex;
     justify-content: center;
@@ -89,6 +90,7 @@ canvas {
 
 .pressAnyKey {
     margin: 0;
+    margin-top: 32px;
     top: 32px;
     left: 410px;
     color: white;
@@ -295,7 +297,7 @@ canvas {
   ##Screen = B/w 768px to 1024px
 */
 
-@media (min-width: 768px) and (max-width: 1390px) and (max-height: 1024px) and (orientation: landscape) {
+@media (min-width: 768px) and (max-width: 1590px) and (max-height: 824px) and (orientation: landscape) {
 
     #turnYourDevice {
         display: none;
