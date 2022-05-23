@@ -18,7 +18,7 @@ class World {
     chickenDies = new Audio('https://freesound.org/data/previews/342/342162_6099553-lq.mp3');
     coinCollection = new Audio('https://freesound.org/data/previews/163/163452_2263027-lq.mp3');
     bottleCollection = new Audio('https://freesound.org/data/previews/195/195227_3628012-lq.mp3');
-    backgroundMusic = new Audio('https://freesound.org/data/previews/489/489035_4977896-lq.mp3');
+    // backgroundMusic = new Audio('https://freesound.org/data/previews/489/489035_4977896-lq.mp3');
     endbossSound = new Audio('https://freesound.org/data/previews/316/316920_4921277-lq.mp3');
     gameWin = new Audio('https://cdn.freesound.org/previews/572/572624_10182789-lq.mp3');
 
@@ -65,7 +65,6 @@ class World {
             this.checkIfBottleHitsSmallChicken();
             this.checkIfCharakterIsToCloseToEndoss();
             this.checkIfGameIsStarted();
-
         }, 10);
 
         setInterval(() => {
@@ -73,6 +72,7 @@ class World {
             this.checkCollisionsWithChicken();
             this.checkCollisionsWithSmallChicken();
             this.updateCounter();
+            // this.addNewObjectsToWorld();
         }, 100);
     }
 
@@ -86,14 +86,21 @@ class World {
 
     checkIfGameIsStarted() {
         window.addEventListener('keydown', (event) => {
-            if(!this.level.endboss[1].dead) {
+            if (!this.level.endboss[1].dead) {
                 this.gameStarted = true;
-                this.backgroundMusic.play();
+                // this.backgroundMusic.play();
                 document.getElementById('pressAnyKey').style = "display: none";
             }
         });
     }
-    
+
+    // addNewObjectsToWorld() {
+    //     if(this.character.x - this.level.enemies[this.level.enemies.length - 1].x == 1) {
+    //         console.log('true')
+    //         this.level.enemies.push(new chicken(this.character.x + 3000))
+    //     }
+    // }
+
     // if character comes to close to Endboss, images of Aggression are played
     checkIfCharakterIsToCloseToEndoss() {
         this.level.endboss.forEach((endboss) => {
@@ -119,11 +126,12 @@ class World {
                 if (this.character.isAboveGround()) {
                     if (!enemy.dead && !enemy.alreadyHit) {
                         this.characterKillsChicken(enemy);
+                        this.spawnNewChicken('brownChicken');
                     }
                 } else if (!enemy.dead) {
                     if (this.character.energy == 0) {
                         this.gameOver = true;
-                        this.backgroundMusic.pause();
+                        // this.backgroundMusic.pause();
                     } else if (!enemy.alreadyHit) {
                         this.chickenHitsCharacter(enemy);
                     }
@@ -138,6 +146,7 @@ class World {
                 if (this.character.isAboveGround() && !enemy.isAboveGround() || this.character.chickenSmashes(enemy)) {
                     if (!enemy.dead && !enemy.alreadyHit) {
                         this.characterKillsChicken(enemy);
+                        this.spawnNewChicken('yellowChicken');
                     }
                 } else if (!enemy.dead) {
                     if (this.character.isDead()) {
@@ -155,6 +164,16 @@ class World {
         enemy.dead = true;
         enemy.Dead();
         this.chickenDies.play();
+    }
+
+    // every time Pepe kills a chicken, a new one spawns.
+    spawnNewChicken(enemy) {
+        if (enemy == 'yellowChicken') {
+            this.level.smallEnemies.push(new smallChicken(this.character.x + 2000));
+        } else {
+            this.level.enemies.push(new chicken(this.character.x + 2000));
+        }
+
     }
 
     chickenHitsCharacter(enemy) {

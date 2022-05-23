@@ -60,47 +60,47 @@ function mobileDevice() {
     document.getElementById('move-left').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.Left = true;
-    });
+    }, {passive: true});
     document.getElementById('move-left').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.Left = false;
-    });
+    }, {passive: true});
     document.getElementById('move-right').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.Right = true;
-    });
+    }, {passive: true});
     document.getElementById('move-right').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.Right = false;
-    });
+    }, {passive: true});
     document.getElementById('throw').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.D = true;
-    });
+    }, {passive: true});
     document.getElementById('throw').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.D = false;
-    });
+    }, {passive: true});
     document.getElementById('jump').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.Space = true;
-    });
+    }, {passive: true});
     document.getElementById('jump').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.Space = false;
-    });
+    }, {passive: true});
 }
 
-function startGameOnMobileDevice() {
-    document.getElementById('startButton').style = "display: none";
-    document.getElementById('button-container').style = "height: 100vh";
-    document.getElementById('subject').style = "display: none";
-    if(window.innerHeight < window.innerWidth){
-        document.getElementById('canvas').setAttribute("style", "height:100vh;width:100vw;");
-        document.getElementById('showButtons').style = "display: flex";
-    } else {
-        document.getElementById('startButton').style = "display: none";
-        document.getElementById('turnYourDevice').style = "display: flex";
-    }
-    world.gameStarted = true;
-}
+// function startGameOnMobileDevice() {
+//     document.getElementById('startButton').style = "display: none";
+//     document.getElementById('button-container').style = "height: 100vh";
+//     document.getElementById('subject').style = "display: none";
+//     if(window.innerHeight < window.innerWidth){
+//         document.getElementById('canvas').setAttribute("style", "height:100vh;width:100vw;");
+//         document.getElementById('showButtons').style = "display: flex";
+//     } else {
+//         document.getElementById('startButton').style = "display: none";
+//         document.getElementById('turnYourDevice').style = "display: flex";
+//     }
+//     world.gameStarted = true;
+// }

@@ -21,7 +21,7 @@ class smallChicken extends movableObject {
 
     constructor(x) {
         super().loadImage(this.imagesWalking[0]);
-        this.x = x + Math.random() * 17000;
+        this.x = x + Math.random() * 4000;
 
         this.animate();
         this.applyGravity();

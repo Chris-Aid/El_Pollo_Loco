@@ -59,13 +59,17 @@ class Bosses extends movableObject {
         }, 200);
     }
 
+    // endboss rotates and flys away after dead. Timeout is set to avoid function from running forever
     Dead() {
         this.dead = true;
-        setInterval(() => {
+        let enbossFlyingAway = setInterval(() => {
             this.playAnimation(this.imagesDead);
             this.x += 40;
             this.y -= 15;
-        }, 40);
+        }, 40); 
+        setTimeout(() => {
+            clearInterval(enbossFlyingAway)
+        }, 3000);
     }
 
     // if character comes close to endboss fucntion plays agression images
