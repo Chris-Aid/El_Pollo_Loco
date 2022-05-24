@@ -28,6 +28,8 @@ class World {
 
     gameStarted = false;
     gameOver = false;
+    coinsPushed = false;
+    secondCoindsPushed = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d'); // this.ctx = document.getElementById('canvas').getContext('2d);
@@ -57,14 +59,15 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisionsWithEndboss();
-            this.checkCollisionsOfCoins();
-            this.checkCollisionsOfHearts();
-            this.checkCollisionsOfBottles();
+            this.checkCollectionOfCoins();
+            this.checkCollectionOfHearts();
+            this.checkCollectionOfBottles();
             this.checkIfBottleHitsEndboss();
             this.checkIfBottleHitsEnemy();
             this.checkIfBottleHitsSmallChicken();
             this.checkIfCharakterIsToCloseToEndoss();
             this.checkIfGameIsStarted();
+            this.pushNewCoins();
         }, 10);
 
         setInterval(() => {
@@ -94,17 +97,27 @@ class World {
         });
     }
 
-    // addNewObjectsToWorld() {
-    //     if(this.character.x - this.level.enemies[this.level.enemies.length - 1].x == 1) {
-    //         console.log('true')
-    //         this.level.enemies.push(new chicken(this.character.x + 3000))
-    //     }
-    // }
+    pushNewCoins() {
+        if(this.character.x > 2000 && !this.coinsPushed || 
+            this.character.x > 6000 && !this.secondCoindsPushed) {
+            this.coinsPushed = true;
+            this.secondCoindsPushed = true;
+            this.level.coins.push(
+                new Coin('img/8.Coin/Moneda1.png', 350, this.character.x + 1000 + 40),
+                new Coin('img/8.Coin/Moneda1.png', 300, this.character.x + 1000 + 80),
+                new Coin('img/8.Coin/Moneda1.png', 250, this.character.x + 1000 + 130),
+                new Coin('img/8.Coin/Moneda1.png', 210, this.character.x + 1000 + 180),
+                new Coin('img/8.Coin/Moneda1.png', 250, this.character.x + 1000 + 230),
+                new Coin('img/8.Coin/Moneda1.png', 300, this.character.x + 1000 + 270),
+                new Coin('img/8.Coin/Moneda1.png', 350, this.character.x + 1000 + 310),
+            );
+        }
+    }
 
     // if character comes to close to Endboss, images of Aggression are played
     checkIfCharakterIsToCloseToEndoss() {
         this.level.endboss.forEach((endboss) => {
-            if (endboss.x - this.character.x <= 350) {
+            if (endboss.x - this.character.x <= 650) {
                 endboss.bossAttacks = true;
             }
         });
@@ -173,7 +186,6 @@ class World {
         } else {
             this.level.enemies.push(new chicken(this.character.x + 2000));
         }
-
     }
 
     chickenHitsCharacter(enemy) {
@@ -187,18 +199,27 @@ class World {
         }, 800);
     }
 
-    checkCollisionsOfCoins() { // function checks collision with coins.
+    checkCollectionOfCoins() { // function checks collision with coins.
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
                 this.level.coins.splice(this.level.coins.indexOf(coin), 1);
                 this.coinCounter++;
                 this.coinsbar.coinCollected();
                 this.coinCollection.play();
+                // this.level.coins.push(
+                //     new Coin('img/8.Coin/Moneda1.png', 350, this.character.x + 1000 + 40),
+                //     new Coin('img/8.Coin/Moneda1.png', 300, this.character.x + 1000 + 40),
+                //     new Coin('img/8.Coin/Moneda1.png', 250, this.character.x + 1000 + 50),
+                //     new Coin('img/8.Coin/Moneda1.png', 210, this.character.x + 1000 + 50),
+                //     new Coin('img/8.Coin/Moneda1.png', 250, this.character.x + 1000 + 50),
+                //     new Coin('img/8.Coin/Moneda1.png', 300, this.character.x + 1000 + 40),
+                //     new Coin('img/8.Coin/Moneda1.png', 350, this.character.x + 1000 + 40),
+                // );
             }
         });
     }
 
-    checkCollisionsOfHearts() { // function checks collision with hearts.
+    checkCollectionOfHearts() { // function checks collision with hearts.
         this.level.hearts.forEach((heart) => {
             if (this.character.isColliding(heart) && this.character.energy < 100) {
                 this.level.hearts.splice(this.level.hearts.indexOf(heart), 1);
@@ -208,13 +229,14 @@ class World {
         });
     }
 
-    checkCollisionsOfBottles() {
+    checkCollectionOfBottles() {
         this.level.bottles.forEach((bottle) => {
             if (this.character.isColliding(bottle)) {
                 this.bottleCounter++;
                 this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
                 this.bottlesbar.bottlesCollected();
                 this.bottleCollection.play();
+                this.level.bottles.push(new Bottle('img/6.botella/2.Botella_enterrada1.png', this.character.x + 3000));
             }
         });
     }
@@ -260,6 +282,7 @@ class World {
                         enemy.dead = true;
                         this.chickenCounter++;
                         enemy.Dead();
+                        this.spawnNewChicken();
                     }
                 }
             });
@@ -278,6 +301,7 @@ class World {
                         enemy.dead = true;
                         this.chickenCounter++;
                         enemy.Dead();
+                        this.spawnNewChicken('yellowChicken');
                     }
                 }
             });
@@ -288,6 +312,7 @@ class World {
     checkThrowObjecs() {
         if (this.keyboard.D && this.bottleCounter > 0 && !this.gameOver && this.gameStarted) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
+            this.level.bottles.push(new Bottle('img/6.botella/2.Botella_enterrada1.png', this.character.x + 3000));
             this.throwableObjects.push(bottle);
             this.bottlesbar.bottleThrown();
             this.bottleCounter--;
@@ -300,7 +325,6 @@ class World {
     //following functions are responsible for drawing the objects onto the canvas and display them in a poper way!
 
     draw() {
-
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0); // moving forwards

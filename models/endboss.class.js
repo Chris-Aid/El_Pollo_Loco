@@ -2,7 +2,7 @@ class Endboss extends Bosses {
     height;
     width;
     y;
-    x ;
+    x;
     energy = 100;
     acceleration = 5;
     characterX;
@@ -26,7 +26,5 @@ class Endboss extends Bosses {
         this.height = height;
         this.width = width;
         this.boss = boss;
-    }
-
-  
+    } 
 }
