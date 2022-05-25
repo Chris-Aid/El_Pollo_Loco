@@ -18,7 +18,8 @@ class World {
     chickenDies = new Audio('https://freesound.org/data/previews/342/342162_6099553-lq.mp3');
     coinCollection = new Audio('https://freesound.org/data/previews/163/163452_2263027-lq.mp3');
     bottleCollection = new Audio('https://freesound.org/data/previews/195/195227_3628012-lq.mp3');
-    backgroundMusic = new Audio('https://freesound.org/data/previews/489/489035_4977896-lq.mp3');
+    backgroundMusic = new Audio('https://cdn.freesound.org/previews/489/489035_4977896-lq.mp3');
+    
     endbossSound = new Audio('https://freesound.org/data/previews/316/316920_4921277-lq.mp3');
     gameWin = new Audio('https://cdn.freesound.org/previews/572/572624_10182789-lq.mp3');
 
@@ -32,6 +33,7 @@ class World {
     coinsPushed = false;
     secondCoindsPushed = false;
     thirdCoindsPushed = false;
+    musicAlreadyRuns = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d'); // this.ctx = document.getElementById('canvas').getContext('2d);
@@ -90,9 +92,10 @@ class World {
 
     checkIfGameIsStarted() {
         window.addEventListener('keydown', (event) => {
-            if (!this.level.endboss[1].dead) {
+            if (!this.level.endboss[1].dead && !this.musicAlreadyRuns) {
                 this.gameStarted = true;
-                // this.backgroundMusic.play();
+                this.musicAlreadyRuns = true;
+                this.backgroundMusic.play();
                 document.getElementById('pressAnyKey').style = "display: none";
             }
         });
