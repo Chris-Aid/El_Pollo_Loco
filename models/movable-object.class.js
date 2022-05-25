@@ -86,7 +86,7 @@ class movableObject extends DrawableObject {
     moveLeft() {
         this.x -= this.speed;
         // every time an enemy leaves map without getting killed, it respawns at the end!
-        if(this.x <= 0) {
+        if(this instanceof smallChicken && this.x <= 0 || this instanceof chicken && this.x <= 0) {
             this.x = 13000;
         }
     }

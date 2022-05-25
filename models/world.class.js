@@ -18,7 +18,7 @@ class World {
     chickenDies = new Audio('https://freesound.org/data/previews/342/342162_6099553-lq.mp3');
     coinCollection = new Audio('https://freesound.org/data/previews/163/163452_2263027-lq.mp3');
     bottleCollection = new Audio('https://freesound.org/data/previews/195/195227_3628012-lq.mp3');
-    // backgroundMusic = new Audio('https://freesound.org/data/previews/489/489035_4977896-lq.mp3');
+    backgroundMusic = new Audio('https://freesound.org/data/previews/489/489035_4977896-lq.mp3');
     endbossSound = new Audio('https://freesound.org/data/previews/316/316920_4921277-lq.mp3');
     gameWin = new Audio('https://cdn.freesound.org/previews/572/572624_10182789-lq.mp3');
 
@@ -28,8 +28,10 @@ class World {
 
     gameStarted = false;
     gameOver = false;
+
     coinsPushed = false;
     secondCoindsPushed = false;
+    thirdCoindsPushed = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d'); // this.ctx = document.getElementById('canvas').getContext('2d);
@@ -75,7 +77,6 @@ class World {
             this.checkCollisionsWithChicken();
             this.checkCollisionsWithSmallChicken();
             this.updateCounter();
-            // this.addNewObjectsToWorld();
         }, 100);
     }
 
@@ -97,11 +98,14 @@ class World {
         });
     }
 
+    
     pushNewCoins() {
         if(this.character.x > 2000 && !this.coinsPushed || 
-            this.character.x > 6000 && !this.secondCoindsPushed) {
+            this.character.x > 6000 && !this.secondCoindsPushed ||
+            this.character.x > 10000 && !this.thirdCoindsPushed) {
             this.coinsPushed = true;
             this.secondCoindsPushed = true;
+            this.thirdCoindsPushed = true;
             this.level.coins.push(
                 new Coin('img/8.Coin/Moneda1.png', 350, this.character.x + 1000 + 40),
                 new Coin('img/8.Coin/Moneda1.png', 300, this.character.x + 1000 + 80),
@@ -140,6 +144,7 @@ class World {
                     if (!enemy.dead && !enemy.alreadyHit) {
                         this.characterKillsChicken(enemy);
                         this.spawnNewChicken('brownChicken');
+                        this.deleteDeadChickenFromArray('brownChicken', enemy);
                     }
                 } else if (!enemy.dead) {
                     if (this.character.energy == 0) {
@@ -160,6 +165,7 @@ class World {
                     if (!enemy.dead && !enemy.alreadyHit) {
                         this.characterKillsChicken(enemy);
                         this.spawnNewChicken('yellowChicken');
+                        this.deleteDeadChickenFromArray('yellowChicken', enemy);
                     }
                 } else if (!enemy.dead) {
                     if (this.character.isDead()) {
@@ -177,6 +183,21 @@ class World {
         enemy.dead = true;
         enemy.Dead();
         this.chickenDies.play();
+    }
+
+    deleteDeadChickenFromArray(colorOfChicken, enemy) {
+        console.log(colorOfChicken);
+            if(colorOfChicken == 'yellowChicken') {
+            setTimeout(() => {
+                console.log(this.level.smallEnemies.indexOf(enemy));
+                this.level.smallEnemies.splice(this.level.smallEnemies.indexOf(enemy), 1);
+            }, 3000);
+        } else {
+            setTimeout(() => {
+                this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
+            }, 3000);
+        }
+
     }
 
     // every time Pepe kills a chicken, a new one spawns.
@@ -206,15 +227,6 @@ class World {
                 this.coinCounter++;
                 this.coinsbar.coinCollected();
                 this.coinCollection.play();
-                // this.level.coins.push(
-                //     new Coin('img/8.Coin/Moneda1.png', 350, this.character.x + 1000 + 40),
-                //     new Coin('img/8.Coin/Moneda1.png', 300, this.character.x + 1000 + 40),
-                //     new Coin('img/8.Coin/Moneda1.png', 250, this.character.x + 1000 + 50),
-                //     new Coin('img/8.Coin/Moneda1.png', 210, this.character.x + 1000 + 50),
-                //     new Coin('img/8.Coin/Moneda1.png', 250, this.character.x + 1000 + 50),
-                //     new Coin('img/8.Coin/Moneda1.png', 300, this.character.x + 1000 + 40),
-                //     new Coin('img/8.Coin/Moneda1.png', 350, this.character.x + 1000 + 40),
-                // );
             }
         });
     }
@@ -236,7 +248,7 @@ class World {
                 this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
                 this.bottlesbar.bottlesCollected();
                 this.bottleCollection.play();
-                this.level.bottles.push(new Bottle('img/6.botella/2.Botella_enterrada1.png', this.character.x + 3000));
+                this.level.bottles.push(new Bottle('img/6.botella/2.Botella_enterrada1.png', this.character.x + 3000),);
             }
         });
     }
@@ -283,6 +295,7 @@ class World {
                         this.chickenCounter++;
                         enemy.Dead();
                         this.spawnNewChicken();
+                        this.deleteDeadChickenFromArray('brownChicken', enemy);
                     }
                 }
             });
@@ -302,6 +315,7 @@ class World {
                         this.chickenCounter++;
                         enemy.Dead();
                         this.spawnNewChicken('yellowChicken');
+                        this.deleteDeadChickenFromArray('yellowChicken', enemy);
                     }
                 }
             });
@@ -312,7 +326,6 @@ class World {
     checkThrowObjecs() {
         if (this.keyboard.D && this.bottleCounter > 0 && !this.gameOver && this.gameStarted) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
-            this.level.bottles.push(new Bottle('img/6.botella/2.Botella_enterrada1.png', this.character.x + 3000));
             this.throwableObjects.push(bottle);
             this.bottlesbar.bottleThrown();
             this.bottleCounter--;

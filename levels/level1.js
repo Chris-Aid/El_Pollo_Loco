@@ -1,15 +1,3 @@
-// function createCoins(x) {
-//     return [
-//         new Coin('img/8.Coin/Moneda1.png', 350, x + 1000 + 40),
-//         new Coin('img/8.Coin/Moneda1.png', 300, x + 1000 + 40),
-//         new Coin('img/8.Coin/Moneda1.png', 250, x + 1000 + 50),
-//         new Coin('img/8.Coin/Moneda1.png', 210, x + 1000 + 50),
-//         new Coin('img/8.Coin/Moneda1.png', 250, x + 1000 + 50),
-//         new Coin('img/8.Coin/Moneda1.png', 300, x + 1000 + 40),
-//         new Coin('img/8.Coin/Moneda1.png', 350, x + 1000 + 40),
-//     ]
-// }
-
 const level1 = new Level(
 
     [
@@ -126,6 +114,9 @@ const level1 = new Level(
         new Bottle('img/6.botella/2.Botella_enterrada2.png', 600),
         new Bottle('img/6.botella/2.Botella_enterrada1.png', 1000),
         new Bottle('img/6.botella/2.Botella_enterrada1.png', 2000),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png', 2500),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png', 3000),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png', 3500),
     ],
     [
         new Heart('img/7.Marcadores/Icono/Vidas.png', 1200),

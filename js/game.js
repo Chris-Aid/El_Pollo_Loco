@@ -91,16 +91,16 @@ function mobileDevice() {
     }, {passive: true});
 }
 
-// function startGameOnMobileDevice() {
-//     document.getElementById('startButton').style = "display: none";
-//     document.getElementById('button-container').style = "height: 100vh";
-//     document.getElementById('subject').style = "display: none";
-//     if(window.innerHeight < window.innerWidth){
-//         document.getElementById('canvas').setAttribute("style", "height:100vh;width:100vw;");
-//         document.getElementById('showButtons').style = "display: flex";
-//     } else {
-//         document.getElementById('startButton').style = "display: none";
-//         document.getElementById('turnYourDevice').style = "display: flex";
-//     }
-//     world.gameStarted = true;
-// }
+function startGameOnMobileDevice() {
+    document.getElementById('startButton').style = "display: none";
+    document.getElementById('button-container').style = "height: 100vh";
+    document.getElementById('subject').style = "display: none";
+    if(window.innerHeight < window.innerWidth){
+        document.getElementById('canvas').setAttribute("style", "height:100vh;width:100vw;");
+        document.getElementById('showButtons').style = "display: flex";
+    } else {
+        document.getElementById('startButton').style = "display: none";
+        document.getElementById('turnYourDevice').style = "display: flex";
+    }
+    world.gameStarted = true;
+}
