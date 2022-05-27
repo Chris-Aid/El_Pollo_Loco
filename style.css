@@ -172,6 +172,7 @@ canvas {
 
     .canvas {
         position: absolute;
+        height: 78vh;
         width: 100vw;
         height: auto;
     }
@@ -255,10 +256,6 @@ canvas {
         height: auto;
     }
 
-    /* .overlays {
-        width: 65%;
-    } */
-
     .gameInforamtion {
         width: 100%;
         gap: 42px;
@@ -297,7 +294,7 @@ canvas {
   ##Screen = B/w 768px to 1024px
 */
 
-@media (min-width: 768px) and (max-width: 1590px) and (max-height: 824px) and (orientation: landscape) {
+@media (min-width: 768px) and (max-width: 1390px) and (max-height: 824px) and (orientation: landscape) {
 
     #turnYourDevice {
         display: none;
@@ -331,3 +328,18 @@ canvas {
         font-size: 18px;
     }
 }
+    /* For 1366 Resolution */  
+    @media only screen and (min-width: 1030px) and (max-width: 1550px)  
+    {
+    .canvas {
+        height: 78vh;
+    }
+
+    .gameInforamtion {
+         gap: 42px;
+    }
+
+    .h3, h3 {
+        font-size: 1.3rem !important;
+    }
+    }  
