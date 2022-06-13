@@ -57,6 +57,7 @@ class World {
             this.level.enemies.forEach((chicken) => { chicken.gameOver = this.gameOver });
             this.level.smallEnemies.forEach((smallchicken) => { smallchicken.gameStarted = this.gameStarted });
             this.level.smallEnemies.forEach((smallchicken) => { smallchicken.gameOver = this.gameOver });
+            this.level.coins.forEach((coin) => { coin.gameStarted = this.gameStarted });
         }, 50);
     }
 

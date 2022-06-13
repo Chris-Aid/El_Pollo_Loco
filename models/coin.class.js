@@ -4,6 +4,8 @@ class Coin extends movableObject {
     height = 120;
     width = 120;
 
+    gameStarted;
+
     constructor(path, y, x) {
         super().loadImage(path);
         // this.x = Math.random() * 7400;
@@ -14,18 +16,21 @@ class Coin extends movableObject {
 
     //this animation let the coins blink (getting bigger and smaller)
     animate() {
-        setInterval(() => {
-            if(this.height < 150) {
-                this.height += 30;
-                this.width += 30;
-                this.y -= 15;
-                this.x -= 15;
-            } else if (this.height == 150) {
-                this.height = 120;
-                this.width = 120;
-                this.y += 15;
-                this.x += 15;
-            }
-        }, 300);
+        console.log(this.gameStarted)
+        if(this.gameStarted) {
+            setInterval(() => {
+                if(this.height < 150) {
+                    this.height += 30;
+                    this.width += 30;
+                    this.y -= 15;
+                    this.x -= 15;
+                } else if (this.height == 150) {
+                    this.height = 120;
+                    this.width = 120;
+                    this.y += 15;
+                    this.x += 15;
+                }
+            }, 300);
+        }
     }
 }

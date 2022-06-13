@@ -101,11 +101,11 @@ const level1 = new Level(
         new Coin('img/8.Coin/Moneda1.png', 300, 850),
         new Coin('img/8.Coin/Moneda1.png', 350, 890),
 
-        // new Coin('img/8.Coin/Moneda1.png', 540, 1400),
-        // new Coin('img/8.Coin/Moneda1.png', 540, 1900),
-        // new Coin('img/8.Coin/Moneda1.png', 540, 2400),
-        // new Coin('img/8.Coin/Moneda1.png', 540, 2900),
-        // new Coin('img/8.Coin/Moneda1.png', 540, 3400),
+        new Coin('img/8.Coin/Moneda1.png', 540, 1400),
+        new Coin('img/8.Coin/Moneda1.png', 540, 1900),
+        new Coin('img/8.Coin/Moneda1.png', 540, 2400),
+        new Coin('img/8.Coin/Moneda1.png', 540, 2900),
+        new Coin('img/8.Coin/Moneda1.png', 540, 3400),
     ],
     [
         new Bottle('img/6.botella/2.Botella_enterrada1.png', 0),
