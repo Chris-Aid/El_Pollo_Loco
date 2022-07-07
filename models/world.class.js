@@ -102,26 +102,6 @@ class World {
         });
     }
 
-    
-    pushNewCoins() {
-        if(this.character.x > 2000 && !this.coinsPushed || 
-            this.character.x > 6000 && !this.secondCoindsPushed ||
-            this.character.x > 10000 && !this.thirdCoindsPushed) {
-            this.coinsPushed = true;
-            this.secondCoindsPushed = true;
-            this.thirdCoindsPushed = true;
-            this.level.coins.push(
-                new Coin('img/8.Coin/Moneda1.png', 350, this.character.x + 1000 + 40),
-                new Coin('img/8.Coin/Moneda1.png', 300, this.character.x + 1000 + 80),
-                new Coin('img/8.Coin/Moneda1.png', 250, this.character.x + 1000 + 130),
-                new Coin('img/8.Coin/Moneda1.png', 210, this.character.x + 1000 + 180),
-                new Coin('img/8.Coin/Moneda1.png', 250, this.character.x + 1000 + 230),
-                new Coin('img/8.Coin/Moneda1.png', 300, this.character.x + 1000 + 270),
-                new Coin('img/8.Coin/Moneda1.png', 350, this.character.x + 1000 + 310),
-            );
-        }
-    }
-
     // if character comes to close to Endboss, images of Aggression are played
     checkIfCharakterIsToCloseToEndoss() {
         this.level.endboss.forEach((endboss) => {
