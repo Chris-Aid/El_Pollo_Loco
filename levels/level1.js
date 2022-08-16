@@ -106,6 +106,16 @@ const level1 = new Level(
         new Coin('img/8.Coin/Moneda1.png', 540, 2400),
         new Coin('img/8.Coin/Moneda1.png', 540, 2900),
         new Coin('img/8.Coin/Moneda1.png', 540, 3400),
+
+        new Coin('img/8.Coin/Moneda1.png', 350, 7630),
+        new Coin('img/8.Coin/Moneda1.png', 300, 7670),
+        new Coin('img/8.Coin/Moneda1.png', 250, 7710),
+        new Coin('img/8.Coin/Moneda1.png', 210, 7760),
+        new Coin('img/8.Coin/Moneda1.png', 250, 7810),
+        new Coin('img/8.Coin/Moneda1.png', 300, 7850),
+        new Coin('img/8.Coin/Moneda1.png', 350, 7890),
+
+
     ],
     [
         new Bottle('img/6.botella/2.Botella_enterrada1.png', 0),
@@ -117,6 +127,10 @@ const level1 = new Level(
         new Bottle('img/6.botella/2.Botella_enterrada2.png', 2500),
         new Bottle('img/6.botella/2.Botella_enterrada1.png', 3000),
         new Bottle('img/6.botella/2.Botella_enterrada1.png', 3500),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png', 4000),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png', 4500),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png', 5000),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png', 5500),
     ],
     [
         new Heart('img/7.Marcadores/Icono/Vidas.png', 1200),
