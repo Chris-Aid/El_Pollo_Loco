@@ -137,6 +137,7 @@ class World {
             if (this.character.isColliding(endboss)) {
                 this.character.energy = 0;
                 this.gameOver = true;
+                this.resetGame(false);
             }
         });
     }
@@ -269,14 +270,14 @@ class World {
                         if (endboss.boss == 'firstBoss') {
                             endboss.energy -= 25;
                         } else {
-                            endboss.energy -= 10;
+                            endboss.energy -= 15;
                         }
                         this.throwableObjects[this.throwableObjects.indexOf(object)].showSmashingBottleAnimation();
                         if (endboss.energy <= 0 && endboss.boss == 'firstBoss') {
                             endboss.Dead();
                         } else if (endboss.energy <= 0 && endboss.boss == 'secondBoss') {
                             endboss.Dead();
-                            this.resetGame();
+                            this.resetGame(true);
                         } else {
                             endboss.imagesAfterHit();
                         }
@@ -417,18 +418,20 @@ class World {
         this.ctx.restore();
     }
 
-    resetGame() {
-        this.displayScore();
-        this.backgroundMusic.pause();
-        this.gameWin.play();
-        this.level.enemies.forEach((enemy) => {
-            enemy.dead = true;
-            enemy.Dead();
-        });
-        this.level.smallEnemies.forEach((smallenemy) => {
-            smallenemy.dead = true;
-            smallenemy.Dead();
-        });
+    resetGame(endbossDied) {
+        if(endbossDied) {
+            this.displayScore();
+            this.backgroundMusic.pause();
+            this.gameWin.play();
+            this.level.enemies.forEach((enemy) => {
+                enemy.dead = true;
+                enemy.Dead();
+            });
+            this.level.smallEnemies.forEach((smallenemy) => {
+                smallenemy.dead = true;
+                smallenemy.Dead();
+            });
+        } 
         setTimeout(() => {
             location.reload(true);
         }, 8000);

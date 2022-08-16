@@ -7,7 +7,8 @@ body {
     position: relative;
     margin: 0;
     font-family: 'Fredoka One', cursive;
-    background-image: url('img/10.Key_Images/background.jpg');
+    /* background-image: url('img/10.Key_Images/background.jpg'); */
+    background-color: #545454;
 }
 
 .displayScoreAfterWin {
@@ -21,7 +22,7 @@ body {
 .scoreAfterWin {
     transition: all 1s ease-in-out !important;
     animation: blinker 1.5s linear infinite;
-    position:  relative !important;
+    position: relative !important;
     font-size: 32px !important;
     color: rgb(255, 255, 255) !important;
 }
@@ -29,7 +30,7 @@ body {
 @keyframes blinker {
     50% {
         opacity: 0.6;
-      }    
+    }
 }
 
 .counterAfterWin {
@@ -49,10 +50,17 @@ body {
 h1 {
     margin-top: 12px;
     margin-bottom: 0;
+    color: white;
 }
 
 h2 {
     margin: 0;
+}
+
+h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
 }
 
 p {
@@ -103,15 +111,15 @@ canvas {
 
 .gameInforamtion {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-end;
     width: 1280px;
     gap: 64px;
 }
 
 .howToPlay {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     height: 70px;
     gap: 12px;
 }
@@ -128,7 +136,7 @@ canvas {
 }
 
 .key-images {
-    height: 45px;
+    height: 40px;
 }
 
 .arrow-keys {
@@ -177,7 +185,7 @@ canvas {
         height: auto;
     }
 
-    .score-overlay{
+    .score-overlay {
         width: 100vw;
     }
 
@@ -321,25 +329,25 @@ canvas {
     }
 
     .canvas {
-       position: absolute;
+        position: absolute;
     }
 
     .score {
         font-size: 18px;
     }
 }
-    /* For 1366 Resolution */  
-    @media only screen and (min-width: 1030px) and (max-width: 1550px)  
-    {
+
+/* For 1366 Resolution */
+@media only screen and (min-width: 1030px) and (max-width: 1550px) {
     .canvas {
         height: 78vh;
     }
 
     .gameInforamtion {
-         gap: 42px;
+        gap: 42px;
     }
 
-    .h3, h3 {
-        font-size: 1.3rem !important;
+    h3 {
+        font-size: 1.5rem;
     }
-    }  
+}
